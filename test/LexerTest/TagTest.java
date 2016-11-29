@@ -29,7 +29,7 @@ public class TagTest {
     public void addKeyTest(){
         Tag.KEY.clear();
 
-        Set<Integer> checkDulicate = new HashSet<>();
+        Set<Integer> checkDuplicate = new HashSet<>();
         for (int i = 1; i <= 100; i++) {
             String key = "" + i;
 
@@ -39,8 +39,8 @@ public class TagTest {
 
             // check whether id generated is unique
             int id = Tag.KEY.get(key);
-            assertTrue(!checkDulicate.contains(id));
-            checkDulicate.add(id);
+            assertTrue(!checkDuplicate.contains(id));
+            checkDuplicate.add(id);
         }
 
         Tag.KEY.clear();
