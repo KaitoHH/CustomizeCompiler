@@ -1,0 +1,11 @@
+Hello World!
+/*
+ * This text file is used for testing preprocessor.removeComment() method
+ * This 4 lines should be removed
+ */
+Hello World Again!
+
+"/*Comment inside a quoted string should not be removed*/"
+'/*So does single quote*/'
+
+"An escaped \" should not be considered to be end of quote /*so this comment will still be here*/"
