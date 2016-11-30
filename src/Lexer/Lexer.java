@@ -1,5 +1,9 @@
 package Lexer;
 
+import Lexer.Token.Tag;
+import Lexer.Token.Token;
+import Lexer.Token.Word;
+
 import java.util.HashMap;
 import java.util.Map;
 

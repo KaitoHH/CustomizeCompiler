@@ -1,4 +1,4 @@
-package LexerTest;
+package LexerTest.TokenTest;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import Lexer.Tag;
+import Lexer.Token.Tag;
 
 /**
  * Project: CustomizeCompiler

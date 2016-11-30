@@ -1,4 +1,4 @@
-package Lexer;
+package Lexer.Token;
 
 /**
  * Project: CustomizeCompiler
