@@ -11,16 +11,28 @@ import java.util.Set;
  * All rights reserved.
  */
 public class Automata {
-	private Set<AutomataNode> accept = new HashSet();
-	private Set<AutomataNode> nodes = new HashSet();
 	private AutomataNode initialNode;
+	private Set<AutomataNode> nodeSet;
+	private Set<AutomataNode> acceptSet;
+
+	public Automata (){
+		initialNode = null;
+		nodeSet = new HashSet<>();
+		acceptSet = new HashSet<>();
+	}
+
+	public Automata (AutomataNode initialNode, Set<AutomataNode> nodeSet, Set<AutomataNode> acceptSet) {
+		this.initialNode = initialNode;
+		this.nodeSet = nodeSet;
+		this.acceptSet = acceptSet;
+	}
 
 	public boolean isAccept(AutomataNode node) {
-		return accept.contains(node);
+		return acceptSet.contains(node);
 	}
 
 	public Set<AutomataNode> getNodes() {
-		return nodes;
+		return nodeSet;
 	}
 
 	public AutomataNode getInitialNode() {

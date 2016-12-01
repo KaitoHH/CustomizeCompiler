@@ -10,9 +10,20 @@ import java.util.Set;
  * Description:
  * All rights reserved.
  */
-class AutomataEdge {
-	private Set<Character> condition = new HashSet();
+public class AutomataEdge {
+	private Set<Character> condition;
 	private AutomataNode dest;
+
+	public AutomataEdge() {
+		condition = new HashSet<>();
+		dest = null;
+	}
+
+	public AutomataEdge(Set<Character> condition, AutomataNode dest) {
+		this.condition = condition;
+		this.dest = dest;
+	}
+
 
 	public Set<Character> getCondition() {
 		return condition;

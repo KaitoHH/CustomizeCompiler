@@ -11,12 +11,24 @@ import java.util.Set;
  * All rights reserved.
  */
 public class AutomataNode {
-	Set<AutomataEdge> edge = new HashSet();
-	Set<Integer> name = new HashSet();
+	Set<AutomataEdge> edgeSet;
+	Set<Integer> nameSet;
 
-	public Set<AutomataEdge> getEdge() {
-		return edge;
+	public AutomataNode() {
+		edgeSet = new HashSet<>();
+		nameSet = new HashSet<>();
 	}
+
+	public AutomataNode(Set<AutomataEdge> edgeSet, Set<Integer> name) {
+		this.edgeSet = edgeSet;
+		this.nameSet = name;
+	}
+
+	public Set<AutomataEdge> getEdgeSet() {
+		return edgeSet;
+	}
+
+	public boolean addEdge(AutomataEdge edge) { return edgeSet.add(edge); }
 
 	@Override
 	public boolean equals(Object o) {
@@ -25,11 +37,11 @@ public class AutomataNode {
 
 		AutomataNode that = (AutomataNode) o;
 
-		return name.equals(that.name);
+		return nameSet.equals(that.nameSet);
 	}
 
 	@Override
 	public int hashCode() {
-		return name.hashCode();
+		return nameSet.hashCode();
 	}
 }
