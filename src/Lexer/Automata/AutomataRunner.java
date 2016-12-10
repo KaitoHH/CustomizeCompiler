@@ -5,7 +5,7 @@ import Lexer.Token.Token;
 import Lexer.Token.Word;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Project: CustomizeCompiler
@@ -25,21 +25,21 @@ public class AutomataRunner {
         if (automata == null || input == null || start >= input.length()) return null;
 
         AutomataNode currentNode = automata.getInitialNode();
-        Set<AutomataEdge> edges;
+        Map<AutomataNode, AutomataEdge> edges;
         int matchPosition = -1;
         char nextChar;
 
         for (int currentPosition = start; currentNode != null && currentPosition < input.length(); currentPosition++) {
             nextChar = input.charAt(currentPosition);
-            edges = currentNode.getEdgeSet();
+            edges = currentNode.getEdgeMap();
             currentNode = null;
 
-            for (AutomataEdge edge: edges) {
+            /*for (AutomataEdge edge: edges) {
                 if (edge.getCondition().contains(nextChar)) {
                     currentNode = edge.getDest();
                     break;
                 }
-            }
+            }*/
 
             if (automata.isAccept(currentNode))
                 matchPosition = currentPosition + 1;
