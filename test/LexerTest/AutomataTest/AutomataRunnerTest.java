@@ -2,8 +2,6 @@ package LexerTest.AutomataTest;
 
 import Lexer.Automata.Automata;
 import Lexer.Automata.AutomataConstructor;
-import Lexer.Automata.RegexTree.RegexTreeGenerator;
-import Lexer.Automata.RegexTree.SetFunctionCalculator;
 import org.junit.Test;
 
 
@@ -18,9 +16,7 @@ public class AutomataRunnerTest {
 
 	@Test
 	public void matchSingleAutomataTest() {
-		RegexTreeGenerator generator = new RegexTreeGenerator("(a|b)*abb");
-		SetFunctionCalculator calculator = new SetFunctionCalculator(generator.getRoot(), generator.getLeafNode());
-		AutomataConstructor automataConstructor = new AutomataConstructor(calculator.getRoot(), calculator.getLeafNode());
+		AutomataConstructor automataConstructor = new AutomataConstructor("(a|b)*abb");
 		Automata automata = automataConstructor.getAutomata();
 		// automata结构见编译原理P114 图3-63
 

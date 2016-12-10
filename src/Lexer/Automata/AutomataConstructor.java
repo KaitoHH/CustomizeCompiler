@@ -1,6 +1,8 @@
 package Lexer.Automata;
 
 import Lexer.Automata.RegexTree.RegexTree;
+import Lexer.Automata.RegexTree.RegexTreeGenerator;
+import Lexer.Automata.RegexTree.SetFunctionCalculator;
 
 import java.util.*;
 
@@ -15,7 +17,22 @@ import java.util.*;
 public class AutomataConstructor {
 	private Automata automata;
 
+	public AutomataConstructor(String regex) {
+		RegexTreeGenerator generator = new RegexTreeGenerator(regex);
+		SetFunctionCalculator calculator = new SetFunctionCalculator(generator.getRoot(), generator.getLeafNode());
+		generateDFA(calculator.getRoot(), calculator.getLeafNode());
+	}
+
 	public AutomataConstructor(RegexTree root, Vector<RegexTree> leafNode) {
+		generateDFA(root, leafNode);
+	}
+
+	/**
+	 * 对于一个给定的语法分析树，已经计算好followPos，生成对应的DFA
+	 * @param root 语法树的根结点
+	 * @param leafNode 叶子节点集合
+	 */
+	public void generateDFA(RegexTree root, Vector<RegexTree> leafNode) {
 		automata = new Automata();
 		Queue<AutomataNode> nodes = new LinkedList();
 
