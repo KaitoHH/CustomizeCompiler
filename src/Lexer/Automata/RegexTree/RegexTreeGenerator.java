@@ -1,5 +1,8 @@
 package Lexer.Automata.RegexTree;
 
+import Lexer.Automata.Automata;
+import Lexer.Automata.AutomataConstructor;
+
 import java.util.Stack;
 import java.util.Vector;
 
@@ -81,5 +84,7 @@ public class RegexTreeGenerator {
 	public static void main(String args[]) {
 		RegexTreeGenerator generator = new RegexTreeGenerator("(a|b)*abb");
 		SetFunctionCalculator calculator = new SetFunctionCalculator(generator.getRoot(), generator.getLeafNode());
+		AutomataConstructor automataConstructor = new AutomataConstructor(calculator.getRoot(), calculator.getLeafNode());
+		Automata automata = automataConstructor.getAutomata();
 	}
 }

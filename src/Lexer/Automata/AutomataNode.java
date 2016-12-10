@@ -1,6 +1,8 @@
 package Lexer.Automata;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -11,29 +13,40 @@ import java.util.Set;
  * All rights reserved.
  */
 public class AutomataNode {
-	Set<AutomataEdge> edgeSet;
+	Map<AutomataNode, AutomataEdge> edgeMap;
 	Set<Integer> nameSet;
 
 	public AutomataNode() {
-		edgeSet = new HashSet<>();
+		edgeMap = new HashMap<>();
 		nameSet = new HashSet<>();
 	}
 
-	public AutomataNode(Set<AutomataEdge> edgeSet, Set<Integer> name) {
-		this.edgeSet = edgeSet;
+	public AutomataNode(Map<AutomataNode, AutomataEdge> edgeMap, Set<Integer> name) {
+		this.edgeMap = edgeMap;
 		this.nameSet = name;
 	}
 
 	public AutomataNode(Set<Integer> name) {
 		this.nameSet = name;
+		edgeMap = new HashMap<>();
 	}
 
-	public Set<AutomataEdge> getEdgeSet() {
-		return edgeSet;
+	public Set<Integer> getNameSet() {
+		return nameSet;
+	}
+
+	public Map<AutomataNode, AutomataEdge> getEdgeMap() {
+		return edgeMap;
 	}
 
 	public boolean addEdge(AutomataEdge edge) {
-		return edgeSet.add(edge);
+		if (!edgeMap.containsKey(edge.getDest())) {
+			edgeMap.put(edge.getDest(), edge);
+		} else {
+			AutomataEdge curEdge = edgeMap.get(edge.getDest());
+			curEdge.addCondition(edge.getCondition());
+		}
+		return true;
 	}
 
 	@Override

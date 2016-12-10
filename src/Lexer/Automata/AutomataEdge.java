@@ -24,6 +24,11 @@ public class AutomataEdge {
 		this.dest = dest;
 	}
 
+	public AutomataEdge(char ch, AutomataNode dest) {
+		condition = new HashSet();
+		this.condition.add(ch);
+		this.dest = dest;
+	}
 
 	public Set<Character> getCondition() {
 		return condition;
@@ -35,5 +40,9 @@ public class AutomataEdge {
 
 	public void setDest(AutomataNode dest) {
 		this.dest = dest;
+	}
+
+	public void addCondition(Set<Character> condition) {
+		this.condition.addAll(condition);
 	}
 }

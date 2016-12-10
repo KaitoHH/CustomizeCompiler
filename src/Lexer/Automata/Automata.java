@@ -43,7 +43,11 @@ public class Automata {
 		this.initialNode = initialNode;
 	}
 
-	public void addNode(AutomataNode node) {
-		nodeSet.add(node);
+	public boolean addNode(AutomataNode node) {
+		return nodeSet.add(node);
+	}
+
+	public void addAccept(AutomataNode node) {
+		acceptSet.add(node);
 	}
 }
