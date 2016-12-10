@@ -24,11 +24,17 @@ public class AutomataNode {
 		this.nameSet = name;
 	}
 
+	public AutomataNode(Set<Integer> name) {
+		this.nameSet = name;
+	}
+
 	public Set<AutomataEdge> getEdgeSet() {
 		return edgeSet;
 	}
 
-	public boolean addEdge(AutomataEdge edge) { return edgeSet.add(edge); }
+	public boolean addEdge(AutomataEdge edge) {
+		return edgeSet.add(edge);
+	}
 
 	@Override
 	public boolean equals(Object o) {
