@@ -12,8 +12,10 @@ import java.util.Vector;
 
 public class SetFunctionCalculator {
 	private Vector<RegexTree> leafNode;
+	private RegexTree root;
 
 	public SetFunctionCalculator(RegexTree root, Vector<RegexTree> leafNode) {
+		this.root = root;
 		this.leafNode = leafNode;
 
 		// nullable
@@ -105,6 +107,14 @@ public class SetFunctionCalculator {
 			}
 		}
 		calcFollowPos(left);
-		calcFirstPos(right);
+		calcFollowPos(right);
+	}
+
+	public Vector<RegexTree> getLeafNode() {
+		return leafNode;
+	}
+
+	public RegexTree getRoot() {
+		return root;
 	}
 }
