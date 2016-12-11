@@ -2,6 +2,7 @@ package LexerTest.AutomataTest;
 
 import Lexer.Automata.Automata;
 import Lexer.Automata.AutomataConstructor;
+import Lexer.Automata.AutomataVisualization;
 import org.junit.Test;
 
 
@@ -18,10 +19,11 @@ public class AutomataRunnerTest {
 	public void matchSingleAutomataTest() {
 		AutomataConstructor automataConstructor = new AutomataConstructor("(a|b)*abb");
 		Automata automata = automataConstructor.getAutomata();
+		System.out.println(AutomataVisualization.getTex(automata));
 		// automata结构见编译原理P114 图3-63
 
 		/* Construct an automata to match odd occurrences of 'a'
-         * Maybe an automata generator would be better
+		 * Maybe an automata generator would be better
          * initialNode:
          *   0
          * nodeSet:
