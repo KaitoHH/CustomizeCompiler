@@ -1,5 +1,7 @@
 package Lexer.Automata;
 
+import java.io.*;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,15 +15,17 @@ import java.util.Map;
  * @version 1.0
  */
 public class AutomataVisualization {
-	public static String beginTex() {
-		return "\\documentclass{article}\n" +
+	private static String beginTex() {
+		return "\\documentclass[a1paper]{article}\n" +
 				"\\usepackage{tikz}\n" +
+				"\\usepackage{geometry}\n" +
+				"\\geometry{left=1.0cm}\n" +
 				"\\usetikzlibrary{automata, positioning}\n" +
 				"\\begin{document}\n" +
 				"\\begin{tikzpicture} [shorten >=1pt, node distance=2cm, on grid, auto] \n";
 	}
 
-	public static String endTex() {
+	private static String endTex() {
 		return "\\end{tikzpicture}\n" +
 				"\\end{document}  \n";
 	}
@@ -32,11 +36,14 @@ public class AutomataVisualization {
 		Map<AutomataNode, Integer> map = new HashMap<>();
 		for (AutomataNode node : automata.getNodes()) {
 			map.put(node, cnt);
+			String state = "state";
 			if (automata.getInitialNode().equals(node)) {
-				tex += initialNode(cnt, node.getNameSet().toString());
-			} else {
-				tex += normalNode(cnt, node.getNameSet().toString());
+				state += ",initial";
 			}
+			if (automata.isAccept(node)) {
+				state += ",accepting";
+			}
+			tex += addNode(cnt, node.getNameSet().toString(), state);
 			cnt++;
 		}
 		tex += "\\path[->] \n";
@@ -51,20 +58,67 @@ public class AutomataVisualization {
 			}
 			cnt++;
 		}
-
+		tex += ";";
 		tex += endTex();
 		return tex;
 	}
 
-	public static String initialNode(int no, String name) {
-		return "\\node[state, initial] (" + no + ")   {$" + name + "$}; \n";
+	private static String addNode(int no, String name, String state) {
+		if (no == 0) {
+			return "\\node[" + state + "] (" + no + ")   {$" + no + "$}; \n";
+		}
+		return "\\node[" + state + "] (" + no + ") [right of = " + (no - 1) + "]  {$" + no + "$}; \n";
 	}
 
-	public static String normalNode(int no, String name) {
-		return "\\node[state] (" + no + ") [right of = " + (no - 1) + "] {$" + name + "$};\n";
+
+	private static String addPath(int from, int to, String condition) {
+		return "\tedge" + (from == to ? " [loop] " : " [bend left=75, min distance = " + (-50 + Math.abs(from - to) * 50) + "] ") + "node {$" + condition + "$} (" + to + ")\n";
 	}
 
-	public static String addPath(int from, int to, String condition) {
-		return "\tedge" + (from == to ? " [loop] " : " ") + "node {" + condition + "} (" + to + ")\n";
+	public static void texToFile(String filename, String tex) throws FileNotFoundException {
+		FileOutputStream fs = new FileOutputStream(new File(filename));
+		PrintStream p = new PrintStream(fs);
+		p.println(tex);
+		p.close();
+	}
+
+	public static String getCmdResult(String[] cmd) {
+		StringBuffer sb = null;
+		try {
+			Process ps = Runtime.getRuntime().exec(cmd);
+			BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));
+			sb = new StringBuffer();
+			String line;
+			while ((line = br.readLine()) != null) {
+				sb.append(line).append("\n");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * Code below only works on <b>Mac OS</b> with PDF Expert installed (renamed to PDF_Expert)
+	 * change cmd2[] to open other pdf application
+	 * @param args ignored
+	 * @throws FileNotFoundException ignored
+	 * @author KaitoHH
+	 */
+	public static void main(String[] args) throws FileNotFoundException {
+		AutomataConstructor automataConstructor = new AutomataConstructor("(a|b)*baa");
+		Automata automata = automataConstructor.getAutomata();
+		String tex = AutomataVisualization.getTex(automata);
+		String date = String.valueOf(new Date().getTime());
+		String filename = date + ".tex";
+		String pdfname = date + ".pdf";
+		texToFile(filename, tex);
+		String[] cmd1 = new String[]{"pdflatexc", filename};
+		String[] cmd2 = new String[]{"/usr/bin/open", "-a", "/Applications/PDF_Expert.app", pdfname};
+		String[] cmd3 = new String[]{"rm", date + ".aux", date + ".log", date + ".tex"};
+		System.out.println(getCmdResult(cmd1));
+		System.out.println(getCmdResult(cmd2));
+		System.out.println(getCmdResult(cmd3));
+
 	}
 }
