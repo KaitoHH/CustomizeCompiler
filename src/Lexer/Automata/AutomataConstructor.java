@@ -39,6 +39,9 @@ public class AutomataConstructor {
 		AutomataNode initialNode = new AutomataNode(root.getFirstPos());
 		automata.addNode(initialNode);
 		automata.setInitialNode(initialNode);
+		if(initialNode.getNameSet().contains(leafNode.size())){
+			automata.addAccept(initialNode);
+		}
 
 		nodes.add(initialNode);
 		while (!nodes.isEmpty()) {
