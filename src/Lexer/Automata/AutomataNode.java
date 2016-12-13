@@ -49,6 +49,15 @@ public class AutomataNode {
 		return true;
 	}
 
+	public AutomataNode getDest(Character c) {
+		for (AutomataNode node : edgeMap.keySet()) {
+			AutomataEdge edge = edgeMap.get(node);
+			if (edge.getCondition().contains(c))
+				return node;
+		}
+		return null;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

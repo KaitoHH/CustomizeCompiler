@@ -24,23 +24,13 @@ public class AutomataRunner {
     public static Word matchSingleAutomata(Automata automata, String input, int start) {
         if (automata == null || input == null || start >= input.length()) return null;
 
-        AutomataNode currentNode = automata.getInitialNode();
-        Map<AutomataNode, AutomataEdge> edges;
-        int matchPosition = -1;
         char nextChar;
+        int matchPosition = -1;
+        AutomataNode currentNode = automata.getInitialNode();
 
         for (int currentPosition = start; currentNode != null && currentPosition < input.length(); currentPosition++) {
             nextChar = input.charAt(currentPosition);
-            edges = currentNode.getEdgeMap();
-            currentNode = null;
-
-            /*for (AutomataEdge edge: edges) {
-                if (edge.getCondition().contains(nextChar)) {
-                    currentNode = edge.getDest();
-                    break;
-                }
-            }*/
-
+            currentNode = currentNode.getDest(nextChar);
             if (automata.isAccept(currentNode))
                 matchPosition = currentPosition + 1;
         }
