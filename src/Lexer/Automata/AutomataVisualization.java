@@ -15,6 +15,12 @@ import java.util.Map;
  * @version 1.0
  */
 public class AutomataVisualization {
+	private static String OS = System.getProperty("os.name").toLowerCase();
+
+	public static boolean isWindows() { return OS.contains("win"); }
+	public static boolean isMac() { return OS.contains("mac"); }
+	public static boolean isUnix() { return OS.contains("nix"); }
+
 	private static String beginTex() {
 		return "\\documentclass[a1paper]{article}\n" +
 				"\\usepackage{tikz}\n" +
@@ -99,7 +105,9 @@ public class AutomataVisualization {
 	}
 
 	/**
-	 * Code below only works on <b>Mac OS</b> with PDF Expert installed (renamed to PDF_Expert)
+	 * Code below works depending on OS： (require pdflatex installed and added into system path)
+	 *     <b>Mac OS</b> with PDF Expert installed (renamed to PDF_Expert)
+	 *     <b>Windows OS</b> (call default web browser to open pdf)
 	 * change cmd2[] to open other pdf application
 	 * @param args ignored
 	 * @throws FileNotFoundException ignored
@@ -113,9 +121,22 @@ public class AutomataVisualization {
 		String filename = date + ".tex";
 		String pdfname = date + ".pdf";
 		texToFile(filename, tex);
-		String[] cmd1 = new String[]{"pdflatexc", filename};
-		String[] cmd2 = new String[]{"/usr/bin/open", "-a", "/Applications/PDF_Expert.app", pdfname};
-		String[] cmd3 = new String[]{"rm", date + ".aux", date + ".log", date + ".tex"};
+		String[] cmd1, cmd2, cmd3;
+		if (isMac()) {
+			cmd1 = new String[]{"pdflatexc", filename};
+			cmd2 = new String[]{"/usr/bin/open", "-a", "/Applications/PDF_Expert.app", pdfname};
+			cmd3 = new String[]{"rm", date + ".aux", date + ".log", date + ".tex"};
+		} else if (isWindows()) {
+			cmd1 = new String[]{"pdflatex", filename};
+			cmd2 = new String[]{"cmd", "/c", "start", pdfname};
+			cmd3 = new String[]{"cmd", "/c", "del", date + ".aux", date + ".log", date + ".tex"};
+		} else {
+			// other os
+			cmd1 = null;
+			cmd2 = null;
+			cmd3 = null;
+		}
+
 		System.out.println(getCmdResult(cmd1));
 		System.out.println(getCmdResult(cmd2));
 		System.out.println(getCmdResult(cmd3));
