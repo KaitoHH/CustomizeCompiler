@@ -45,4 +45,12 @@ public class AutomataEdge {
 	public void addCondition(Set<Character> condition) {
 		this.condition.addAll(condition);
 	}
+
+    @Override
+    public String toString() {
+        String name = "Dest: " + dest.toString() + ", Condition: ";
+        for(Character c : condition)
+            name += c;
+        return name;
+    }
 }

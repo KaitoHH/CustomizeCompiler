@@ -72,4 +72,12 @@ public class AutomataNode {
 	public int hashCode() {
 		return nameSet.hashCode();
 	}
+
+	@Override
+	public String toString() {
+		String name = "";
+		for (Integer i : nameSet)
+			name += i;
+		return name;
+	}
 }
