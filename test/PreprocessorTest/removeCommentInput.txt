@@ -1,4 +1,4 @@
-Hello World!
+Hello World!/*let's start */this test
 /*
  * This text file is used for testing preprocessor.removeComment() method
  * This 4 lines should be removed

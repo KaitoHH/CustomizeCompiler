@@ -1,5 +1,6 @@
 package PreprocessorTest;
 
+import javafx.util.Pair;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -20,7 +21,7 @@ import Preprocessor.Preprocessor;
 public class PreprocessorTest {
 
     @Test
-    public void initializeTest(){
+    public void removeCommentTest(){
         URL inputUrl = PreprocessorTest.class.getResource("/PreprocessorTest/removeCommentInput.txt");
         URL outputUrl = PreprocessorTest.class.getResource("/PreprocessorTest/removeCommentOutput.txt");
 
@@ -28,8 +29,13 @@ public class PreprocessorTest {
             String input = new Scanner(new File(inputUrl.getPath())).useDelimiter("\\Z").next();
             String output = new Scanner(new File(outputUrl.getPath())).useDelimiter("\\Z").next();
 
+            // test whether comment is removed properly
             String answer =  Preprocessor.removeComment(input);
             assertEquals(answer, output);
+
+            // test line position mapping
+            assertEquals(new Pair<>(1, 28),Preprocessor.getPositionPair(12));
+            assertEquals(new Pair<>(6, 1),Preprocessor.getPositionPair(25));
         } catch (FileNotFoundException e) {
             System.out.println("Missing test required file: removeCommentInput.txt || removeCommentOutput.tx");
         }
