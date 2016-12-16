@@ -60,14 +60,15 @@ public class AutomataConstructor {
 			for (Map.Entry<Character, Set<Integer>> entry : map.entrySet()) {
 				if (entry.getValue().size() == 0) continue;
 				AutomataNode newNode = new AutomataNode(entry.getValue());
-				AutomataEdge edge = new AutomataEdge(entry.getKey(), newNode);
-				curNode.addEdge(edge);
 				if (automata.addNode(newNode)) {
 					nodes.add(newNode);
 					if (newNode.getNameSet().contains(leafNode.size())) {
 						automata.addAccept(newNode);
 					}
+				} else {
+					newNode = automata.getNode(newNode);
 				}
+				AutomataEdge edge = new AutomataEdge(entry.getKey(), newNode);
 				curNode.addEdge(edge);
 			}
 		}

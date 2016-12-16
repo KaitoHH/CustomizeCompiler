@@ -50,4 +50,13 @@ public class Automata {
 	public void addAccept(AutomataNode node) {
 		acceptSet.add(node);
 	}
+
+	public AutomataNode getNode(AutomataNode node) {
+		for (AutomataNode curNode : nodeSet) {
+			if (node.equals(curNode)) {
+				return curNode;
+			}
+		}
+		return null;
+	}
 }

@@ -111,7 +111,7 @@ public class AutomataVisualization {
 	 * @author KaitoHH
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
-		AutomataConstructor automataConstructor = new AutomataConstructor("(a|b)*baa");
+		AutomataConstructor automataConstructor = new AutomataConstructor("(a|b)*abb");
 		Automata automata = automataConstructor.getAutomata();
 		String tex = AutomataVisualization.getTex(automata);
 		String date = String.valueOf(new Date().getTime());
