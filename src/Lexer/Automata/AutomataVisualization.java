@@ -1,5 +1,7 @@
 package Lexer.Automata;
 
+import Utils.OSUtils;
+
 import java.io.*;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,11 +17,6 @@ import java.util.Map;
  * @version 1.0
  */
 public class AutomataVisualization {
-	private static String OS = System.getProperty("os.name").toLowerCase();
-
-	public static boolean isWindows() { return OS.contains("win"); }
-	public static boolean isMac() { return OS.contains("mac"); }
-	public static boolean isUnix() { return OS.contains("nix"); }
 
 	private static String beginTex() {
 		return "\\documentclass[a1paper]{article}\n" +
@@ -122,11 +119,11 @@ public class AutomataVisualization {
 		String pdfname = date + ".pdf";
 		texToFile(filename, tex);
 		String[] cmd1, cmd2, cmd3;
-		if (isMac()) {
+		if (OSUtils.isMac()) {
 			cmd1 = new String[]{"pdflatexc", filename};
 			cmd2 = new String[]{"/usr/bin/open", "-a", "/Applications/PDF_Expert.app", pdfname};
 			cmd3 = new String[]{"rm", date + ".aux", date + ".log", date + ".tex"};
-		} else if (isWindows()) {
+		} else if (OSUtils.isWindows()) {
 			cmd1 = new String[]{"pdflatex", filename};
 			cmd2 = new String[]{"cmd", "/c", "start", pdfname};
 			cmd3 = new String[]{"cmd", "/c", "del", date + ".aux", date + ".log", date + ".tex"};
