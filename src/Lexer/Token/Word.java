@@ -14,4 +14,9 @@ public class Word extends Token {
 		super(t);
 		this.lexeme = lexeme;
 	}
+
+	@Override
+	public int getLength() {
+		return lexeme.length();
+	}
 }

@@ -9,9 +9,10 @@ import Lexer.Lexer;
  * Description:
  * All rights reserved.
  */
-public class Token {
+public abstract class Token {
 	public final int tag;
 	public Token(int tag) {
 		this.tag = tag;
 	}
+	public abstract int getLength();
 }

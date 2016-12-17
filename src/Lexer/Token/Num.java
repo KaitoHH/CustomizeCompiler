@@ -14,4 +14,9 @@ public class Num extends Token {
 		super(Tag.NUM);
 		this.value = value;
 	}
+
+	@Override
+	public int getLength() {
+		return String.valueOf(value).length();
+	}
 }
