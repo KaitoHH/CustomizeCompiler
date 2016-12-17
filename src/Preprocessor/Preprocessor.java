@@ -62,8 +62,8 @@ public class Preprocessor {
      * @return			    Pair of two Integers standing for lineNum and offset
      */
     public static Pair<Integer, Integer> getLineOffsetPair(int pos) {
-        for (int i = 1; i < lineLog.size(); i++) {
-            if (pos <= lineLog.get(i) || i == lineLog.size() - 1)
+        for (int i = 1; i <= lineLog.size(); i++) {
+            if ( i == lineLog.size() || pos <= lineLog.get(i))
                 return new Pair<>(i, pos - lineLog.get(i - 1));
         }
         return null;
@@ -79,7 +79,7 @@ public class Preprocessor {
         position = 0;
         sb = new StringBuilder();
         lineLog = new ArrayList<>();
-        lineLog.add(0);
+        lineLog.add(-1);
         commentLog = new ArrayList<>();
 
         while(position < source.length())

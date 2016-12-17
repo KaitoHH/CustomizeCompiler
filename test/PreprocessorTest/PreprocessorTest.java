@@ -34,7 +34,7 @@ public class PreprocessorTest {
             assertEquals(answer, output);
 
             // test line position mapping
-            assertEquals(new Pair<>(1, 28),Preprocessor.getPositionPair(12));
+            assertEquals(new Pair<>(1, 29),Preprocessor.getPositionPair(12));
             assertEquals(new Pair<>(6, 1),Preprocessor.getPositionPair(25));
         } catch (FileNotFoundException e) {
             System.out.println("Missing test required file: removeCommentInput.txt || removeCommentOutput.tx");
