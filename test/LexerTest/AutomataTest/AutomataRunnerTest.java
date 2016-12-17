@@ -4,8 +4,10 @@ import Lexer.Automata.Automata;
 import Lexer.Automata.AutomataConstructor;
 import Lexer.Automata.AutomataRunner;
 import Lexer.Automata.AutomataVisualization;
+import Lexer.IllegalLexemeException;
 import Lexer.Token.Token;
 import Lexer.Token.Word;
+import Preprocessor.Preprocessor;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -60,6 +62,48 @@ public class AutomataRunnerTest {
             Token token = AutomataRunner.matchLongestToken(automatas, input, 0);
 
             assertEquals(i + 1, token.getLength());
+        }
+    }
+
+    @Test
+    public void runTest() {
+        String input = "a b a b\n" +
+                "b a\n" +
+                "b a";
+        Preprocessor.removeComment(input);
+        Automata a = new AutomataConstructor("a").getAutomata();
+        Automata b = new AutomataConstructor("b").getAutomata();
+        List<Automata> automatas = new ArrayList<>();
+        automatas.add(a);
+        automatas.add(b);
+
+        try{
+            List<Token> tokens = AutomataRunner.run(automatas, "abc");
+        } catch (IllegalLexemeException e) {
+            assertEquals(1,e.lineNum);
+            assertEquals(3,e.lineOffset);
+        }
+
+        try{
+            List<Token> tokens = AutomataRunner.run(automatas, input);
+            assertEquals(8, tokens.size());
+
+            Token b2 = tokens.get(3);
+            assertEquals("b", b2.toString());
+            assertEquals(1, b2.lineNum);
+            assertEquals(7, b2.lineOffset);
+
+            Token b3 = tokens.get(4);
+            assertEquals("b", b3.toString());
+            assertEquals(2, b3.lineNum);
+            assertEquals(1, b3.lineOffset);
+
+            Token b4 = tokens.get(6);
+            assertEquals("b", b4.toString());
+            assertEquals(3, b4.lineNum);
+            assertEquals(1, b4.lineOffset);
+        } catch (IllegalLexemeException e){
+            e.printStackTrace();
         }
     }
 }
