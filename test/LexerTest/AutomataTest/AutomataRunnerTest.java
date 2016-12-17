@@ -4,8 +4,13 @@ import Lexer.Automata.Automata;
 import Lexer.Automata.AutomataConstructor;
 import Lexer.Automata.AutomataRunner;
 import Lexer.Automata.AutomataVisualization;
+import Lexer.Token.Token;
 import Lexer.Token.Word;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 
@@ -33,8 +38,28 @@ public class AutomataRunnerTest {
         for (int i = 1; i < 10; i++) {
             sb.insert(0, 'a');
             word = AutomataRunner.matchSingleAutomata(automata, sb.toString(), 0);
+            assertNotNull(word);
             assertEquals(sb.toString(), word.lexeme);
         }
 
 	}
+
+    @Test
+    public void matchLongestTokenTest() {
+        List<Automata> automatas = new ArrayList<>();
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 100; i++)
+            sb.append("b");
+        String input = sb.toString();
+
+        sb = new StringBuilder();
+        for (int i = 0; i < 100; i++) {
+            sb.append("b");
+            automatas.add(new AutomataConstructor(sb.toString()).getAutomata());
+            Token token = AutomataRunner.matchLongestToken(automatas, input, 0);
+
+            assertEquals(i + 1, token.getLength());
+        }
+    }
 }
