@@ -1,12 +1,13 @@
 package Lexer.Automata;
 
+import Lexer.IllegalLexemeException;
 import Lexer.Token.Tag;
 import Lexer.Token.Token;
 import Lexer.Token.Word;
+import Preprocessor.Preprocessor;
+import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Project: CustomizeCompiler
@@ -18,9 +19,33 @@ import java.util.Map;
 public class AutomataRunner {
     private static Token longest;
 
-    public static List<Token> run(List<Automata> automataList, String input) {
-        //TODO: complete this function
-        return null;
+    /** Use given automatas to match given input, returns a list of recognized token
+     *
+     * @param automatas	             Automatas to match with
+     * @param input	                 String of input file
+     * @throws IllegalLexemeException	 Exception with lineNum and lineOffset info
+     * @return			                 List of tokens
+     */
+    public static List<Token> run(List<Automata> automatas, String input) throws IllegalLexemeException {
+        List<Token> tokenList = new ArrayList<>();
+
+        int pos = 0;
+        while (pos < input.length()) {
+            while (input.charAt(pos) == ' ' || input.charAt(pos) == '\n')
+                pos++;
+
+            Token token = matchLongestToken(automatas, input, pos);
+            Pair<Integer, Integer> positionPair = Preprocessor.getPositionPair(pos);
+            if (token != null) {
+                token.setPosition(positionPair);
+                tokenList.add(token);
+                pos += token.getLength();
+            } else {
+                throw new IllegalLexemeException(positionPair);
+            }
+        }
+
+        return tokenList;
     }
 
     /** Find the longest matched token with automatas using multi-threading
