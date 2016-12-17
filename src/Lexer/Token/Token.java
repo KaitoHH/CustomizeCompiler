@@ -12,9 +12,18 @@ import javafx.util.Pair;
  */
 public abstract class Token {
 	public final int tag;
+	public int lineNum;
+	public int lineOffset;
+
 	public Token(int tag) {
 		this.tag = tag;
 	}
+
+	public void setPosition(Pair<Integer, Integer> positionPair) {
+		lineNum = positionPair.getKey();
+		lineOffset = positionPair.getValue();
+	}
+
 	public abstract int getLength();
 	public abstract String toString();
 }
