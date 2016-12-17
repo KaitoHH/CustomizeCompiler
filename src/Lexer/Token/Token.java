@@ -1,6 +1,7 @@
 package Lexer.Token;
 
 import Lexer.Lexer;
+import javafx.util.Pair;
 
 /**
  * Project: CustomizeCompiler
@@ -15,4 +16,5 @@ public abstract class Token {
 		this.tag = tag;
 	}
 	public abstract int getLength();
+	public abstract String toString();
 }

@@ -19,4 +19,9 @@ public class Word extends Token {
 	public int getLength() {
 		return lexeme.length();
 	}
+
+	@Override
+	public String toString() {
+		return lexeme;
+	}
 }

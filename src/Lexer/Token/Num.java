@@ -17,6 +17,11 @@ public class Num extends Token {
 
 	@Override
 	public int getLength() {
-		return String.valueOf(value).length();
+		return toString().length();
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(value);
 	}
 }
