@@ -31,7 +31,7 @@ public class AutomataRunner {
 
         int pos = 0;
         while (pos < input.length()) {
-            while (input.charAt(pos) == ' ' || input.charAt(pos) == '\n')
+            while (Character.isWhitespace(input.charAt(pos)))
                 pos++;
 
             Token token = matchLongestToken(automatas, input, pos);
