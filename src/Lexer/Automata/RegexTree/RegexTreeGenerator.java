@@ -14,6 +14,7 @@ import java.util.Vector;
  * All rights reserved.
  */
 public class RegexTreeGenerator {
+	public static final Character CAT = 1, OR = 2, CLO = 3, SHARP = 4;
 	private RegexTree root;
 	private Vector<Character> suffixExp;
 	private Vector<RegexTree> leafNode;
@@ -41,20 +42,20 @@ public class RegexTreeGenerator {
 		int cnt = 0;
 		for (char ch : suffixExp) {
 			switch (ch) {
-				case '+':
+				case 1:
 					right = stack.pop();
 					left = stack.pop();
 					stack.push(new RegexTree(left, right, RegexTree.CAT));
 					break;
-				case '|':
+				case 2:
 					right = stack.pop();
 					left = stack.pop();
 					stack.push(new RegexTree(left, right, RegexTree.OR));
 					break;
-				case '*':
+				case 3:
 					stack.push(new RegexTree(stack.pop(), RegexTree.STAR));
 					break;
-				case '#':
+				case 4:
 					RegexTree node = new RegexTree('#');
 					node.setNo(++cnt);
 					stack.push(new RegexTree(stack.pop(), node, RegexTree.CAT));

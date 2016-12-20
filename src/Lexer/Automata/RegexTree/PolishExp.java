@@ -24,21 +24,21 @@ public class PolishExp {
 				case '(':
 					if (isDefault) {
 						if (opStack.empty() || opStack.peek() == '(') {
-							opStack.push('+');
+							opStack.push(getCh('+'));
 						} else {
 							exp.add(opStack.pop());
-							opStack.push('+');
+							opStack.push(getCh('+'));
 						}
 					}
-					opStack.push(ch);
+					opStack.push(getCh(ch));
 					isDefault = false;
 					break;
 				case '|':
 					if (opStack.empty() || opStack.peek() == '(') {
-						opStack.push(ch);
+						opStack.push(getCh(ch));
 					} else {
 						exp.add(opStack.pop());
-						opStack.push(ch);
+						opStack.push(getCh(ch));
 					}
 					isDefault = false;
 					break;
@@ -51,16 +51,16 @@ public class PolishExp {
 					isDefault = true;
 					break;
 				case '*':
-					exp.add(ch);
+					exp.add(getCh(ch));
 					isDefault = true;
 					break;
 				default:
 					if (isDefault) {
 						if (opStack.empty() || opStack.peek() == '(') {
-							opStack.push('+');
+							opStack.push(getCh('+'));
 						} else {
 							exp.add(opStack.pop());
-							opStack.push('+');
+							opStack.push(getCh('+'));
 						}
 					}
 					isDefault = true;
@@ -71,7 +71,7 @@ public class PolishExp {
 		while (!opStack.empty()) {
 			exp.add(opStack.pop());
 		}
-		exp.add('#');
+		exp.add(getCh('#'));
 	}
 
 	public Vector<Character> getExp() {
@@ -84,5 +84,20 @@ public class PolishExp {
 			string += ch;
 		}
 		return string;
+	}
+
+	public Character getCh(char ch) {
+		switch (ch) {
+			case '+':
+				return RegexTreeGenerator.CAT;
+			case '*':
+				return RegexTreeGenerator.CLO;
+			case '|':
+				return RegexTreeGenerator.OR;
+			case '#':
+				return RegexTreeGenerator.SHARP;
+			default:
+				return ch;
+		}
 	}
 }
