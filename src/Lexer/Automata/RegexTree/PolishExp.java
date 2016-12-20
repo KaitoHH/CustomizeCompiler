@@ -14,6 +14,12 @@ import java.util.Vector;
 public class PolishExp {
 	private Vector<Character> exp;
 
+	/**
+	 * This function reads a regex, and than generate corresponding polish expression
+	 * @param expression regex to be parsed
+	 * @exception StringIndexOutOfBoundsException this exception will be thrown
+	 * if no character is followed by the escaped character '~'
+	 */
 	public PolishExp(String expression) {
 		Stack<Character> opStack = new Stack();
 		exp = new Vector();
@@ -57,7 +63,11 @@ public class PolishExp {
 				case '~':
 				default:
 					if (ch == '~') {
-						ch = expression.charAt(++i);
+						try {
+							ch = expression.charAt(++i);
+						} catch (StringIndexOutOfBoundsException e) {
+							throw new StringIndexOutOfBoundsException("a character must be followed by an escaped character");
+						}
 					}
 					if (isDefault) {
 						if (opStack.empty() || opStack.peek() == '(') {
