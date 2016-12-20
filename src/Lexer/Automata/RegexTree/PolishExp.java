@@ -54,7 +54,11 @@ public class PolishExp {
 					exp.add(getCh(ch));
 					isDefault = true;
 					break;
+				case '~':
 				default:
+					if (ch == '~') {
+						ch = expression.charAt(++i);
+					}
 					if (isDefault) {
 						if (opStack.empty() || opStack.peek() == '(') {
 							opStack.push(getCh('+'));

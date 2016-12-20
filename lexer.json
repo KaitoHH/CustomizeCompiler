@@ -1,7 +1,7 @@
 {
   "add": "+|(add)",
   "minus": "-|(minus)",
-  "times": "*|(times)",
+  "times": "~*|(times)",
   "divide": "/|(divide)",
   "mod": "%|(mod)|(reminder)",
   "less than": "<",
