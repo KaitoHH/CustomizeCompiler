@@ -28,6 +28,13 @@ public class Automata {
 		this.acceptSet = acceptSet;
 	}
 
+	public static Automata getAutomataFromRegex(String regex, int tagId) {
+		AutomataConstructor constructor = new AutomataConstructor(regex);
+		Automata automata = constructor.getAutomata();
+		automata.setTagId(tagId);
+		return automata;
+	}
+
 	public boolean isAccept(AutomataNode node) {
 		return acceptSet.contains(node);
 	}
