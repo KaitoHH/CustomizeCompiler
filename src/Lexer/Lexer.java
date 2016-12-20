@@ -19,10 +19,5 @@ public class Lexer {
 
 	public Lexer() {
 		words = new HashMap();
-		Map<String, Integer> keyMap = Tag.KEY;
-		for (Map.Entry<String, Integer> entry : keyMap.entrySet()) {
-			words.put(entry.getKey(), new Word(entry.getValue(), entry.getKey()));
-		}
-
 	}
 }

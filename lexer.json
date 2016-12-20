@@ -1,0 +1,13 @@
+{
+  "add": "+|(add)",
+  "minus": "-|(minus)",
+  "times": "*|(times)",
+  "divide": "/|(divide)",
+  "mod": "%|(mod)|(reminder)",
+  "less than": "<",
+  "greater than": ">",
+  "less equal": "<=",
+  "greater equal": ">=",
+  "neq": "(!=)|(<>)",
+  "id": "_|a|b|c(0|1|2|a|b|c|_)"
+}

@@ -14,6 +14,7 @@ public class Automata {
 	private AutomataNode initialNode;
 	private Set<AutomataNode> nodeSet;
 	private Set<AutomataNode> acceptSet;
+	private int tagId;
 
 	public Automata() {
 		initialNode = null;
@@ -58,5 +59,13 @@ public class Automata {
 			}
 		}
 		return null;
+	}
+
+	public int getTagId() {
+		return tagId;
+	}
+
+	public void setTagId(int tagId) {
+		this.tagId = tagId;
 	}
 }

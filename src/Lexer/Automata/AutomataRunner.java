@@ -109,6 +109,6 @@ public class AutomataRunner {
         if (matchPosition == -1)
             return null;
         else
-            return new Word(Tag.ID, input.substring(start, matchPosition));
+            return new Word(Tag.REAL, input.substring(start, matchPosition));
     }
 }
