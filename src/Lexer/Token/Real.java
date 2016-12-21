@@ -2,7 +2,6 @@ package Lexer.Token;
 
 import Lexer.Automata.Automata;
 import Lexer.Automata.AutomataConstructor;
-import Lexer.Automata.AutomataRunner;
 
 /**
  * Project: CustomizeCompiler
@@ -16,7 +15,7 @@ public class Real extends Token {
 	private static final String regex = num + "." + "(0|1|2|3|4|5|6|7|8|9)*";
 	public final double value;
 
-	public Real(int value) {
+	public Real(double value) {
 		super(Tag.REAL);
 		this.value = value;
 	}

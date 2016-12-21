@@ -1,13 +1,13 @@
 package Lexer.Automata;
 
 import Lexer.IllegalLexemeException;
-import Lexer.Token.Tag;
 import Lexer.Token.Token;
 import Lexer.Token.Word;
 import Preprocessor.Preprocessor;
 import javafx.util.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Project: CustomizeCompiler
@@ -17,98 +17,100 @@ import java.util.*;
  * All rights reserved.
  */
 public class AutomataRunner {
-    private static Token longest;
+	private static Token longest;
 
-    /** Use given automatas to match given input, returns a list of recognized token
-     *
-     * @param automatas	             Automatas to match with
-     * @param input	                 String of input file
-     * @throws IllegalLexemeException	 Exception with lineNum and lineOffset info
-     * @return			                 List of tokens
-     */
-    public static List<Token> run(List<Automata> automatas, String input) throws IllegalLexemeException {
-        List<Token> tokenList = new ArrayList<>();
+	/**
+	 * Use given automatas to match given input, returns a list of recognized token
+	 *
+	 * @param automatas Automatas to match with
+	 * @param input     String of input file
+	 * @return List of tokens
+	 * @throws IllegalLexemeException Exception with lineNum and lineOffset info
+	 */
+	public static List<Token> run(List<Automata> automatas, String input) throws IllegalLexemeException {
+		List<Token> tokenList = new ArrayList<>();
 
-        int pos = 0;
-        while (pos < input.length()) {
-            while (Character.isWhitespace(input.charAt(pos)))
-                pos++;
+		int pos = 0;
+		while (pos < input.length()) {
+			while (pos < input.length() && Character.isWhitespace(input.charAt(pos)))
+				pos++;
+			if (pos >= input.length()) break;
+			Token token = matchLongestToken(automatas, input, pos);
+			Pair<Integer, Integer> positionPair = Preprocessor.getPositionPair(pos);
+			if (token != null) {
+				token.setPosition(positionPair);
+				tokenList.add(token);
+				pos += token.getLength();
+			} else {
+				throw new IllegalLexemeException(positionPair);
+			}
+		}
 
-            Token token = matchLongestToken(automatas, input, pos);
-            Pair<Integer, Integer> positionPair = Preprocessor.getPositionPair(pos);
-            if (token != null) {
-                token.setPosition(positionPair);
-                tokenList.add(token);
-                pos += token.getLength();
-            } else {
-                throw new IllegalLexemeException(positionPair);
-            }
-        }
+		return tokenList;
+	}
 
-        return tokenList;
-    }
+	/**
+	 * Find the longest matched token with automatas using multi-threading
+	 *
+	 * @param automatas Automatas to match with
+	 * @param input     String of input file
+	 * @param start     int of start position to match
+	 * @return Longest matched Token
+	 */
+	public static Token matchLongestToken(List<Automata> automatas, String input, int start) {
+		List<Thread> threads = new ArrayList<>();
+		longest = null;
 
-    /** Find the longest matched token with automatas using multi-threading
-     *
-     * @param automatas	    Automatas to match with
-     * @param input	        String of input file
-     * @param start	        int of start position to match
-     * @return			        Longest matched Token
-     */
-    public static Token matchLongestToken(List<Automata> automatas, String input, int start) {
-        List<Thread> threads = new ArrayList<>();
-        longest = null;
+		for (Automata automata : automatas) {
+			Thread thread = new Thread() {
+				@Override
+				public void run() {
+					Token matched = matchSingleAutomata(automata, input, start);
+					if (matched != null)
+						synchronized ("multi automata match lock") {
+							if (longest == null || matched.getLength() > longest.getLength())
+								longest = matched;
+						}
+				}
+			};
+			threads.add(thread);
+			thread.start();
+		}
 
-        for (Automata automata : automatas) {
-            Thread thread = new Thread(){
-                @Override
-                public void run() {
-                    Token matched = matchSingleAutomata(automata, input , start);
-                    if (matched != null)
-                        synchronized ("multi automata match lock") {
-                            if (longest == null || matched.getLength() > longest.getLength())
-                                longest = matched;
-                        }
-                }
-            };
-            threads.add(thread);
-            thread.start();
-        }
+		for (Thread t : threads)
+			try {
+				t.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
-        for (Thread t : threads)
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+		return longest;
+	}
 
-        return longest;
-    }
+	/**
+	 * Find the longest matched token with a single automata
+	 *
+	 * @param automata Automata to match with
+	 * @param input    String of input file
+	 * @param start    int of start position to match
+	 * @return Longest matched Token (currently return a Word)
+	 */
+	public static Word matchSingleAutomata(Automata automata, String input, int start) {
+		if (automata == null || input == null || start >= input.length()) return null;
 
-    /** Find the longest matched token with a single automata
-     *
-     * @param automata	        Automata to match with
-     * @param input	        String of input file
-     * @param start	        int of start position to match
-     * @return			        Longest matched Token (currently return a Word)
-     */
-    public static Word matchSingleAutomata(Automata automata, String input, int start) {
-        if (automata == null || input == null || start >= input.length()) return null;
+		char nextChar;
+		int matchPosition = -1;
+		AutomataNode currentNode = automata.getInitialNode();
 
-        char nextChar;
-        int matchPosition = -1;
-        AutomataNode currentNode = automata.getInitialNode();
-
-        for (int currentPosition = start; currentNode != null && currentPosition < input.length(); currentPosition++) {
-            nextChar = input.charAt(currentPosition);
-            currentNode = currentNode.getDest(nextChar);
-            if (automata.isAccept(currentNode))
-                matchPosition = currentPosition + 1;
-        }
-
-        if (matchPosition == -1)
-            return null;
-        else
-            return new Word(Tag.REAL, input.substring(start, matchPosition));
-    }
+		for (int currentPosition = start; currentNode != null && currentPosition < input.length(); currentPosition++) {
+			nextChar = input.charAt(currentPosition);
+			currentNode = currentNode.getDest(nextChar);
+			if (automata.isAccept(currentNode))
+				matchPosition = currentPosition + 1;
+		}
+		if (matchPosition == -1)
+			return null;
+		else
+			return new Word(automata.getTagId(), input.substring(start, matchPosition));
+	}
 }
