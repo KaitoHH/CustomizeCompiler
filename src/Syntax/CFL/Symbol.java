@@ -1,4 +1,4 @@
-package Syntax;
+package Syntax.CFL;
 
 /**
  * Project: CustomizeCompiler

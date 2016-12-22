@@ -1,6 +1,6 @@
 package SyntaxTest;
 
-import Syntax.CFL;
+import Syntax.CFL.CFL;
 import Syntax.SyntaxConfig;
 import org.junit.Test;
 

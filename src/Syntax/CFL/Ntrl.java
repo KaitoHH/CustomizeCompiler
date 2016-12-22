@@ -1,4 +1,4 @@
-package Syntax;
+package Syntax.CFL;
 
 /**
  * Project: CustomizeCompiler
@@ -7,8 +7,8 @@ package Syntax;
  * Description:
  * All rights reserved.
  */
-public class Trl extends Symbol {
-	public Trl(String s) {
+public class Ntrl extends Symbol{
+	public Ntrl(String s) {
 		super(s);
 	}
 }
