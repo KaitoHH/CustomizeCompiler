@@ -31,11 +31,14 @@ public class SublimeSyntaxGenerator {
     public static void generateSublimeSyntaxFile() throws IOException {
         URL templateUrl = SublimeSyntaxGenerator.class.getResource("/Utils/SublimeSyntax/syntax_template.txt");
         String template = new Scanner(new File(templateUrl.getPath())).useDelimiter("\\Z").next();
-
+        String extensions = "";
+        for(String extension : JSONUtils.getLanguageExtentions())
+            extensions += "  - ex\n".replace("ex", extension);
+        template = template.replace("{{extentions}}", extensions);
         template = template.replace("{{keyword}}", getKeyWordRegular());
         template = template.replace("{{identifier}}", getIdentifierRegular());
 
-        FileUtils.createFile("test.sublime-syntax", template);
+        FileUtils.createFile(JSONUtils.getLanguageName() + ".sublime-syntax", template);
     }
 
     private static List<String> getKeywordRegulars() throws IOException {

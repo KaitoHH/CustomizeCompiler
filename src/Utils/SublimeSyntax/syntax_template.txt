@@ -2,7 +2,7 @@
 ---
 # See http://www.sublimetext.com/docs/3/syntax.html
 file_extensions:
-  - ec
+{{extentions}}
 scope: source.source-scope
 contexts:
   main:
