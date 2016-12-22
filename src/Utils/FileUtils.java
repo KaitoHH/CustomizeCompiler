@@ -1,9 +1,6 @@
 package Utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Project: CustomizeCompiler
@@ -25,5 +22,12 @@ public class FileUtils {
 		}
 		br.close();
 		return bd.toString();
+	}
+
+	public static void createFile(String filename, String content) throws FileNotFoundException {
+		FileOutputStream fs = new FileOutputStream(new File(filename));
+		PrintStream p = new PrintStream(fs);
+		p.println(content);
+		p.close();
 	}
 }
