@@ -1,13 +1,13 @@
 package LexerTest.TokenTest;
 
+import Lexer.Token.Tag;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import Lexer.Token.Tag;
+import static org.junit.Assert.*;
 
 /**
  * Project: CustomizeCompiler
@@ -34,7 +34,7 @@ public class TagTest {
             String key = "" + i;
 
             // check whether key is added
-            Tag.addKey(key);
+            //Tag.addKey(key);
             assertEquals(Tag.KEY.size(), i);
 
             // check whether id generated is unique

@@ -32,8 +32,8 @@
     "scope_start": "{",
     "scope_end": "}",
     "assign": "=",
-    "bracket_left": "(",
-    "bracket_right": ")",
+    "bracket_left": "~(",
+    "bracket_right": "~)",
     "delimiter": ";",
     "neq": "(!=)|(<>)",
     "id": "_|a|b|c(0|1|2|a|b|c|_)*"

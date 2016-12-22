@@ -12,31 +12,51 @@ import java.util.Map;
  * All rights reserved.
  */
 public class Tag {
-	public final static int INT = -2, REAL = -1;        //ID指代 标识符
+	public final static int INT = -2, REAL = -1;
+	public final static String[] keywords = new String[]{
+			"Int",
+			"Real",
+			"if",
+			"else",
+			"while",
+			"do",
+			"for",
+			"break",
+			"continue",
+			"add",
+			"minus",
+			"times",
+			"divide",
+			"mod",
+			"less_than",
+			"greater_than",
+			"and",
+			"or",
+			"not",
+			"eq",
+			"scope_start",
+			"scope_end",
+			"assign",
+			"bracket_left",
+			"bracket_right",
+			"delimiter",
+			"neq",
+			"id"
+	};
 
 	/**
 	 * ReadOnly
 	 */
 	public final static Map<String, Integer> KEY;
-	private static int keyId = 0;
 
 	static {
 		Map<String, Integer> keys = new HashMap<>();
-		keys.put("add", 1);
-		keys.put("minus", 2);
-		keys.put("times", 3);
-		keys.put("divide", 4);
-		keys.put("mod", 5);
-		keys.put("less_than", 6);
-		keys.put("greater_than", 7);
-		keys.put("less_equal", 8);
-		keys.put("greater_equal", 9);
-		keys.put("neq", 10);
-		keys.put("id", 11);
+		int cnt = 0;
+		for (String word : keywords) {
+			keys.put(word, ++cnt);
+		}
 		KEY = Collections.unmodifiableMap(keys);
 	}
 
-	public static void addKey(String key) {
-		KEY.put(key, keyId++);
-	}
+
 }
