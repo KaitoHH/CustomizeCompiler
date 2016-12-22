@@ -3,6 +3,7 @@ package Lexer;
 import Lexer.Automata.Automata;
 import Lexer.Token.Tag;
 import Utils.FileUtils;
+import Utils.JSONUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -33,8 +34,7 @@ public class LexerConfig {
 	 *                          use getMessage() to get more detailed information
 	 */
 	public LexerConfig() throws IOException {
-		String content = FileUtils.getFileString("lexer.json");
-		JSONObject jsonObject = new JSONObject(content);
+		JSONObject jsonObject = JSONUtils.getLanguageDefinition();
 		automataList = new ArrayList();
 		Map<String, Integer> keys = Tag.KEY;
 		for (Map.Entry<String, Integer> entry : keys.entrySet()) {
