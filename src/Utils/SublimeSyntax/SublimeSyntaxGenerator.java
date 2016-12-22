@@ -2,6 +2,7 @@ package Utils.SublimeSyntax;
 
 import Lexer.Token.Tag;
 import Utils.FileUtils;
+import Utils.JSONUtils;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -38,8 +39,7 @@ public class SublimeSyntaxGenerator {
     }
 
     private static List<String> getKeywordRegulars() throws IOException {
-        String content = FileUtils.getFileString("lexer.json");
-        JSONObject jsonObject = new JSONObject(content);
+        JSONObject jsonObject = JSONUtils.getLanguageDefinition();
 
         List<String> regulars = new ArrayList<>();
         Map<String, Integer> keys = Tag.KEY;
@@ -77,8 +77,7 @@ public class SublimeSyntaxGenerator {
     }
 
     private static String getIdentifierRegular() throws IOException{
-        String content = FileUtils.getFileString("lexer.json");
-        JSONObject jsonObject = new JSONObject(content);
+        JSONObject jsonObject = JSONUtils.getLanguageDefinition();
         return jsonObject.getString("id");
     }
 
