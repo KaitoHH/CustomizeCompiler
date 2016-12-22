@@ -13,7 +13,7 @@ import java.util.List;
  * Description:
  * All rights reserved.
  */
-public class JSONUtils {
+public class LexerJSONUtils {
     private static JSONObject jsonObject;
 
     public static String getLanguageName() {
@@ -21,10 +21,10 @@ public class JSONUtils {
     }
 
     public static List<String> getLanguageExtentions() {
-        List<String> extentions = new ArrayList<>();
+        List<String> extensions = new ArrayList<>();
         for (Object object: jsonObject.getJSONObject("language_info").getJSONArray("file_extensions").toList())
-            extentions.add(object.toString());
-        return extentions;
+            extensions.add(object.toString());
+        return extensions;
     }
 
     public static JSONObject getLanguageDefinition() {

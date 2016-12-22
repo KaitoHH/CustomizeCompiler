@@ -2,7 +2,7 @@ package Utils.SublimeSyntax;
 
 import Lexer.Token.Tag;
 import Utils.FileUtils;
-import Utils.JSONUtils;
+import Utils.LexerJSONUtils;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -32,17 +32,17 @@ public class SublimeSyntaxGenerator {
         URL templateUrl = SublimeSyntaxGenerator.class.getResource("/Utils/SublimeSyntax/syntax_template.txt");
         String template = new Scanner(new File(templateUrl.getPath())).useDelimiter("\\Z").next();
         String extensions = "";
-        for(String extension : JSONUtils.getLanguageExtentions())
+        for(String extension : LexerJSONUtils.getLanguageExtentions())
             extensions += "  - ex\n".replace("ex", extension);
         template = template.replace("{{extentions}}", extensions);
         template = template.replace("{{keyword}}", getKeyWordRegular());
         template = template.replace("{{identifier}}", getIdentifierRegular());
 
-        FileUtils.createFile(JSONUtils.getLanguageName() + ".sublime-syntax", template);
+        FileUtils.createFile(LexerJSONUtils.getLanguageName() + ".sublime-syntax", template);
     }
 
     private static List<String> getKeywordRegulars() throws IOException {
-        JSONObject jsonObject = JSONUtils.getLanguageDefinition();
+        JSONObject jsonObject = LexerJSONUtils.getLanguageDefinition();
 
         List<String> regulars = new ArrayList<>();
         Map<String, Integer> keys = Tag.KEY;
@@ -80,7 +80,7 @@ public class SublimeSyntaxGenerator {
     }
 
     private static String getIdentifierRegular() throws IOException{
-        JSONObject jsonObject = JSONUtils.getLanguageDefinition();
+        JSONObject jsonObject = LexerJSONUtils.getLanguageDefinition();
         return jsonObject.getString("id");
     }
 
