@@ -5,10 +5,15 @@ import Syntax.CFL.Ntrl;
 import Syntax.CFL.Production;
 import Syntax.CFL.Trl;
 import Syntax.SyntaxConfig;
+import Utils.SyntaxJSONUtils;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +27,16 @@ import static org.junit.Assert.*;
 public class CFLTest {
     @Test
     public void computeFirstSetTest() {
-        SyntaxConfig config = new SyntaxConfig();
+        URL testInputUrl = CFLTest.class.getResource("/SyntaxTest/CFLTest/TestFirstSet.json");
+        String testInput;
+        try{
+            testInput = new Scanner(new File(testInputUrl.getPath())).useDelimiter("\\Z").next();
+        } catch (IOException e) {
+            System.out.println("Missing test required file: TestFirstSet.json");
+            return;
+        }
+
+        SyntaxConfig config = new SyntaxConfig(SyntaxJSONUtils.getCFLfromJSONstring(testInput));
         CFL cfl = config.getCfl();
         cfl.computeAllFirstSets();
 

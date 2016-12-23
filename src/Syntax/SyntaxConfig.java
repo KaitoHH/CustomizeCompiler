@@ -21,11 +21,23 @@ public class SyntaxConfig {
 	CFL cfl;
 
 	/**
-	 * This function reads a production config file(json) and translate into <b>CFL Class</b>
+	 * This function reads the default production config file(json) and translate into <b>CFL Class</b>
 	 * @see CFL class
 	 */
 	public SyntaxConfig() {
 		JSONObject jsonObject = SyntaxJSONUtils.getCFL();
+		generateCFLfromJSON(jsonObject);
+	}
+
+	/**
+	 * This function receive a jsonObject and translate into <b>CFL Class</b>
+	 * @see CFL class
+	 */
+	public SyntaxConfig(JSONObject jsonObject) {
+		generateCFLfromJSON(jsonObject);
+	}
+
+	private void generateCFLfromJSON(JSONObject	jsonObject) {
 		Iterator<String> productions = jsonObject.keys();
 		tokenMap = new HashMap<>();
 		cfl = new CFL();

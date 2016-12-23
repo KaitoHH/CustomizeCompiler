@@ -18,6 +18,10 @@ public class SyntaxJSONUtils {
 		return jsonObject;
 	}
 
+	public static JSONObject getCFLfromJSONstring(String jsonString) {
+		return new JSONObject(jsonString);
+	}
+
 	static {
 		try {
 			String content = FileUtils.getFileString("sample.json");
