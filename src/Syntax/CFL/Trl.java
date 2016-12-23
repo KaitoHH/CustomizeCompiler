@@ -11,4 +11,15 @@ public class Trl extends Symbol {
 	public Trl(String s) {
 		super(s);
 	}
+
+	public static Trl Epsilon = new Trl("epsilon");
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	public static boolean isEpsilon(Symbol symbol) {
+		return Epsilon.equals(symbol);
+	}
 }

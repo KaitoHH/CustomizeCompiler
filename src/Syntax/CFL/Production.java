@@ -39,6 +39,10 @@ public class Production {
 		return initial;
 	}
 
+	public List<Symbol> getRule() { return rule; }
+
+	public boolean deriveToEpsilonDirectly() { return rule.size() == 1 && Trl.isEpsilon(rule.get(0)); }
+
 	@Override
 	public String toString() {
 		String out = initial + "\t->";

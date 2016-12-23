@@ -1,9 +1,6 @@
 package Syntax.CFL;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Project: CustomizeCompiler
@@ -18,10 +15,11 @@ import java.util.Map;
  * @see Production class
  */
 public class CFL {
-	Map<Ntrl, List<Production>> productionMap;
+	public Map<Ntrl, List<Production>> productionMap = new HashMap<>();
+	public Set<Trl> trlSet = new HashSet<>();
 
-	public CFL() {
-		productionMap = new HashMap<>();
+	public void addTrl(Trl trl) {
+		trlSet.add(trl);
 	}
 
 	public void addProduction(Production production) {
@@ -30,6 +28,51 @@ public class CFL {
 			productionMap.put(initial, new ArrayList<>());
 		}
 		productionMap.get(initial).add(production);
+	}
+
+	/**
+	 * Compute first set for all symbols
+	 */
+	public void computeAllFirstSets() {
+		setFirstSetOfTrls();
+		int size = -1;
+		while (size != getFirstSetTotalSize()) {
+			size = getFirstSetTotalSize();
+			for (Map.Entry<Ntrl, List<Production>> entry : productionMap.entrySet()) {
+				for (Production production : entry.getValue()) {
+					computeFirstSet(production);
+				}
+			}
+		}
+	}
+
+	private void setFirstSetOfTrls() {
+		for (Trl trl : trlSet)
+			trl.firstSet.add(trl);
+	}
+
+	private int getFirstSetTotalSize() {
+		int size = 0;
+		for (Ntrl ntrl : productionMap.keySet()) {
+			size += ntrl.firstSet.size();
+		}
+		return size;
+	}
+
+	private void computeFirstSet(Production production) {
+		Ntrl lhs = production.getInitial();
+		List<Symbol> rhs = production.getRule();
+
+		if (production.deriveToEpsilonDirectly()) {
+			lhs.firstSet.add(Trl.Epsilon);
+		} else {
+			for (Symbol symbol : rhs) {
+				lhs.firstSet.addAll(symbol.firstSet);
+				if (!symbol.firstSet.contains(Trl.Epsilon))
+					return;
+			}
+			lhs.firstSet.add(Trl.Epsilon);
+		}
 	}
 
 	@Override

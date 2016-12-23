@@ -1,5 +1,8 @@
 package Syntax.CFL;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Project: CustomizeCompiler
  * Author: KaitoHH
@@ -9,6 +12,8 @@ package Syntax.CFL;
  */
 public abstract class Symbol {
 	private String string;
+	public Set<Trl> firstSet = new HashSet<>();
+	public Set<Trl> followSet = new HashSet<>();
 
 	public Symbol(String s) {
 		string = s;
@@ -17,5 +22,10 @@ public abstract class Symbol {
 	@Override
 	public String toString() {
 		return string;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
 	}
 }

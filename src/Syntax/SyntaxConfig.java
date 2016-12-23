@@ -39,6 +39,8 @@ public class SyntaxConfig {
 				for (int j = 0; j < rules.length(); j++) {
 					String rule = rules.getString(j);
 					Symbol ruleSymbol = getToken(rule);
+					if (ruleSymbol instanceof Trl)
+						cfl.addTrl((Trl)ruleSymbol);
 					production.ruleAddSymbol(ruleSymbol);
 				}
 				cfl.addProduction(production);
@@ -60,7 +62,10 @@ public class SyntaxConfig {
 		if (name.startsWith("$")) {
 			return new Ntrl(name);
 		} else {
-			return new Trl(name);
+			if (name.equals("epsilon"))
+				return Trl.Epsilon;
+			else
+				return new Trl(name);
 		}
 	}
 
