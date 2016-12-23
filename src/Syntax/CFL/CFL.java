@@ -12,10 +12,12 @@ import java.util.*;
 
 /**
  * CFL (Context Free Language) class consists of productions
+ *
  * @see Production class
  */
 public class CFL {
 	public Map<Ntrl, List<Production>> productionMap = new HashMap<>();
+	private Ntrl initinialNtrl;
 	public Set<Trl> trlSet = new HashSet<>();
 
 	public void addTrl(Trl trl) {
@@ -25,9 +27,17 @@ public class CFL {
 	public void addProduction(Production production) {
 		Ntrl initial = production.getInitial();
 		if (!productionMap.containsKey(initial)) {
+			//TODO: temporary change, may need to be modified
+			if (production.getInitial().toString().contains("`")) {
+				initinialNtrl = production.getInitial();
+			}
 			productionMap.put(initial, new ArrayList<>());
 		}
 		productionMap.get(initial).add(production);
+	}
+
+	public Ntrl getInitinialNtrl() {
+		return initinialNtrl;
 	}
 
 	/**

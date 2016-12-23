@@ -18,6 +18,7 @@ import java.util.List;
  * a production is like:
  * $E -> $E + $T
  * where the symbol begins with '$' is nonterminals , the other terminals
+ *
  * @see Symbol base class for terminals and nonterminals
  * @see Ntrl nonterminals extends Symbol
  * @see Trl terminals extenrs Symbol
@@ -39,9 +40,26 @@ public class Production {
 		return initial;
 	}
 
-	public List<Symbol> getRule() { return rule; }
+	public List<Symbol> getRule() {
+		return rule;
+	}
 
-	public boolean deriveToEpsilonDirectly() { return rule.size() == 1 && Trl.isEpsilon(rule.get(0)); }
+	public boolean isNtrl(int index) {
+		return rule.get(index).isNtrl();
+	}
+
+	public Symbol getSymbol(int index) {
+		return rule.get(index);
+	}
+
+	public boolean deriveToEpsilonDirectly() {
+		return rule.size() == 1 && Trl.isEpsilon(rule.get(0));
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
 
 	@Override
 	public String toString() {

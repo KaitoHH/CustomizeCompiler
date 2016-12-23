@@ -24,8 +24,13 @@ public abstract class Symbol {
 		return string;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
+	public boolean isTrl() {
+		return this instanceof Trl;
 	}
+
+	public boolean isNtrl() {
+		return this instanceof Ntrl;
+	}
+
+
 }
