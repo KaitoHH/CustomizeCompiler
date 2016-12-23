@@ -40,6 +40,7 @@ public class CFLTest {
         CFL cfl = config.getCfl();
         cfl.computeAllFirstSets();
 
+        // get terminals and check its first set
         Trl id = null,lb = null, rb = null;
         for (Trl trl : cfl.trlSet) {
             if (trl.toString().equals("id"))
@@ -53,6 +54,7 @@ public class CFLTest {
             assertEquals(trl, trl.firstSet.iterator().next());
         }
 
+        // check first set of non terminals
         for (Map.Entry<Ntrl, List<Production>> entry : cfl.productionMap.entrySet()) {
             Ntrl ntrl = entry.getKey();
 
@@ -88,4 +90,64 @@ public class CFLTest {
             }
         }
     }
+
+    @Test
+    // This use cfl on dragon book P138 4.28
+    public void computeFollowSetTest() {
+        URL testInputUrl = CFLTest.class.getResource("/SyntaxTest/CFLTest/TestFollowSet.json");
+        String testInput;
+        try{
+            testInput = new Scanner(new File(testInputUrl.getPath())).useDelimiter("\\Z").next();
+        } catch (IOException e) {
+            System.out.println("Missing test required file: TestFollowSet.json");
+            return;
+        }
+
+        SyntaxConfig config = new SyntaxConfig(SyntaxJSONUtils.getCFLfromJSONstring(testInput));
+        CFL cfl = config.getCfl();
+        cfl.computeAllFirstSets();
+        cfl.computeAllFollowSets();
+
+        // get terminals
+        Trl id = null,lb = null, rb = null, plus = null, times = null;
+        for (Trl trl : cfl.trlSet) {
+            if (trl.toString().equals("id"))
+                id = trl;
+            if (trl.toString().equals("("))
+                lb = trl;
+            if (trl.toString().equals(")"))
+                rb = trl;
+            if (trl.toString().equals("+"))
+                plus = trl;
+            if (trl.toString().equals("*"))
+                times = trl;
+        }
+
+        // check follow set
+        for (Map.Entry<Ntrl, List<Production>> entry : cfl.productionMap.entrySet()) {
+            Ntrl ntrl = entry.getKey();
+
+            if (ntrl.toString().equals("$$E") || ntrl.toString().equals("$E`")) {
+                assertEquals(2, ntrl.followSet.size());
+                assertTrue(ntrl.followSet.contains(rb));
+                assertTrue(ntrl.followSet.contains(Trl.EndMark));
+            }
+
+            if (ntrl.toString().equals("$T") || ntrl.toString().equals("$T`")) {
+                assertEquals(3, ntrl.followSet.size());
+                assertTrue(ntrl.followSet.contains(plus));
+                assertTrue(ntrl.followSet.contains(rb));
+                assertTrue(ntrl.followSet.contains(Trl.EndMark));
+            }
+
+            if (ntrl.toString().equals("$F")) {
+                assertEquals(4, ntrl.followSet.size());
+                assertTrue(ntrl.followSet.contains(plus));
+                assertTrue(ntrl.followSet.contains(times));
+                assertTrue(ntrl.followSet.contains(rb));
+                assertTrue(ntrl.followSet.contains(Trl.EndMark));
+            }
+        }
+    }
+
 }

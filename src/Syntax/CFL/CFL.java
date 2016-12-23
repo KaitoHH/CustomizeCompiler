@@ -19,10 +19,7 @@ public class CFL {
 	public Map<Ntrl, List<Production>> productionMap = new HashMap<>();
 	private Ntrl initinialNtrl;
 	public Set<Trl> trlSet = new HashSet<>();
-
-	public void addTrl(Trl trl) {
-		trlSet.add(trl);
-	}
+	public Ntrl startSymbol;
 
 	public void addProduction(Production production) {
 		Ntrl initial = production.getInitial();
@@ -38,6 +35,57 @@ public class CFL {
 
 	public Ntrl getInitinialNtrl() {
 		return initinialNtrl;
+	}
+
+	/**
+	 * Compute first set for all non terminal symbols
+	 */
+	public void computeAllFollowSets() {
+		setEndMarkToStartSymbol();
+		int size = -1;
+		while (size != getFollowSetTotalSize()) {
+			size = getFollowSetTotalSize();
+			for (Map.Entry<Ntrl, List<Production>> entry : productionMap.entrySet()) {
+				for (Production production : entry.getValue()) {
+					computeFollowSet(production);
+				}
+			}
+		}
+	}
+
+	private void setEndMarkToStartSymbol(){
+		startSymbol.followSet.add(Trl.EndMark);
+	}
+
+	private int getFollowSetTotalSize() {
+		int size = 0;
+		for (Ntrl ntrl : productionMap.keySet()) {
+			size += ntrl.followSet.size();
+		}
+		return size;
+	}
+
+	private void computeFollowSet(Production production) {
+		Ntrl lhs = production.getInitial();
+		List<Symbol> rhs = production.getRule();
+
+		for (int i = 0; i < rhs.size(); i++) {
+			Symbol symbol = rhs.get(i);
+			if (symbol instanceof Ntrl && i < rhs.size() - 1) {
+				for (Trl trl : rhs.get(i + 1).firstSet)
+					if (!Trl.isEpsilon(trl))
+						symbol.followSet.add(trl);
+			}
+		}
+
+		for (int i = rhs.size() - 1; i >= 0; i--) {
+			Symbol symbol = rhs.get(i);
+			if (symbol instanceof Ntrl) {
+				symbol.followSet.addAll(lhs.followSet);
+			}
+			if (!symbol.firstSet.contains(Trl.Epsilon))
+				return;
+		}
 	}
 
 	/**

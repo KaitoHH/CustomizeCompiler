@@ -17,8 +17,8 @@ import java.util.Map;
  * All rights reserved.
  */
 public class SyntaxConfig {
-	Map<String, Symbol> tokenMap;
-	CFL cfl;
+	Map<String, Symbol> tokenMap = new HashMap<>();
+	CFL cfl = new CFL();
 
 	/**
 	 * This function reads the default production config file(json) and translate into <b>CFL Class</b>
@@ -39,8 +39,6 @@ public class SyntaxConfig {
 
 	private void generateCFLfromJSON(JSONObject	jsonObject) {
 		Iterator<String> productions = jsonObject.keys();
-		tokenMap = new HashMap<>();
-		cfl = new CFL();
 		while (productions.hasNext()) {
 			String cur = productions.next();
 			Symbol start = getToken(cur);
@@ -51,8 +49,9 @@ public class SyntaxConfig {
 				for (int j = 0; j < rules.length(); j++) {
 					String rule = rules.getString(j);
 					Symbol ruleSymbol = getToken(rule);
+					// add terminals into trlSet
 					if (ruleSymbol instanceof Trl)
-						cfl.addTrl((Trl)ruleSymbol);
+						cfl.trlSet.add((Trl)ruleSymbol);
 					production.ruleAddSymbol(ruleSymbol);
 				}
 				cfl.addProduction(production);
@@ -72,6 +71,12 @@ public class SyntaxConfig {
 
 	public Symbol createSymbol(String name) {
 		if (name.startsWith("$")) {
+			if (name.startsWith("$$")) {
+				// start symbol starts with $$
+				Ntrl start = new Ntrl(name);
+				cfl.startSymbol = start;
+				return start;
+			}
 			return new Ntrl(name);
 		} else {
 			if (name.equals("epsilon"))

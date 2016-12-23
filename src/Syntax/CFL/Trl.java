@@ -13,6 +13,7 @@ public class Trl extends Symbol {
 	}
 
 	public static Trl Epsilon = new Trl("epsilon");
+	public static Trl EndMark = new Trl("$");
 
 	@Override
 	public boolean equals(Object obj) {
