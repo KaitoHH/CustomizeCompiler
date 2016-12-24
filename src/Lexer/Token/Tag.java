@@ -48,15 +48,21 @@ public class Tag {
 	 * ReadOnly
 	 */
 	public final static Map<String, Integer> KEY;
+	private final static Map<Integer, String> stringMap;
 
 	static {
 		Map<String, Integer> keys = new HashMap<>();
+		stringMap = new HashMap<>();
 		int cnt = 0;
 		for (String word : keywords) {
+			word = word.toUpperCase();
 			keys.put(word, ++cnt);
+			stringMap.put(cnt, word);
 		}
 		KEY = Collections.unmodifiableMap(keys);
 	}
 
-
+	public static String getKey(int id) {
+		return stringMap.get(id);
+	}
 }

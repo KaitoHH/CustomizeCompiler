@@ -1,0 +1,107 @@
+// CUP specification for a simple expression evaluator (w/ actions)
+
+import java_cup.runtime.*;
+
+/* Terminals (tokens returned by the scanner). */
+terminal           intnum,realnum,INT,REAL,IF,ELSE,WHILE,DO,FOR,BREAK,CONTINUE,
+                    ADD,MINUS,TIMES,DIVIDE,MOD,LESS_THAN,GREATER_THAN,LESS_EQUAL,GREATER_EQUAL,
+                    AND,OR,NOT,EQ,
+                    SCOPE_START,SCOPE_END,ASSIGN,BRACKET_LEFT,BRACKET_RIGHT,
+                    DELIMITER,NEQ,ID;
+
+/* Non-terminals */
+non terminal       program,block,stmts,stmt,type,bool,join,equality,rel,expr,term,unary,factor;
+
+precedence left    ELSE;
+
+/* The grammar */
+program ::= block;
+
+block   ::= SCOPE_START stmts SCOPE_END;
+
+stmts   ::= stmts stmt
+        |
+            stmt
+        ;
+stmt   ::=
+            type ID DELIMITER
+            {:System.out.println("declare");:}
+        |
+            ID ASSIGN bool DELIMITER
+            {:System.out.println("assign");:}
+        |
+            IF BRACKET_LEFT bool BRACKET_RIGHT stmt ELSE stmt
+            {:System.out.println("if-else");:}
+        |
+            IF BRACKET_LEFT bool BRACKET_RIGHT stmt
+            {:System.out.println("if");:}
+        |
+            WHILE BRACKET_LEFT bool BRACKET_RIGHT stmt
+        |
+            DO stmt WHILE BRACKET_LEFT bool BRACKET_RIGHT DELIMITER
+        |
+            block
+        ;
+type   ::= INT
+        |
+            REAL
+        ;
+bool   ::= join
+        |
+            bool OR join
+        ;
+join   ::= equality
+        |
+            join AND equality
+        ;
+equality::= rel
+        |
+            equality EQ rel
+            {:System.out.println("eq");:}
+        |
+            equality NEQ rel
+        ;
+rel    ::= expr LESS_THAN expr
+        |
+            expr GREATER_THAN expr
+        |
+            expr LESS_EQUAL expr
+        |
+            expr GREATER_EQUAL expr
+        |
+            expr
+        ;
+expr   ::= term
+        |
+            expr MINUS term
+        |
+            expr ADD term
+            {:System.out.println("add");:}
+        ;
+
+term   ::= unary
+        |
+            term TIMES unary
+        |
+            term DIVIDE unary
+        |
+            term MOD unary
+        ;
+unary  ::= NOT unary
+        |
+            MINUS unary
+        |
+            factor
+        ;
+
+factor ::= BRACKET_LEFT bool BRACKET_RIGHT
+        |
+            ID
+        |
+            intnum
+        |
+            realnum
+        ;
+
+
+

@@ -1,6 +1,5 @@
 package Lexer.Token;
 
-import Lexer.Lexer;
 import javafx.util.Pair;
 
 /**
@@ -26,4 +25,14 @@ public abstract class Token {
 
 	public abstract int getLength();
 	public abstract String toString();
+
+	public int getLineNum() {
+		return lineNum;
+	}
+
+	public int getLineOffset() {
+		return lineOffset;
+	}
+
+
 }

@@ -1,0 +1,8 @@
+{
+    int a;
+    int b;
+    a=b+a;
+    if(a==b){
+        b=-a;
+    }
+}
