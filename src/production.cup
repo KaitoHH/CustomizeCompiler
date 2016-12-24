@@ -1,7 +1,8 @@
 import java_cup.runtime.*;
-
+import Lexer.Token.Token;
 /* Terminals (tokens returned by the scanner). */
-terminal           INTNUM,REALNUM,INT,REAL,IF,ELSE,WHILE,DO,FOR,BREAK,CONTINUE,
+terminal           INTNUM,REALNUM;
+terminal           INT,REAL,IF,ELSE,WHILE,DO,FOR,BREAK,CONTINUE,
                     ADD,MINUS,TIMES,DIVIDE,MOD,LESS_THAN,GREATER_THAN,LESS_EQUAL,GREATER_EQUAL,
                     AND,OR,NOT,EQ,
                     SCOPE_START,SCOPE_END,ASSIGN,BRACKET_LEFT,BRACKET_RIGHT,
@@ -21,6 +22,7 @@ stmts   ::= stmts stmt
         |
             stmt
         ;
+/* user defined here */
 stmt   ::=
             type ID DELIMITER
             {:System.out.println("declare");:}
@@ -37,8 +39,12 @@ stmt   ::=
             WHILE BRACKET_LEFT bool BRACKET_RIGHT stmt
         |
             DO stmt WHILE BRACKET_LEFT bool BRACKET_RIGHT DELIMITER
-        |
+        ;
+/* user defined here */
+stmt    ::=
             block
+        |
+            error DELIMITER
         ;
 type   ::= INT
         |

@@ -5,6 +5,7 @@ import Utils.FileUtils;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Scanner;
 import java_cup.runtime.Symbol;
+import java_cup.runtime.SymbolFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class SyntaxScanner implements Scanner {
 		}
 	}
 
-	public ComplexSymbolFactory getFactory() {
+	public SymbolFactory getFactory() {
 		return factory;
 	}
 
@@ -46,16 +47,20 @@ public class SyntaxScanner implements Scanner {
 	public Symbol next_token() {
 		if (iterator.hasNext()) {
 			Token token = iterator.next();
-			return factory.newSymbol(token.toString(), integerMap.get(Tag.getKey(token.tag)));
+			//return factory.newSymbol(token.toString(), integerMap.get(Tag.getKey(token.tag)), token);
+			return factory.newSymbol(token.toString(), integerMap.get(Tag.getKey(token.tag)),
+			new ComplexSymbolFactory.Location(token.toString(), token.getLineNum(), token.getLineOffset()),
+					new ComplexSymbolFactory.Location(token.toString(), token.getLineNum(), token.getLineOffset() + token.getLength())
+					, token);
 		} else {
-			return factory.newSymbol("EOF", sym.EOF);
+			return factory.newSymbol("EOF", sym.EOF,"");
 		}
 	}
 
 	public static void main(String args[]) throws IOException {
 		Lexer lexer = new Lexer(FileUtils.getFileString("source.txt"));
 		SyntaxScanner scanner = new SyntaxScanner(lexer.getTokenList());
-		parser p = new parser(scanner, scanner.getFactory());
+		parser p = new SyntaxParser(scanner, scanner.getFactory());
 		try {
 			p.parse();
 		} catch (Exception e) {
