@@ -3,7 +3,7 @@ package LexerTest.AutomataTest;
 import Lexer.Automata.Automata;
 import Lexer.Automata.AutomataConstructor;
 import Lexer.Automata.AutomataVisualization;
-import org.junit.ClassRule;
+import Utils.OSUtils;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -83,8 +83,8 @@ public class AutomataVisualizationTest {
 		String[] cmd1 = new String[]{"pdflatexc", filename};
 		String[] cmd2 = new String[]{"/usr/bin/open", "-a", "/Applications/PDF_Expert.app", pdfname};
 		String[] cmd3 = new String[]{"rm", date + ".aux", date + ".log", date + ".tex"};
-		System.out.println(AutomataVisualization.getCmdResult(cmd1));
-		System.out.println(AutomataVisualization.getCmdResult(cmd2));
-		System.out.println(AutomataVisualization.getCmdResult(cmd3));
+		System.out.println(OSUtils.executeCMD(cmd1));
+		System.out.println(OSUtils.executeCMD(cmd2));
+		System.out.println(OSUtils.executeCMD(cmd3));
 	}
 }

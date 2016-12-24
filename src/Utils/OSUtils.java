@@ -27,7 +27,7 @@ public class OSUtils {
 		StringBuffer sb = null;
 		try {
 			Process ps = Runtime.getRuntime().exec(cmd);
-			BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(ps.getErrorStream()));
 			sb = new StringBuffer();
 			String line;
 			while ((line = br.readLine()) != null) {
@@ -38,4 +38,5 @@ public class OSUtils {
 		}
 		return sb.toString();
 	}
+
 }
