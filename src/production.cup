@@ -25,16 +25,12 @@ stmts   ::= stmts stmt
 /* user defined here */
 stmt   ::=
             type ID DELIMITER
-            {:System.out.println("declare");:}
         |
             ID ASSIGN bool DELIMITER
-            {:System.out.println("assign");:}
         |
             IF BRACKET_LEFT bool BRACKET_RIGHT stmt ELSE stmt
-            {:System.out.println("if-else");:}
         |
             IF BRACKET_LEFT bool BRACKET_RIGHT stmt
-            {:System.out.println("if");:}
         |
             WHILE BRACKET_LEFT bool BRACKET_RIGHT stmt
         |
@@ -61,7 +57,6 @@ join   ::= equality
 equality::= rel
         |
             equality EQ rel
-            {:System.out.println("eq");:}
         |
             equality NEQ rel
         ;
@@ -80,7 +75,6 @@ expr   ::= term
             expr MINUS term
         |
             expr ADD term
-            {:System.out.println("add");:}
         ;
 
 term   ::= unary
@@ -103,7 +97,6 @@ factor ::= BRACKET_LEFT bool BRACKET_RIGHT
             ID
         |
             INTNUM
-            {:System.out.println("int");:}
         |
             REALNUM
         ;

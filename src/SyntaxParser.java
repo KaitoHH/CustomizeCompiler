@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0
  */
 public class SyntaxParser extends parser {
-	private final static int[] commanMiss = new int[]{
+	private final static int[] commonMiss = new int[]{
 			sym.SCOPE_START, sym.SCOPE_END, sym.DELIMITER, sym.BRACKET_LEFT, sym.BRACKET_RIGHT
 	};
 
@@ -26,13 +26,17 @@ public class SyntaxParser extends parser {
 	@Override
 	public void syntax_error(Symbol cur_token) {
 		ComplexSymbolFactory.ComplexSymbol token = (ComplexSymbolFactory.ComplexSymbol) cur_token;
-		System.err.println("An error occurred at Line " + token.xleft.getLine() +
-				" ,Column " + token.xleft.getColumn());
+		try {
+			System.err.println("An error occurred at Line " + token.xleft.getLine() +
+					" ,Column " + token.xleft.getColumn());
+		} catch (NullPointerException e) {
+			System.err.println("An error occurred at " + token);
+		}
 		List<Integer> list = expected_token_ids();
-		report_expected_token_ids();
-		for (int id : commanMiss) {
+		//report_expected_token_ids();
+		for (int id : commonMiss) {
 			if (list.contains(id)) {
-				System.err.println("Are you probably missing " + sym.terminalNames[id] + "?");
+				System.out.println("Are you probably missing " + sym.terminalNames[id] + "?");
 			}
 		}
 	}

@@ -1,27 +1,5 @@
 {
-  "$program": [
-    [
-      "$block"
-    ]
-  ],
-  "$block": [
-    [
-      "scope_start",
-      "$stmts",
-      "scope_end"
-    ]
-  ],
-  "$stmts": [
-    [
-      "$stmts",
-      "$stmt"
-    ],
-    [
-      "$stmt"
-    ],
-    [
-      "//USER DEFINE BELOW"
-    ],
+  "$stmt": [
     [
       "$type",
       "id",
@@ -30,7 +8,8 @@
     [
       "id",
       "assign",
-      "$bool"
+      "$bool",
+      "delimiter"
     ],
     [
       "if",
@@ -74,145 +53,6 @@
       "$bool",
       "bracket_right",
       "$stmt"
-    ],
-    [
-      "//USER DEFINE ABOVE"
-    ]
-  ],
-  "$stmt": [
-    [
-      "$type",
-      "id",
-      "delimiter"
-    ],
-    [
-      "$block"
-    ]
-  ],
-  "$type": [
-    [
-      "Int"
-    ],
-    [
-      "Real"
-    ]
-  ],
-  "$bool": [
-    [
-      "$join"
-    ],
-    [
-      "$bool",
-      "or",
-      "$join"
-    ]
-  ],
-  "$join": [
-    [
-      "$equality"
-    ],
-    [
-      "$join",
-      "and",
-      "$equality"
-    ]
-  ],
-  "$equality": [
-    [
-      "$rel"
-    ],
-    [
-      "$equality",
-      "eq",
-      "$rel"
-    ],
-    [
-      "$equality",
-      "neq",
-      "$rel"
-    ]
-  ],
-  "$rel": [
-    [
-      "$expr",
-      "less_than",
-      "$expr"
-    ],
-    [
-      "$expr",
-      "greater_than",
-      "$expr"
-    ],
-    [
-      "$expr",
-      "less_equal",
-      "$expr"
-    ],
-    [
-      "$expr",
-      "greater_equal",
-      "$expr"
-    ]
-  ],
-  "$expr": [
-    [
-      "$term"
-    ],
-    [
-      "$expr",
-      "add",
-      "$term"
-    ],
-    [
-      "$expr",
-      "minus",
-      "$term"
-    ]
-  ],
-  "$term": [
-    [
-      "$unary"
-    ],
-    [
-      "$term",
-      "times",
-      "$unary"
-    ],
-    [
-      "$term",
-      "divide",
-      "$unary"
-    ],
-    [
-      "$term",
-      "mod",
-      "$unary"
-    ]
-  ],
-  "$unary": [
-    [
-      "not",
-      "$unary"
-    ],
-    [
-      "minus",
-      "$unary"
-    ],
-    [
-      "$factor"
-    ]
-  ],
-  "$factor": [
-    [
-      "bracket_left",
-      "$bool",
-      "bracket_right"
-    ],
-    [
-      "$$int"
-    ],
-    [
-      "$$real"
     ]
   ]
 }
