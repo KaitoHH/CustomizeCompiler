@@ -1,3 +1,5 @@
+package Syntax;
+
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Scanner;
 import java_cup.runtime.Symbol;
@@ -14,9 +16,9 @@ import java.util.List;
  * @author huang
  * @version 1.0
  */
-public class SyntaxParser extends parser {
+public class SyntaxParser extends Parser {
 	private final static int[] commonMiss = new int[]{
-			sym.SCOPE_START, sym.SCOPE_END, sym.DELIMITER, sym.BRACKET_LEFT, sym.BRACKET_RIGHT
+			ParserSym.SCOPE_START, ParserSym.SCOPE_END, ParserSym.DELIMITER, ParserSym.BRACKET_LEFT, ParserSym.BRACKET_RIGHT
 	};
 
 	public SyntaxParser(Scanner s, SymbolFactory sf) {
@@ -36,7 +38,7 @@ public class SyntaxParser extends parser {
 		//report_expected_token_ids();
 		for (int id : commonMiss) {
 			if (list.contains(id)) {
-				System.out.println("Are you probably missing " + sym.terminalNames[id] + "?");
+				System.out.println("Are you probably missing " + ParserSym.terminalNames[id] + "?");
 			}
 		}
 	}

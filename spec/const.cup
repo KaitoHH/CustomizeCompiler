@@ -1,15 +1,15 @@
 import java_cup.runtime.*;
 import Lexer.Token.Token;
-/* Terminals (tokens returned by the scanner). */
-terminal           INTNUM,REALNUM;
-terminal           INT,REAL,IF,ELSE,WHILE,DO,FOR,BREAK,CONTINUE,
-                    ADD,MINUS,TIMES,DIVIDE,MOD,LESS_THAN,GREATER_THAN,LESS_EQUAL,GREATER_EQUAL,
-                    AND,OR,NOT,EQ,
-                    SCOPE_START,SCOPE_END,ASSIGN,BRACKET_LEFT,BRACKET_RIGHT,
-                    DELIMITER,NEQ,ID;
 
-/* Non-terminals */
+class Parser;
+
+/* Terminals stub#01 */
+terminal           INTNUM,REALNUM;
+
+
+/* Non-terminals stub#02 */
 non terminal       program,block,stmts,stmt,type,bool,join,equality,rel,expr,term,unary,factor;
+non terminal       declaration,assignment,single_if,if_else,single_while,do_while;
 
 precedence left    ELSE;
 
@@ -22,21 +22,22 @@ stmts   ::= stmts stmt
         |
             stmt
         ;
-/* user defined here */
-stmt   ::=
-            type ID DELIMITER
+stmt    ::=
+            declaration
         |
-            ID ASSIGN bool DELIMITER
+            assignment
         |
-            IF BRACKET_LEFT bool BRACKET_RIGHT stmt ELSE stmt
+            single_if
         |
-            IF BRACKET_LEFT bool BRACKET_RIGHT stmt
+            if_else
         |
-            WHILE BRACKET_LEFT bool BRACKET_RIGHT stmt
+            single_while
         |
-            DO stmt WHILE BRACKET_LEFT bool BRACKET_RIGHT DELIMITER
+            do_while
         ;
-/* user defined here */
+
+/* user define stub#03 */
+
 stmt    ::=
             block
         |

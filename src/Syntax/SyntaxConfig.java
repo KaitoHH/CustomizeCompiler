@@ -22,6 +22,7 @@ public class SyntaxConfig {
 
 	/**
 	 * This function reads the default production config file(json) and translate into <b>CFL Class</b>
+	 *
 	 * @see CFL class
 	 */
 	public SyntaxConfig() {
@@ -31,13 +32,14 @@ public class SyntaxConfig {
 
 	/**
 	 * This function receive a jsonObject and translate into <b>CFL Class</b>
+	 *
 	 * @see CFL class
 	 */
 	public SyntaxConfig(JSONObject jsonObject) {
 		generateCFLfromJSON(jsonObject);
 	}
 
-	private void generateCFLfromJSON(JSONObject	jsonObject) {
+	private void generateCFLfromJSON(JSONObject jsonObject) {
 		Iterator<String> productions = jsonObject.keys();
 		while (productions.hasNext()) {
 			String cur = productions.next();
@@ -51,7 +53,7 @@ public class SyntaxConfig {
 					Symbol ruleSymbol = getToken(rule);
 					// add terminals into trlSet
 					if (ruleSymbol instanceof Trl)
-						cfl.trlSet.add((Trl)ruleSymbol);
+						cfl.trlSet.add((Trl) ruleSymbol);
 					production.ruleAddSymbol(ruleSymbol);
 				}
 				cfl.addProduction(production);
@@ -70,7 +72,7 @@ public class SyntaxConfig {
 	}
 
 	public Symbol createSymbol(String name) {
-		if (name.startsWith("$")) {
+		if (Character.isLowerCase(name.charAt(0))) {
 			if (name.startsWith("$$")) {
 				// start symbol starts with $$
 				Ntrl start = new Ntrl(name);

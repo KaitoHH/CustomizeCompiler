@@ -1,3 +1,5 @@
+package Syntax;
+
 import Lexer.Lexer;
 import Lexer.Token.Tag;
 import Lexer.Token.Token;
@@ -33,8 +35,8 @@ public class SyntaxScanner implements Scanner {
 		iterator = list.iterator();
 		factory = new ComplexSymbolFactory();
 		integerMap = new HashMap<>();
-		for (int i = 0; i < sym.terminalNames.length; i++) {
-			String name = sym.terminalNames[i];
+		for (int i = 0; i < ParserSym.terminalNames.length; i++) {
+			String name = ParserSym.terminalNames[i];
 			integerMap.put(name, i);
 		}
 	}
@@ -53,14 +55,14 @@ public class SyntaxScanner implements Scanner {
 					new ComplexSymbolFactory.Location(token.toString(), token.getLineNum(), token.getLineOffset() + token.getLength())
 					, token);
 		} else {
-			return factory.newSymbol("EOF", sym.EOF,"");
+			return factory.newSymbol("EOF", ParserSym.EOF,"");
 		}
 	}
 
 	public static void main(String args[]) throws IOException {
 		Lexer lexer = new Lexer(FileUtils.getFileString("source.txt"));
 		SyntaxScanner scanner = new SyntaxScanner(lexer.getTokenList());
-		parser p = new SyntaxParser(scanner, scanner.getFactory());
+		Parser p = new SyntaxParser(scanner, scanner.getFactory());
 		try {
 			p.parse();
 		} catch (Exception e) {

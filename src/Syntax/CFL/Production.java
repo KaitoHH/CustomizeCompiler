@@ -63,11 +63,11 @@ public class Production {
 
 	@Override
 	public String toString() {
-		String out = initial + "\t->";
+		String out = initial + " ::=";
 		for (Symbol symbol : rule) {
 			out += "\t" + symbol;
 		}
-		out += "\n";
+		out += ";\n";
 		return out;
 	}
 }

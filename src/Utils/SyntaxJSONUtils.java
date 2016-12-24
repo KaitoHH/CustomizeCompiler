@@ -24,7 +24,7 @@ public class SyntaxJSONUtils {
 
 	static {
 		try {
-			String content = FileUtils.getFileString("sample.json");
+			String content = FileUtils.getFileString("production.json");
 			jsonObject = new JSONObject(content);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,12 +1,12 @@
 {
-  "language_info":{
+  "language_info": {
     "name": "name",
-    "file_extensions":[
+    "file_extensions": [
       "ex1",
       "ex2"
     ]
   },
-  "language_definition":{
+  "language_definition": {
     "INT": "int",
     "REAL": "real",
     "IF": "if",
@@ -36,6 +36,8 @@
     "BRACKET_RIGHT": "~)",
     "DELIMITER": ";",
     "NEQ": "(!=)|(<>)",
-    "ID": "_|a|b|c(0|1|2|a|b|c|_)*"
+    "ID": "_|a|b|c(0|1|2|a|b|c|_)*",
+    "DIM": "dim",
+    "AS": "as"
   }
 }

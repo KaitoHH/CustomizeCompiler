@@ -1,6 +1,5 @@
 package Lexer.Token;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,23 +42,18 @@ public class Tag {
 			"neq",
 			"id"
 	};
+	private static int cnt;
 
-	/**
-	 * ReadOnly
-	 */
 	public final static Map<String, Integer> KEY;
 	private final static Map<Integer, String> stringMap;
 
 	static {
-		Map<String, Integer> keys = new HashMap<>();
+		KEY = new HashMap<>();
 		stringMap = new HashMap<>();
-		int cnt = 0;
+		cnt = 0;
 		for (String word : keywords) {
-			word = word.toUpperCase();
-			keys.put(word, ++cnt);
-			stringMap.put(cnt, word);
+			addKey(word);
 		}
-		KEY = Collections.unmodifiableMap(keys);
 	}
 
 	public static String getKey(int id) {
@@ -67,5 +61,26 @@ public class Tag {
 			return id == -2 ? "INTNUM" : "REALNUM";
 		}
 		return stringMap.get(id);
+	}
+
+	public static void addKey(String word) {
+		word = word.toUpperCase();
+		KEY.put(word, ++cnt);
+		stringMap.put(cnt, word);
+	}
+
+	public static String getTerminalString() {
+		StringBuffer buffer = new StringBuffer("terminal ");
+		boolean first = true;
+		for (Map.Entry<String, Integer> entry : KEY.entrySet()) {
+			if (first) {
+				first = false;
+				buffer.append(entry.getKey());
+			} else {
+				buffer.append("," + entry.getKey());
+			}
+		}
+		buffer.append(";");
+		return buffer.toString();
 	}
 }

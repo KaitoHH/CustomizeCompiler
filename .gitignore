@@ -11,3 +11,6 @@ hs_err_pid*
 .idea
 CustomizeCompiler.iml
 out
+/production.cup
+/src/Syntax/Parser.java
+/src/Syntax/ParserSym.java

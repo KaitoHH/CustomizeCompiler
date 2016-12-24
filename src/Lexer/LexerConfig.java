@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -36,10 +37,22 @@ public class LexerConfig {
 		JSONObject jsonObject = LexerJSONUtils.getLanguageDefinition();
 		automataList = new ArrayList();
 		Map<String, Integer> keys = Tag.KEY;
+		Iterator<String> iterator = jsonObject.keys();
+		while (iterator.hasNext()) {
+			String next = iterator.next();
+			if (!keys.containsKey(next)) {
+				Tag.addKey(next);
+				String regex = jsonObject.getString(next);
+				automataList.add(Automata.getAutomataFromRegex(regex, keys.get(next)));
+			}
+		}
+
 		for (Map.Entry<String, Integer> entry : keys.entrySet()) {
 			String regex = jsonObject.getString(entry.getKey());
 			automataList.add(Automata.getAutomataFromRegex(regex, entry.getValue()));
 		}
+
+		//System.out.println(Tag.getTerminalString());
 	}
 
 	public static void main(String[] args) {

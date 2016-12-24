@@ -1,11 +1,11 @@
 {
     int a;
     int b
-    c=2+(3abbac %1);
-    if(a==b){
+    ;c=2+(3+(abbac %1));
+    if (a==b)
         b=-a;
-    }else{
+    else
         a=-b;
-    }
+
 }
-}
+

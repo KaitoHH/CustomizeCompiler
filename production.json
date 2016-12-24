@@ -1,58 +1,57 @@
 {
-  "$stmt": [
+  "declaration": [
     [
-      "$type",
-      "id",
-      "delimiter"
-    ],
+      "type",
+      "ID",
+      "DELIMITER"
+    ]
+  ],
+  "assignment": [
     [
-      "id",
-      "assign",
-      "$bool",
-      "delimiter"
-    ],
+      "ID",
+      "ASSIGN",
+      "bool",
+      "DELIMITER"
+    ]
+  ],
+  "single_if": [
     [
-      "if",
-      "bracket_left",
-      "$bool",
-      "bracket_right",
-      "$stmt",
-      "else",
-      "$stmt"
-    ],
+      "IF",
+      "BRACKET_LEFT",
+      "bool",
+      "BRACKET_RIGHT",
+      "stmt",
+      "ELSE",
+      "stmt"
+    ]
+  ],
+  "if_else": [
     [
-      "if",
-      "bracket_left",
-      "$bool",
-      "bracket_right",
-      "$stmt"
-    ],
+      "IF",
+      "BRACKET_LEFT",
+      "bool",
+      "BRACKET_RIGHT",
+      "stmt"
+    ]
+  ],
+  "single_while": [
     [
-      "while",
-      "bracket_left",
-      "$bool",
-      "bracket_right",
-      "$stmt"
-    ],
+      "WHILE",
+      "BRACKET_LEFT",
+      "bool",
+      "BRACKET_RIGHT",
+      "stmt"
+    ]
+  ],
+  "do_while": [
     [
-      "do",
-      "$stmt",
-      "while",
-      "bracket_left",
-      "$bool",
-      "bracket_right",
-      "delimiter"
-    ],
-    [
-      "for",
-      "bracket_left",
-      "$bool",
-      "delimiter",
-      "$bool",
-      "delimiter",
-      "$bool",
-      "bracket_right",
-      "$stmt"
+      "DO",
+      "stmt",
+      "WHILE",
+      "BRACKET_LEFT",
+      "bool",
+      "BRACKET_RIGHT",
+      "DELIMITER"
     ]
   ]
 }
