@@ -2,7 +2,10 @@ package Lexer.Automata;
 
 import Utils.OSUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -85,22 +88,6 @@ public class AutomataVisualization {
 		p.close();
 	}
 
-	public static String getCmdResult(String[] cmd) {
-		StringBuffer sb = null;
-		try {
-			Process ps = Runtime.getRuntime().exec(cmd);
-			BufferedReader br = new BufferedReader(new InputStreamReader(ps.getInputStream()));
-			sb = new StringBuffer();
-			String line;
-			while ((line = br.readLine()) != null) {
-				sb.append(line).append("\n");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return sb.toString();
-	}
-
 	/**
 	 * Code below works depending on OS： (require pdflatex installed and added into system path)
 	 *     <b>Mac OS</b> with PDF Expert installed (renamed to PDF_Expert)
@@ -134,9 +121,9 @@ public class AutomataVisualization {
 			cmd3 = null;
 		}
 
-		System.out.println(getCmdResult(cmd1));
-		System.out.println(getCmdResult(cmd2));
-		System.out.println(getCmdResult(cmd3));
+		System.out.println(OSUtils.executeCMD(cmd1));
+		System.out.println(OSUtils.executeCMD(cmd2));
+		System.out.println(OSUtils.executeCMD(cmd3));
 
 	}
 }
