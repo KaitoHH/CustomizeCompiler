@@ -20,8 +20,8 @@ public class sym {
   public static final int WHILE = 8;
   public static final int NOT = 24;
   public static final int GREATER_EQUAL = 21;
-  public static final int intnum = 2;
   public static final int IF = 6;
+  public static final int REALNUM = 3;
   public static final int ID = 33;
   public static final int SCOPE_END = 27;
   public static final int DO = 9;
@@ -34,8 +34,8 @@ public class sym {
   public static final int error = 1;
   public static final int ASSIGN = 28;
   public static final int EQ = 25;
-  public static final int realnum = 3;
   public static final int BRACKET_RIGHT = 30;
+  public static final int INTNUM = 2;
   public static final int FOR = 10;
   public static final int REAL = 5;
   public static final int NEQ = 32;
@@ -43,8 +43,8 @@ public class sym {
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "intnum",
-  "realnum",
+  "INTNUM",
+  "REALNUM",
   "INT",
   "REAL",
   "IF",

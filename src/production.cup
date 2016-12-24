@@ -1,9 +1,7 @@
-// CUP specification for a simple expression evaluator (w/ actions)
-
 import java_cup.runtime.*;
 
 /* Terminals (tokens returned by the scanner). */
-terminal           intnum,realnum,INT,REAL,IF,ELSE,WHILE,DO,FOR,BREAK,CONTINUE,
+terminal           INTNUM,REALNUM,INT,REAL,IF,ELSE,WHILE,DO,FOR,BREAK,CONTINUE,
                     ADD,MINUS,TIMES,DIVIDE,MOD,LESS_THAN,GREATER_THAN,LESS_EQUAL,GREATER_EQUAL,
                     AND,OR,NOT,EQ,
                     SCOPE_START,SCOPE_END,ASSIGN,BRACKET_LEFT,BRACKET_RIGHT,
@@ -98,9 +96,10 @@ factor ::= BRACKET_LEFT bool BRACKET_RIGHT
         |
             ID
         |
-            intnum
+            INTNUM
+            {:System.out.println("int");:}
         |
-            realnum
+            REALNUM
         ;
 
 

@@ -63,6 +63,9 @@ public class Tag {
 	}
 
 	public static String getKey(int id) {
+		if (id < 0) {
+			return id == -2 ? "INTNUM" : "REALNUM";
+		}
 		return stringMap.get(id);
 	}
 }
