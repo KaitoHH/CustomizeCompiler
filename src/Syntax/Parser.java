@@ -258,7 +258,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     java_cup.runtime.lr_parser parser,
     java.util.Stack            stack,
     int                        top)
-    throws java.lang.Exception
+    throws Exception
   {
     /* call code in generated class */
     return action_obj.CUP$Parser$do_action(act_num, parser, stack, top);
@@ -292,7 +292,7 @@ class CUP$Parser$actions {
     java_cup.runtime.lr_parser CUP$Parser$parser,
     java.util.Stack            CUP$Parser$stack,
     int                        CUP$Parser$top)
-    throws java.lang.Exception
+    throws Exception
     {
       /* Symbol object for return from actions */
       java_cup.runtime.Symbol CUP$Parser$result;
@@ -742,7 +742,7 @@ class CUP$Parser$actions {
     java_cup.runtime.lr_parser CUP$Parser$parser,
     java.util.Stack            CUP$Parser$stack,
     int                        CUP$Parser$top)
-    throws java.lang.Exception
+    throws Exception
     {
               return CUP$Parser$do_action_part00000000(
                                CUP$Parser$act_num,
