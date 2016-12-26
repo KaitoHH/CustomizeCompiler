@@ -22,7 +22,7 @@ public class Times extends Arith {
         Basic right = expr2.eval(env);
 
         type = Type.max(left.type, right.type);
-        if (type == null) error("type error");
+        if (type == null && Type.numeric(left.type)) error("expect numeric but get bool");
 
         return Basic.makeResult(this, type, left.val() * right.val());
     }

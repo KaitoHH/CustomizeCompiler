@@ -24,7 +24,7 @@ public class UnEqual extends Logic {
 
         Type maxType = Type.max(left.type, right.type);
         if (maxType == null)
-            error("type error");
+            error("left and right type not match");
 
         if (Type.numeric(left.type))
             return new Bool(null, left.val() != right.val());

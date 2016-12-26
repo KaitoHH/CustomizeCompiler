@@ -16,6 +16,12 @@ public abstract class Expr {
     public Type type;
     public Token token;
     public Expr(Token token, Type type) { this.token = token; this.type = type;  }
-    public void error(String msg) { System.out.println(msg); }
-    public abstract Basic eval(Env env);
+    public void error(String msg) {
+        if (token == null)
+            throw new RuntimeException("Try to throw exception on temp value, msg: " + msg);
+        else
+            throw new RuntimeException("Runtime error occurs at line " + token.lineNum + " offset " + token.lineOffset + "," + msg);
+    }
+
+    public abstract Basic eval(Env env) throws RuntimeException;
 }

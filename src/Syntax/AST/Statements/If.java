@@ -28,7 +28,7 @@ public class If extends Stmt{
     public void execute(Env env) {
         Basic condition = expr.eval(env);
         if (Type.numeric(condition.type))
-            expr.error("type error");
+            expr.error("expect bool but get numeric");
 
         if (Basic.isTrue(condition)) {
             if (stmt1 != null)

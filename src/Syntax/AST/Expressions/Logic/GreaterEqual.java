@@ -21,11 +21,11 @@ public class GreaterEqual extends Logic {
     public Basic eval(Env env) {
         Basic left = expr1.eval(env);
         if (!Type.numeric(left.type))
-            left.error("type error");
+            left.error("expect numeric but get bool");
 
         Basic right = expr2.eval(env);
         if (!Type.numeric(right.type))
-            right.error("type error");
+            right.error("expect numeric but get bool");
 
         return new Bool(null, left.val() >= right.val());
     }

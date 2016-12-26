@@ -24,7 +24,7 @@ public class Assign extends Stmt {
 
         Basic right = expr.eval(env);
         if (id.type != right.type)
-            id.error("type error");
+            id.error("left and right type not match");
 
         env.update(id, right);
     }

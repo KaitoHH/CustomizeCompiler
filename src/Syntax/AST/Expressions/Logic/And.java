@@ -20,14 +20,14 @@ public class And extends Logic {
     public Basic eval(Env env) {
         Basic left = expr1.eval(env);
         if (Type.numeric(left.type))
-            left.error("type error");
+            left.error("expect bool but get numeric");
 
         if (Basic.isFalse(left))
             return left;
 
         Basic right = expr2.eval(env);
         if (Type.numeric(left.type))
-            right.error("type error");
+            right.error("expect bool but get numeric");
         return right;
     }
 }

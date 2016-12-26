@@ -23,7 +23,7 @@ public class While extends Stmt{
         while(true) {
             Basic condition = expr.eval(env);
             if (Type.numeric(condition.type))
-                expr.error("type error");
+                expr.error("expect bool but get numeric");
 
             if (Basic.isFalse(condition))
                 break;
