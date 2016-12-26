@@ -285,6 +285,22 @@ public class ASTEvalTest {
     }
 
     @Test
+    public void UnDeclare() {
+        Env env = new Env();
+        String name = "i5";
+        Id id = new Id(null, Type.Int, name);
+
+        Declare declare = new Declare(id);
+        declare.execute(env);
+
+        UnDeclare unDeclare = new UnDeclare(id);
+        unDeclare.execute(env);
+
+        assertNull(env.get(id));
+        assertNull(env.table.get(name));
+    }
+
+    @Test
     public void Assign() {
         Env env = new Env();
         String name = "i5";
