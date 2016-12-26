@@ -1,5 +1,8 @@
 package SyntaxTest.interpreterTest;
 
+import Lexer.Token.Tag;
+import Lexer.Token.Token;
+import Lexer.Token.Word;
 import Syntax.AST.Basic.*;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Arith.Add;
@@ -10,6 +13,7 @@ import Syntax.AST.Expressions.Logic.*;
 import Syntax.AST.Expressions.Arith.UnaryMinus;
 import Syntax.AST.Statements.*;
 import Syntax.AST.Type;
+import javafx.util.Pair;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -22,6 +26,12 @@ import static org.junit.Assert.*;
  * All rights reserved.
  */
 public class ASTEvalTest {
+    public Token token;
+
+    public ASTEvalTest(){
+        token = new Word(0, "fake token");
+        token.setPosition(new Pair<>(1,1));
+    }
 
     @Test
     public void basicValue(){
@@ -67,6 +77,17 @@ public class ASTEvalTest {
         Divide divide2_1 = new Divide(null, Type.Int, i2, i1);
         assertEquals(2, divide2_1.eval(env).val(), 0);
         assertEquals(Type.Int, divide2_1.eval(env).type);
+
+        // check type error
+        Bool f = new Bool(null, false);
+        try{
+            Add add1_f = new Add(token, Type.Int, i1, f);
+            add1_f.eval(env);
+            assertTrue(false);
+        } catch(RuntimeException e) {
+            String msg = e.getMessage();
+            assertTrue(msg.contains("expect numeric but get bool"));
+        }
     }
 
     @Test
@@ -194,6 +215,17 @@ public class ASTEvalTest {
         And and_f_error = new And(null, f, new Int(null, 1));
         assertTrue(!Type.numeric(and_f_error.eval(env).type));
         assertTrue(Basic.isFalse(and_f_error.eval(env)));
+
+        // check type error
+        Int i1 = new Int(null, 1);
+        try{
+            And and1_f = new And(token, i1, f);
+            and1_f.eval(env);
+            assertTrue(false);
+        } catch(RuntimeException e) {
+            String msg = e.getMessage();
+            assertTrue(msg.contains("expect bool but get numeric"));
+        }
     }
 
     @Test
