@@ -9,6 +9,7 @@ import Syntax.AST.Expressions.Arith.Add;
 import Syntax.AST.Expressions.Arith.Divide;
 import Syntax.AST.Expressions.Arith.Minus;
 import Syntax.AST.Expressions.Arith.Times;
+import Syntax.AST.Expressions.Cast;
 import Syntax.AST.Expressions.Logic.*;
 import Syntax.AST.Expressions.Arith.UnaryMinus;
 import Syntax.AST.Statements.*;
@@ -50,6 +51,29 @@ public class ASTEvalTest {
 
         Bool f = new Bool(null, false);
         assertFalse(Basic.isFalse(t));
+    }
+
+    @Test
+    public void cast() {
+        Env env = new Env();
+
+        Int i0 = new Int(null, 0);
+        Int i1 = new Int(null, 1);
+
+        Basic r1 = new Cast(null, Type.Real, i1).eval(env);
+        assertEquals(1, r1.eval(env).val(), 0);
+        assertEquals(Type.Real, r1.eval(env).type);
+
+        Basic t = new Cast(null, Type.Bool, i1).eval(env);
+        assertTrue(Basic.isTrue(t));
+
+
+        Basic f = new Cast(null, Type.Bool, i0).eval(env);
+        assertTrue(Basic.isFalse(f));
+
+        Basic r0 = new Cast(null, Type.Real, f).eval(env);
+        assertEquals(0, r0.val(), 0);
+
     }
 
     @Test
