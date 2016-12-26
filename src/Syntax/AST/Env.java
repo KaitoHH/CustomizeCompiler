@@ -39,4 +39,14 @@ public class Env {
             }
         }
     }
+
+    public void undeclare(Id id) {
+        for (Env env = this; env != null; env = env.prev) {
+            Basic found = env.table.get(id.name);
+            if (found != null){
+                env.table.remove(id.name);
+                return;
+            }
+        }
+    }
 }

@@ -19,6 +19,6 @@ public class Declare extends Stmt{
     public void execute(Env env) {
         if (env.getWithinCurEnv(id) != null)
             id.error("duplicate declare");
-        env.put(id, Basic.Uninitialized);
+        env.undeclare(id);
     }
 }
