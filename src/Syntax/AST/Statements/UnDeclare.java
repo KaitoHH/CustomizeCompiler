@@ -1,5 +1,6 @@
 package Syntax.AST.Statements;
 
+import Syntax.AST.Basic.Basic;
 import Syntax.AST.Basic.Id;
 import Syntax.AST.Env;
 
@@ -16,6 +17,6 @@ public class UnDeclare extends Stmt {
 
     @Override
     public void execute(Env env) {
-
+        env.undeclare(id);
     }
 }
