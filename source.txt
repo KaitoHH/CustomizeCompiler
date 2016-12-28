@@ -1,4 +1,18 @@
 {
-    a = 2;
+    int a;
+    a=2;
+    a=3;
+    int b;
+    b=0;
+    while(b<3){
+        a=a+1;
+        b=b+1;
+    }
+    if(a>b){
+        a=b;
+    }else{
+        b=a;
+    }
 }
+
 

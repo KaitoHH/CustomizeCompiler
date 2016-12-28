@@ -1,8 +1,11 @@
 package Syntax;
 
+import CodeGenerator.JavaGenerator;
 import Lexer.Lexer;
 import Lexer.Token.Tag;
 import Lexer.Token.Token;
+import Syntax.AST.ASTRoot;
+import Syntax.AST.Statements.Stmt;
 import Utils.FileUtils;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Scanner;
@@ -65,9 +68,10 @@ public class SyntaxScanner implements Scanner {
 		Parser p = new SyntaxParser(scanner, scanner.getFactory());
 		try {
 			Symbol parse = p.parse();
-			System.out.println(parse);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		Stmt root = ASTRoot.getRoot();
+		System.out.println(JavaGenerator.generate(root));
 	}
 }

@@ -35,8 +35,14 @@ public class GrammarFactory {
 		String[] cmd1 = new String[]{"java", "-jar", "lib/java-cup-11b.jar",
 				"-package", "Syntax",
 				"-locations", "production.cup"};
-		String[] cmd2 = new String[]{"cmd", "/c", "move", "Parser.java", "src/Syntax"};
-		String[] cmd3 = new String[]{"cmd", "/c", "move", "ParserSym.java", "src/Syntax"};
+		String[] cmd2, cmd3;
+		if (OSUtils.isWindows()) {
+			cmd2 = new String[]{"cmd", "/c", "move", "Parser.java", "src/Syntax"};
+			cmd3 = new String[]{"cmd", "/c", "move", "ParserSym.java", "src/Syntax"};
+		} else {
+			cmd2 = new String[]{"mv", "Parser.java", "src/Syntax"};
+			cmd3 = new String[]{"mv", "ParserSym.java", "src/Syntax"};
+		}
 		System.out.println(OSUtils.executeCMD(cmd1));
 		OSUtils.executeCMD(cmd2);
 		OSUtils.executeCMD(cmd3);
