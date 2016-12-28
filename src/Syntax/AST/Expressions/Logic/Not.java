@@ -29,4 +29,9 @@ public class Not extends Expr {
         else
             return new Bool(null, true);
     }
+
+    @Override
+    public String toJava() {
+        return "(!"+ expr.toJava() + ")";
+    }
 }

@@ -12,7 +12,7 @@ import Syntax.AST.Type;
  * Description:
  * All rights reserved.
  */
-public abstract class Expr {
+public abstract class Expr{
     public Type type;
     public Token token;
     public Expr(Token token, Type type) { this.token = token; this.type = type;  }
@@ -24,4 +24,5 @@ public abstract class Expr {
     }
 
     public abstract Basic eval(Env env) throws RuntimeException;
+    public abstract String toJava();
 }

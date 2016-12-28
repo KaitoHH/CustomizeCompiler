@@ -19,4 +19,9 @@ public class UnDeclare extends Stmt {
     public void execute(Env env) {
         env.undeclare(id);
     }
+
+    @Override
+    public String toJava(String indent) {
+        return indent + "\\\\ unDeclare not supported in java \n";
+    }
 }

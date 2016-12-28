@@ -25,4 +25,9 @@ public class Bool extends Basic{
     public Basic eval(Env env) {
         return this;
     }
+
+    @Override
+    public String toJava() {
+        return val ? "true" : "false";
+    }
 }

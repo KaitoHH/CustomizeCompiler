@@ -23,4 +23,9 @@ public class UnaryMinus extends Expr {
 
         return Basic.makeResult(this, type, -1 * right.val());
     }
+
+    @Override
+    public String toJava() {
+        return "(-" + expr.toJava() + ")";
+    }
 }

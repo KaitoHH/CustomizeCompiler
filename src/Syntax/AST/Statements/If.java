@@ -38,4 +38,12 @@ public class If extends Stmt{
                 stmt2.execute(env);
         }
     }
+
+    @Override
+    public String toJava(String indent) {
+        return indent +  "if(" + expr.toJava() + ")\n" +
+                (newScope? new Scope(stmt1).toJava(indent): stmt1.toJava(indent + "    ")) +
+                (stmt2 == null? "" : indent + "else" +
+                        (stmt2 instanceof If ? " "  + stmt2.toJava(indent): "\n" + stmt2.toJava(indent)));
+    }
 }

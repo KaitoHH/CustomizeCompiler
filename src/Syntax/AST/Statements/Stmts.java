@@ -21,4 +21,9 @@ public class Stmts extends Stmt {
         if (rest != null)
             rest.execute(env);
     }
+
+    @Override
+    public String toJava(String indent) {
+        return indent + first.toJava(indent) + (rest != null ? rest.toJava(indent): "");
+    }
 }

@@ -30,4 +30,9 @@ public class Or extends Logic {
             left.error("expect bool but get numeric");
         return right;
     }
+
+    @Override
+    public String toJava() {
+        return "(" + expr1.toJava() + " || " + expr2.toJava() + ")";
+    }
 }

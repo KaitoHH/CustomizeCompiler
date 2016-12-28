@@ -11,4 +11,5 @@ import Syntax.AST.Env;
  */
 public abstract class Stmt {
     public abstract void execute(Env env);
+    public abstract String toJava(String indent);
 }

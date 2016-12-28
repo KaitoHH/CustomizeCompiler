@@ -29,4 +29,9 @@ public class Greater extends Logic {
 
         return new Bool(null, left.val() > right.val());
     }
+
+    @Override
+    public String toJava() {
+        return "(" + expr1.toJava() + " > " + expr2.toJava() + ")";
+    }
 }

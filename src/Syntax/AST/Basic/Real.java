@@ -25,4 +25,9 @@ public class Real extends Basic {
     public Basic eval(Env env) {
         return this;
     }
+
+    @Override
+    public String toJava() {
+        return String.valueOf(val);
+    }
 }

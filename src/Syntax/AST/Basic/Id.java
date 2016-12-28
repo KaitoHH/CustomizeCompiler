@@ -21,4 +21,9 @@ public class Id extends Expr {
     public Basic eval(Env env) {
         return env.get(this);
     }
+
+    @Override
+    public String toJava() {
+        return name;
+    }
 }

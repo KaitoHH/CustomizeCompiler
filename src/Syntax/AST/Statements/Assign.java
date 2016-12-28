@@ -28,4 +28,9 @@ public class Assign extends Stmt {
 
         env.update(id, right);
     }
+
+    @Override
+    public String toJava(String indent) {
+        return indent + id.name + " = " + expr.toJava() + ";\n";
+    }
 }

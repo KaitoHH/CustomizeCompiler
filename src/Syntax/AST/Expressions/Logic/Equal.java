@@ -31,4 +31,9 @@ public class Equal extends Logic {
         else
             return new Bool(null, Basic.isTrue(left) && Basic.isTrue(right) || Basic.isFalse(left) && Basic.isFalse(right));
     }
+
+    @Override
+    public String toJava() {
+        return "(" + expr1.toJava() + " == " + expr2.toJava() + ")";
+    }
 }

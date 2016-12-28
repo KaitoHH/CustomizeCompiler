@@ -40,4 +40,9 @@ public class Cast extends Expr{
                 return new Real(null, right.val());
         }
     }
+
+    @Override
+    public String toJava() {
+        return "((" + Type.toJavaType(type) + ")" + expr.toJava() +")";
+    }
 }

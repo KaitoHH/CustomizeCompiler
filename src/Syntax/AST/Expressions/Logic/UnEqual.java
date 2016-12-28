@@ -31,4 +31,9 @@ public class UnEqual extends Logic {
         else
             return new Bool(null, Basic.isTrue(left) && Basic.isFalse(right) || Basic.isFalse(left) && Basic.isTrue(right));
     }
+
+    @Override
+    public String toJava() {
+        return "(" + expr1.toJava() + " != " + expr2.toJava() + ")";
+    }
 }

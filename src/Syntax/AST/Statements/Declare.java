@@ -3,6 +3,7 @@ package Syntax.AST.Statements;
 import Syntax.AST.Basic.Basic;
 import Syntax.AST.Basic.Id;
 import Syntax.AST.Env;
+import Syntax.AST.Type;
 
 /**
  * Project: CustomizeCompiler
@@ -20,5 +21,10 @@ public class Declare extends Stmt{
         if (env.getWithinCurEnv(id) != null)
             id.error("duplicate declare");
         env.put(id, Basic.Uninitialized);
+    }
+
+    @Override
+    public String toJava(String indent) {
+        return indent + Type.toJavaType(id.type) + " " + id.name + ";\n";
     }
 }

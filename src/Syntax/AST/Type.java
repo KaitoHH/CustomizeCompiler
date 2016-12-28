@@ -29,4 +29,17 @@ public class Type {
         else if (t1 == Int || t2 == Int) return Int;
         else return Char;
     }
+
+    public static String toJavaType(Type type) {
+        String t;
+        if (type == Type.Bool)
+            t = "boolean";
+        else if (type == Type.Int)
+            t = "int";
+        else if (type == Type.Real)
+            t = "double";
+        else
+            t = "char";
+        return t;
+    }
 }

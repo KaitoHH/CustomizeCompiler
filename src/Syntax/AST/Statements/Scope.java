@@ -17,4 +17,11 @@ public class Scope extends Stmt {
     public void execute(Env env) {
         stmt.execute(env.createInner());
     }
+
+    @Override
+    public String toJava(String indent) {
+        return indent + "{\n" +
+                stmt.toJava(indent + "    ") +
+                indent + "}\n";
+    }
 }

@@ -1,6 +1,6 @@
 package SyntaxTest.interpreterTest;
 
-import Lexer.Token.Tag;
+import CodeGenerator.JavaGenerator;
 import Lexer.Token.Token;
 import Lexer.Token.Word;
 import Syntax.AST.Basic.*;
@@ -250,6 +250,8 @@ public class ASTEvalTest {
             String msg = e.getMessage();
             assertTrue(msg.contains("expect bool but get numeric"));
         }
+
+        System.out.println(new And(null, and_ff, t).toJava());
     }
 
     @Test
@@ -400,6 +402,7 @@ public class ASTEvalTest {
 
         assertEquals(10, id.eval(env).val(), 0);
         assertEquals(Type.Int, id.eval(env).type);
+        System.out.println(JavaGenerator.generate(w));
     }
 
     @Test
@@ -412,8 +415,10 @@ public class ASTEvalTest {
         declare.execute(env);
 
         Assign assign_i0 = new Assign(id, new Int(null, 0));
+        Assign assign_i1 = new Assign(id, new Int(null, 1));
+
         If if_stmt = new If(new Bool(null, false),
-                null,
+                assign_i1,
                 new If(new Bool(null, true), assign_i0, null, true),
                 true);
         if_stmt.execute(env);

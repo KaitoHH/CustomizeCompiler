@@ -26,4 +26,9 @@ public class Divide extends Arith {
 
         return Basic.makeResult(this, type, left.val() / right.val());
     }
+
+    @Override
+    public String toJava() {
+        return "(" + expr1.toJava() + " / " + expr2.toJava() + ")";
+    }
 }
