@@ -64,7 +64,8 @@ public class SyntaxScanner implements Scanner {
 		SyntaxScanner scanner = new SyntaxScanner(lexer.getTokenList());
 		Parser p = new SyntaxParser(scanner, scanner.getFactory());
 		try {
-			p.parse();
+			Symbol parse = p.parse();
+			System.out.println(parse);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

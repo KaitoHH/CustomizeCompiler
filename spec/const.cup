@@ -97,9 +97,19 @@ factor ::= BRACKET_LEFT bool BRACKET_RIGHT
         |
             ID
         |
-            INTNUM
+            INTNUM:dint
+            {:
+                Token token = (Token)dint;
+                RESULT=new Int(token,Type.Int,1);
+                System.out.println("int");
+            :}
         |
-            REALNUM
+            REALNUM:real
+            {:
+                Token token = (Token)real;
+                RESULT=new Real(real,Type.Real,0.2);
+                System.out.println("real");
+            :}
         ;
 
 

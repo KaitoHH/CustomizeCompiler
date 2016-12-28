@@ -43,7 +43,7 @@ public class GrammarFactory {
 	}
 
 	public static void main(String[] args) throws IOException {
-		updateCupFile();
+		//updateCupFile();
 		compileCUP();
 	}
 }
