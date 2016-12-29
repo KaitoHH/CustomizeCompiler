@@ -47,7 +47,7 @@ public class SublimeSyntaxGenerator {
         List<String> regulars = new ArrayList<>();
         Map<String, Integer> keys = Tag.KEY;
         for (String keyword : keys.keySet()) {
-            if (!keyword.equals("id"))
+            if (!keyword.equals("ID"))
                 regulars.add(jsonObject.getString(keyword));
         }
         return regulars;
@@ -81,7 +81,7 @@ public class SublimeSyntaxGenerator {
 
     private static String getIdentifierRegular() throws IOException{
         JSONObject jsonObject = LexerJSONUtils.getLanguageDefinition();
-        return jsonObject.getString("id");
+        return jsonObject.getString("ID");
     }
 
     public static void main(String[]args){
