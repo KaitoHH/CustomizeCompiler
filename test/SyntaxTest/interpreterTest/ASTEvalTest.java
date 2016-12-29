@@ -415,6 +415,35 @@ public class ASTEvalTest {
     }
 
     @Test
+    public void DoWhile() {
+        Env env = new Env();
+        String name = "i";
+        Id id = new Id(null, Type.Int, name);
+
+        // initialize i with 0
+        Declare declare = new Declare(id);
+        Assign assign_i0 = new Assign(id, new Int(null, 0));
+        Stmts stmts = new Stmts(declare, new Stmts(assign_i0, null));
+        stmts.execute(env);
+
+        // use do while to plus it by 1
+        Assign assign_i_iplus1 = new Assign(id, new Add(null, Type.Int, id, new Int(null, 1)));
+        DoWhile dw = new DoWhile(new Bool(null, false), new Scope(assign_i_iplus1));
+        dw.execute(env);
+        assertEquals(1, id.eval(env).val(), 0);
+        assertEquals(Type.Int, id.eval(env).type);
+        System.out.println(dw.toJava(""));
+
+        // use do while to accelerate i to 10
+        UnEqual neq_i_10 = new UnEqual(null, id, new Int(null, 10));
+        dw = new DoWhile(neq_i_10, assign_i_iplus1);
+        dw.execute(env);
+
+        assertEquals(10, id.eval(env).val(), 0);
+        assertEquals(Type.Int, id.eval(env).type);
+    }
+
+    @Test
     public void If() {
         Env env = new Env();
         String name = "i";
