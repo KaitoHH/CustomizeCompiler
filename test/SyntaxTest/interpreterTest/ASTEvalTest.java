@@ -5,13 +5,9 @@ import Lexer.Token.Token;
 import Lexer.Token.Word;
 import Syntax.AST.Basic.*;
 import Syntax.AST.Env;
-import Syntax.AST.Expressions.Arith.Add;
-import Syntax.AST.Expressions.Arith.Divide;
-import Syntax.AST.Expressions.Arith.Minus;
-import Syntax.AST.Expressions.Arith.Times;
+import Syntax.AST.Expressions.Arith.*;
 import Syntax.AST.Expressions.Cast;
 import Syntax.AST.Expressions.Logic.*;
-import Syntax.AST.Expressions.Arith.UnaryMinus;
 import Syntax.AST.Statements.*;
 import Syntax.AST.Type;
 import javafx.util.Pair;
@@ -101,6 +97,10 @@ public class ASTEvalTest {
         Divide divide2_1 = new Divide(null, Type.Int, i2, i1);
         assertEquals(2, divide2_1.eval(env).val(), 0);
         assertEquals(Type.Int, divide2_1.eval(env).type);
+
+        Mod mod1_1d5 = new Mod(null, Type.Real, i2, new Real(null, 1.5));
+        assertEquals(0.5, mod1_1d5.eval(env).val(), 0);
+        assertEquals(Type.Real.name, mod1_1d5.eval(env).type.name);
 
         // check type error
         Bool f = new Bool(null, false);
@@ -337,6 +337,15 @@ public class ASTEvalTest {
 
         Assign assign_i5 = new Assign(id, new Int(null, 5));
         assign_i5.execute(env);
+
+        Assign assign_if = new Assign(id, new Bool(null, false));
+        try{
+            assign_if.execute(env);
+            assertTrue(false);
+        } catch(RuntimeException e) {
+            String msg = e.getMessage();
+            assertTrue(msg.contains("expect numeric but get bool"));
+        }
 
         assertEquals(5, id.eval(env).val(), 0);
         assertEquals(Type.Int, id.eval(env).type);

@@ -23,7 +23,8 @@ public class Assign extends Stmt {
             id.error("assign to undeclared identifier");
 
         Basic right = expr.eval(env);
-        if (id.type != right.type)
+        Basic left = env.get(id);
+        if (left.type != right.type)
             id.error("left and right type not match");
 
         env.update(id, right);
