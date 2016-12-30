@@ -23,7 +23,12 @@ public class Id extends Expr {
     }
 
     @Override
-    public String toJava() {
+    public String toString() {
         return name;
+    }
+
+    @Override
+    public String toJava() {
+        return toString();
     }
 }

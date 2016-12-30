@@ -27,7 +27,12 @@ public class Real extends Basic {
     }
 
     @Override
-    public String toJava() {
+    public String toString() {
         return String.valueOf(val);
+    }
+
+    @Override
+    public String toJava() {
+        return toString();
     }
 }

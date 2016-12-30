@@ -27,7 +27,12 @@ public class Bool extends Basic{
     }
 
     @Override
-    public String toJava() {
+    public String toString() {
         return val ? "true" : "false";
+    }
+
+    @Override
+    public String toJava() {
+        return toString();
     }
 }

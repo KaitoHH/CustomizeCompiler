@@ -33,5 +33,8 @@ public abstract class Basic extends Expr {
         return basic.type == Type.Bool && !((Bool)basic).val;
     }
 
+    @Override
+    public abstract String toString();
+
     public static final Basic Uninitialized = new Int(null, Integer.MIN_VALUE);
 }
