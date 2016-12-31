@@ -24,7 +24,7 @@ public class Add extends Arith {
         type = Type.max(left.type, right.type);
         if (type == null && Type.numeric(left.type)) error("expect numeric but get bool");
 
-        return Basic.makeResult(this, type, left.val() + right.val());
+        return Basic.makeResult(type, left.val() + right.val());
     }
 
     @Override

@@ -4,6 +4,7 @@ import Lexer.Token.Token;
 import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
+import Syntax.AST.Type;
 
 /**
  * Project: CustomizeCompiler
@@ -21,7 +22,9 @@ public class UnaryMinus extends Expr {
         Basic right = expr.eval(env);
         type = right.type;
 
-        return Basic.makeResult(this, type, -1 * right.val());
+        if (type == Type.Char)
+            type = Type.Int;
+        return Basic.makeResult(type, -1 * right.val());
     }
 
     @Override

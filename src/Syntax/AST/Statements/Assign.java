@@ -4,6 +4,7 @@ import Syntax.AST.Basic.Basic;
 import Syntax.AST.Basic.Id;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
+import Syntax.AST.Type;
 
 /**
  * Project: CustomizeCompiler
@@ -24,10 +25,10 @@ public class Assign extends Stmt {
 
         Basic right = expr.eval(env);
         Basic left = env.get(id);
-        if (left.type != right.type)
-            id.error("left and right type not match");
+        if (!Type.assignable(left.type, right.type))
+            id.error("can not assign " + right.type.name +" to type " + left.type.name);
 
-        env.update(id, right);
+        env.update(id, Basic.makeResult(Type.max(left.type, right.type), right.val()));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package Syntax.AST.Statements;
 
-import Syntax.AST.Basic.Basic;
-import Syntax.AST.Basic.Id;
+import Syntax.AST.Basic.*;
 import Syntax.AST.Env;
 import Syntax.AST.Type;
 
@@ -20,7 +19,8 @@ public class Declare extends Stmt{
     public void execute(Env env) {
         if (env.getWithinCurEnv(id) != null)
             id.error("duplicate declare");
-        env.put(id, Basic.Uninitialized);
+
+        env.put(id, Basic.getUninitialized(id.type));
     }
 
     @Override

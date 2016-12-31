@@ -19,15 +19,28 @@ public class Type {
             Bool = new Type("Bool");
 
     public static boolean numeric(Type t) {
-        return t == Int || t == Real;
+        return t == Int || t == Real || t == Char;
     }
 
     public static Type max(Type t1, Type t2) {
         if (numeric(t1) != numeric(t2)) return null;
         else if (!numeric(t1) && !numeric(t2)) return Bool;
         else if (t1 == Real || t2 == Real) return Real;
-        else if (t1 == Int || t2 == Int) return Int;
-        else return Char;
+        else return Int;
+    }
+
+    public static boolean assignable(Type t1, Type t2) {
+        Type maxType = max(t1, t2);
+        if (maxType == null)
+            return false;
+        else if (t1 == Real)
+            return true;
+        else if (t1 == Int || t2 != Real)
+            return true;
+        else if (t1 == Char || t2 == Char)
+            return true;
+        else
+            return false;
     }
 
     public static String toJavaType(Type type) {

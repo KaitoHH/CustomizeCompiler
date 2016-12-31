@@ -15,11 +15,10 @@ public abstract class Basic extends Expr {
     public Basic(Token token, Type type) { super(token, type); }
     public abstract double val();
 
-    public static Basic makeResult(Expr op, Type type, double result) {
-        if (!Type.numeric(type))
-            op.error("type error");
-
-        if (type == Type.Int)
+    public static Basic makeResult(Type type, double result) {
+        if (type == Type.Char)
+            return new Char(null, (char)result);
+        else if (type == Type.Int)
             return new Int(null, (int)result);
         else
             return new Real(null, result);
@@ -33,8 +32,19 @@ public abstract class Basic extends Expr {
         return basic.type == Type.Bool && !((Bool)basic).val;
     }
 
+    public static Basic getUninitialized(Type type) {
+        Basic uninitialized;
+        if (type == Type.Real)
+            uninitialized = Real.Uninitialized;
+        else if (type == Type.Int)
+            uninitialized = Int.Uninitialized;
+        else if (type == Type.Bool)
+            uninitialized = Bool.Uninitialized;
+        else
+            uninitialized = Char.Uninitialized;
+        return uninitialized;
+    }
+
     @Override
     public abstract String toString();
-
-    public static final Basic Uninitialized = new Int(null, Integer.MIN_VALUE);
 }

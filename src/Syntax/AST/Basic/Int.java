@@ -35,4 +35,6 @@ public class Int extends Basic{
     public String toJava() {
         return toString();
     }
+
+    public static final Basic Uninitialized = new Int(null, Integer.MIN_VALUE);
 }

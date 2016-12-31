@@ -46,7 +46,11 @@ public class ASTEvalTest {
         assertTrue(Basic.isTrue(t));
 
         Bool f = new Bool(null, false);
-        assertFalse(Basic.isFalse(t));
+        assertTrue(Basic.isFalse(f));
+
+        Char c0 = new Char(null, '0');
+        assertEquals((int)'0', c0.eval(env).val(), 0);
+        assertEquals(Type.Char, c0.eval(env).type);
     }
 
     @Test
@@ -77,10 +81,19 @@ public class ASTEvalTest {
         Env env = new Env();
         Int i1 = new Int(null, 1);
         Int i2 = new Int(null, 2);
+        Char c1 = new Char(null, '1');
 
         Add add1_2 = new Add(null, Type.Int, i1, i2);
         assertEquals(3, add1_2.eval(env).val(), 0);
         assertEquals(Type.Int, add1_2.eval(env).type);
+
+        Add addi1_c1 = new Add(null, Type.Int, i1, c1);
+        assertEquals(1 + (int)'1', addi1_c1.eval(env).val(), 0);
+        assertEquals(Type.Int, addi1_c1.eval(env).type);
+
+        Add addc1_c1 = new Add(null, Type.Int, c1, c1);
+        assertEquals(2 * (int)'1', addc1_c1.eval(env).val(), 0);
+        assertEquals(Type.Int, addc1_c1.eval(env).type);
 
         Minus minus1_2 = new Minus(null, Type.Int, i1, i2);
         assertEquals(-1, minus1_2.eval(env).val(), 0);
@@ -118,6 +131,11 @@ public class ASTEvalTest {
     public void unaryMinus() {
         Env env = new Env();
 
+        Char c1 = new Char(null, '1');
+        UnaryMinus um_c1 = new UnaryMinus(null, c1);
+        assertEquals(-1 * (int)'1', um_c1.eval(env).val(), 0);
+        assertEquals(Type.Int, um_c1.eval(env).type);
+
         Int i1 = new Int(null, 1);
         UnaryMinus um_i1 = new UnaryMinus(null, i1);
         assertEquals(-1, um_i1.eval(env).val(), 0);
@@ -130,15 +148,17 @@ public class ASTEvalTest {
     }
 
     @Test
-    public void equal() {
+    public void UnEqual() {
         Env env = new Env();
         Int i1 = new Int(null, 1);
         Int i2 = new Int(null, 2);
         Real r2 = new Real(null, 2);
         Bool t = new Bool(null, true);
         Bool f = new Bool(null, false);
+        Char c1 = new Char(null, (char)1);
 
         assertTrue(Basic.isTrue(new UnEqual(null, i1, i2).eval(env)));
+        assertTrue(Basic.isFalse(new UnEqual(null, i1, c1).eval(env)));
         assertTrue(Basic.isFalse(new UnEqual(null, r2, i2).eval(env)));
         assertTrue(Basic.isFalse(new UnEqual(null, t, t).eval(env)));
         assertTrue(Basic.isFalse(new UnEqual(null, f, f).eval(env)));
@@ -146,7 +166,7 @@ public class ASTEvalTest {
     }
 
     @Test
-    public void unEqual() {
+    public void equal() {
         Env env = new Env();
         Int i1 = new Int(null, 1);
         Int i2 = new Int(null, 2);
@@ -301,13 +321,19 @@ public class ASTEvalTest {
     public void Declare() {
         Env env = new Env();
         String name = "i5";
-        Id id = new Id(null, Type.Int, name);
+        Id id = new Id(token, Type.Int, name);
 
         Declare declare = new Declare(id);
         declare.execute(env);
-
         assertNotNull(env.table.get(name));
-        assertEquals(Basic.Uninitialized, env.get(id));
+
+        try{
+            id.eval(env);
+            assertTrue(false);
+        } catch(RuntimeException e) {
+            String msg = e.getMessage();
+            assertTrue(msg.contains("try to use uninitialized identifier"));
+        }
     }
 
     @Test
@@ -330,12 +356,12 @@ public class ASTEvalTest {
     public void Assign() {
         Env env = new Env();
         String name = "i5";
-        Id id = new Id(null, Type.Int, name);
+        Id id = new Id(token, Type.Int, name);
 
         Declare declare = new Declare(id);
         declare.execute(env);
 
-        Assign assign_i5 = new Assign(id, new Int(null, 5));
+        Assign assign_i5 = new Assign(id, new Char(null, '0'));
         assign_i5.execute(env);
 
         Assign assign_if = new Assign(id, new Bool(null, false));
@@ -344,10 +370,10 @@ public class ASTEvalTest {
             assertTrue(false);
         } catch(RuntimeException e) {
             String msg = e.getMessage();
-            assertTrue(msg.contains("expect numeric but get bool"));
+            assertTrue(msg.contains("can not assign"));
         }
 
-        assertEquals(5, id.eval(env).val(), 0);
+        assertEquals((int)'0', id.eval(env).val(), 0);
         assertEquals(Type.Int, id.eval(env).type);
     }
 

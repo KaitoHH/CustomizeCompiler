@@ -35,4 +35,6 @@ public class Bool extends Basic{
     public String toJava() {
         return toString();
     }
+
+    public static final Basic Uninitialized = new Bool(null, false);
 }

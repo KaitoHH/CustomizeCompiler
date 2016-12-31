@@ -35,4 +35,6 @@ public class Real extends Basic {
     public String toJava() {
         return toString();
     }
+
+    public static final Basic Uninitialized = new Real(null, Double.MIN_VALUE);
 }
