@@ -95,7 +95,7 @@ public class AutomataRunner {
 	 * @param start    int of start position to match
 	 * @return Longest matched Token (currently return a Word)
 	 */
-	public static Word matchSingleAutomata(Automata automata, String input, int start) {
+	public static Token matchSingleAutomata(Automata automata, String input, int start) {
 		if (automata == null || input == null || start >= input.length()) return null;
 
 		char nextChar;
@@ -111,6 +111,6 @@ public class AutomataRunner {
 		if (matchPosition == -1)
 			return null;
 		else
-			return new Word(automata.getTagId(), input.substring(start, matchPosition));
+			return automata.generateToken(input.substring(start, matchPosition));
 	}
 }

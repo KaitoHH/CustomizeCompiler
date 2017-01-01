@@ -35,13 +35,13 @@ public class AutomataRunnerTest {
 
         // Start test to match a{0, 10}bb
         StringBuilder sb = new StringBuilder("bb");
-        Word word = AutomataRunner.matchSingleAutomata(automata, sb.toString(), 0);
-        assertNull(word);
+        Token token = AutomataRunner.matchSingleAutomata(automata, sb.toString(), 0);
+        assertNull(token);
         for (int i = 1; i < 10; i++) {
             sb.insert(0, 'a');
-            word = AutomataRunner.matchSingleAutomata(automata, sb.toString(), 0);
-            assertNotNull(word);
-            assertEquals(sb.toString(), word.lexeme);
+            token = AutomataRunner.matchSingleAutomata(automata, sb.toString(), 0);
+            assertNotNull(token);
+            assertEquals(sb.toString(), token.toString());
         }
 
 	}
