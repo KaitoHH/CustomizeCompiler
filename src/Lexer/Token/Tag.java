@@ -11,7 +11,7 @@ import java.util.Map;
  * All rights reserved.
  */
 public class Tag {
-	public final static int INT = -2, REAL = -1;
+	public final static int CHAR = -3, INT = -2, REAL = -1;
 	public final static String[] keywords = new String[]{
 			"Int",
 			"Real",
