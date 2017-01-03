@@ -7,7 +7,7 @@ import Syntax.AST.ASTRoot;
 import Syntax.AST.Statements.*;
 import Syntax.AST.Type;
 import Lexer.Token.Token;
-import Syntax.AST.Expressions.Expr;
+import Syntax.AST.Expressions.*;
 import Syntax.AST.Statements.Stmt;
 
 class Parser;
@@ -108,7 +108,9 @@ bool   ::= join:jn
         |
             bool:bl OR:tk join:jn
             {:RESULT = new Or((Token)tk,bl,jn);:}
-
+        |
+            BRACKET_LEFT type:type BRACKET_RIGHT:tk BRACKET_LEFT bool:expr BRACKET_RIGHT
+            {:RESULT = new Cast((Token)tk,type,expr);:}
         ;
 join   ::= equality:eq
             {:RESULT = eq;:}

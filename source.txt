@@ -1,17 +1,7 @@
 
     int a;
-    a=1;
-    a=a+1;
-    int b;
-    b=0;
-    do{
-        a=a-1;
-        b=b+1;
-    }while(b<10);
+    real b;
+    b=2.0;
+    a='c';
+    a=(8>0);
     print(a);
-    print (' ');
-    print(b);
-
-
-
-
