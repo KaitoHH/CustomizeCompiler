@@ -23,6 +23,6 @@ public class Print extends Stmt {
 
     @Override
     public String toJava() {
-        return " System.out.print(" + expr.toJava() + ")";
+        return "System.out.print(" + expr.toJava() + ");\n";
     }
 }

@@ -12,20 +12,32 @@ import Syntax.AST.Type;
  * All rights reserved.
  */
 public class Char extends Basic {
-    public final char c;
-    public Char(Token token, char c) { super(token, Type.Char); this.c = c; }
+	public final char c;
 
-    @Override
-    public Basic eval(Env env) throws RuntimeException { return this; }
+	public Char(Token token, char c) {
+		super(token, Type.Char);
+		this.c = c;
+	}
 
-    @Override
-    public double val() { return (double)c; }
+	@Override
+	public Basic eval(Env env) throws RuntimeException {
+		return this;
+	}
 
-    @Override
-    public String toString() { return String.valueOf(c); }
+	@Override
+	public double val() {
+		return (double) c;
+	}
 
-    @Override
-    public String toJava() { return toString(); }
+	@Override
+	public String toString() {
+		return String.valueOf(c);
+	}
 
-    public static final Basic Uninitialized = new Char(null, '\0');
+	@Override
+	public String toJava() {
+		return '\'' + toString() + '\'';
+	}
+
+	public static final Basic Uninitialized = new Char(null, '\0');
 }

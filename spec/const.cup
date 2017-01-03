@@ -1,5 +1,6 @@
 import java_cup.runtime.*;
 import Syntax.AST.Basic.*;
+import Lexer.Token.Tag;
 import Syntax.AST.Expressions.Arith.*;
 import Syntax.AST.Expressions.Logic.*;
 import Syntax.AST.ASTRoot;
@@ -12,11 +13,11 @@ import Syntax.AST.Statements.Stmt;
 class Parser;
 
 /* Terminals stub#01 */
-terminal           INTNUM,REALNUM;
+terminal           INTNUM,REALNUM,CHARNUM;
 
 
 /* Non-terminals stub#02 */
-non terminal       type;
+non terminal Type  type;
 
 non terminal Stmt  program,block,stmts,stmt,declaration,assignment,single_if,if_else,single_while,do_while;
 non terminal Expr  bool,join,equality,rel,expr,term,unary,factor;
@@ -24,15 +25,13 @@ non terminal Expr  bool,join,equality,rel,expr,term,unary,factor;
 precedence left    ELSE;
 
 /* The grammar */
-program ::= block:block
-            {:
-            ASTRoot.setRoot(block);
-            System.out.println("find root");
-            :};
+program ::= stmts:stmt
+            {:ASTRoot.setRoot(stmt);:};
 
 block   ::= SCOPE_START stmts:stmts SCOPE_END
             {:RESULT = new Scope(stmts);:}
             ;
+
 
 stmts   ::= stmts:stmts stmt:stmt
             {:RESULT = new Stmts(stmts,new Stmts(stmt,null));:}
@@ -58,6 +57,9 @@ stmt    ::=
         |
             do_while:do_while
             {:RESULT = do_while;:}
+        |
+            PRINT BRACKET_LEFT bool:expr BRACKET_RIGHT DELIMITER
+            {:RESULT = new Print(expr);:}
         ;
 
 /*single_while*/
@@ -73,7 +75,7 @@ stmt    ::=
 /*declaration*/
 {:
     Token token = (Token)mid;
-    Id id = new Id(token, Type.Int, token.toString());
+    Id id = new Id(token,t, token.toString());
     RESULT = new Declare(id);
 :};
 
@@ -84,7 +86,7 @@ stmt    ::=
 {:RESULT = new If(exp,s1,s2,false);:};
 
 /*do_while*/
-{://throw new NotImplementedException();:};
+{:RESULT = new DoWhile(expr,stmt);:};
 
 stmt    ::=
             block:block
@@ -93,8 +95,13 @@ stmt    ::=
             error DELIMITER
         ;
 type   ::=  INT
+            {:RESULT = Type.Int;:}
         |
             REAL
+            {:RESULT = Type.Real;:}
+        |
+            CHAR
+            {:RESULT = Type.Char;:}
         ;
 bool   ::= join:jn
             {:RESULT = jn;:}
@@ -155,8 +162,7 @@ term   ::= unary:ary
         |
             term:trm MOD:tk unary:ary
             {:
-                //throw new NotImplementedException();
-                //RESULT = new Mod(null,null,trm,ary);
+                RESULT = new Mod((Token)tk,null,trm,ary);
             :}
         ;
 unary  ::= NOT:tk unary : ary
@@ -180,14 +186,20 @@ factor ::= BRACKET_LEFT bool:bl BRACKET_RIGHT
         |
             INTNUM : mint
             {:
-                Token token = (Token)mint;
-                RESULT = new Int(token,1);
+                Lexer.Token.Int token = (Lexer.Token.Int)mint;
+                RESULT = new Int(token,token.value);
 
             :}
         |
             REALNUM : real
             {:
-                Token token = (Token)real;
-                RESULT =  new Real(token,2.0);
+                Lexer.Token.Real token = (Lexer.Token.Real)real;
+                RESULT =  new Real(token,token.value);
+            :}
+        |
+            CHARNUM : ch
+            {:
+                Lexer.Token.Char token = (Lexer.Token.Char)ch;
+                RESULT = new Char(token,token.value);
             :}
         ;

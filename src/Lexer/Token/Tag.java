@@ -15,6 +15,7 @@ public class Tag {
 	public final static String[] keywords = new String[]{
 			"Int",
 			"Real",
+			"Char",
 			"if",
 			"else",
 			"while",
@@ -40,6 +41,7 @@ public class Tag {
 			"bracket_right",
 			"delimiter",
 			"neq",
+			"print",
 			"id"
 	};
 	private static int cnt;
@@ -58,7 +60,9 @@ public class Tag {
 
 	public static String getKey(int id) {
 		if (id < 0) {
-			return id == -2 ? "INTNUM" : "REALNUM";
+			if (id == -1) return "REALNUM";
+			if (id == -2) return "INTNUM";
+			else return "CHARNUM";
 		}
 		return stringMap.get(id);
 	}

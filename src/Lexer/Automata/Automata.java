@@ -1,9 +1,6 @@
 package Lexer.Automata;
 
-import Lexer.Token.Int;
-import Lexer.Token.Real;
-import Lexer.Token.Token;
-import Lexer.Token.Word;
+import Lexer.Token.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -86,6 +83,8 @@ public class Automata {
 			return new Int(Integer.valueOf(lexeme));
 		else if (tagId == -1)
 			return new Real(Double.valueOf(lexeme));
+		else if (tagId == -3)
+			return new Char(lexeme.charAt(1));
 		else
 			return new Word(tagId, lexeme);
 	}

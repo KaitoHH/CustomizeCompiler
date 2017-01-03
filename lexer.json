@@ -9,6 +9,7 @@
   "language_definition": {
     "INT": "int",
     "REAL": "real",
+    "CHAR": "char",
     "IF": "if",
     "ELSE": "else",
     "WHILE": "while",
@@ -36,6 +37,7 @@
     "BRACKET_RIGHT": "~)",
     "DELIMITER": ";",
     "NEQ": "(!=)|(<>)",
+    "PRINT": "print",
     "ID": "_|a|b|c(0|1|2|a|b|c|_)*",
     "DIM": "dim",
     "AS": "as"

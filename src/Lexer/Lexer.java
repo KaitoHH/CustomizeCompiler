@@ -2,6 +2,7 @@ package Lexer;
 
 import Lexer.Automata.Automata;
 import Lexer.Automata.AutomataRunner;
+import Lexer.Token.Char;
 import Lexer.Token.Int;
 import Lexer.Token.Real;
 import Lexer.Token.Token;
@@ -31,6 +32,7 @@ public class Lexer {
 		automataList = config.getAutomataList();
 		automataList.add(Real.getAutomata());
 		automataList.add(Int.getAutomata());
+		automataList.add(Char.getAutomata());
 		try {
 			tokenList = AutomataRunner.run(automataList, input);
 		} catch (IllegalLexemeException e) {

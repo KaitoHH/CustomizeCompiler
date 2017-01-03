@@ -1,7 +1,8 @@
 package CodeGenerator;
 
 import Syntax.AST.Statements.Stmt;
-import java.util.regex.*;
+
+import java.util.regex.Pattern;
 
 /**
  * Project: CustomizeCompiler
@@ -12,16 +13,16 @@ import java.util.regex.*;
  */
 public class JavaGenerator {
     public static String generate(Stmt root) {
-        return "public Main class  {\n" +
-                "    public static void main(String arg[]) \n" +
+        return "public class Main  {\n" +
+                "    public static void main(String arg[]){ \n" +
                 addIndent(root.toJava()) +
-                "}";
+                "    }\n}";
     }
 
     public static String addIndent(String input) {
         String indentedCode = "";
         String[] lines = input.split("\n");
-        int indent = 4;
+        int indent = 8;
         String scopeStart = "\\s*\\{\\s*$";
         String scopeEnd = "\\s*\\}\\s*$";
 

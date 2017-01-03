@@ -1,7 +1,7 @@
 {
   "declaration": [
     [
-      "type",
+      "type:t",
       "ID:mid",
       "DELIMITER"
     ]
@@ -46,10 +46,10 @@
   "do_while": [
     [
       "DO",
-      "stmt",
+      "stmt:stmt",
       "WHILE",
       "BRACKET_LEFT",
-      "bool",
+      "bool:expr",
       "BRACKET_RIGHT",
       "DELIMITER"
     ]
