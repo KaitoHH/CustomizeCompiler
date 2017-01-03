@@ -33,6 +33,11 @@ public class CFL {
 		productionMap.get(initial).add(production);
 	}
 
+	public List<Production> getProductionList(String string) {
+		List<Production> list = productionMap.get(new Ntrl(string));
+		return list;
+	}
+
 	public Ntrl getInitinialNtrl() {
 		return initinialNtrl;
 	}
@@ -53,7 +58,7 @@ public class CFL {
 		}
 	}
 
-	private void setEndMarkToStartSymbol(){
+	private void setEndMarkToStartSymbol() {
 		startSymbol.followSet.add(Trl.EndMark);
 	}
 

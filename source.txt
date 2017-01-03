@@ -1,5 +1,6 @@
 {
     int a;
+    int a;
     a=2;
     a=3;
     int b;
@@ -11,8 +12,10 @@
     if(a>b){
         a=b;
     }else{
-        b=a;
+        b=not (a+b)*a;
+        a=b;
     }
+    b=3;
 }
 
 

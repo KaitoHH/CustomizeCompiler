@@ -1,5 +1,13 @@
 import java_cup.runtime.*;
+import Syntax.AST.Basic.*;
+import Syntax.AST.Expressions.Arith.*;
+import Syntax.AST.Expressions.Logic.*;
+import Syntax.AST.ASTRoot;
+import Syntax.AST.Statements.*;
+import Syntax.AST.Type;
 import Lexer.Token.Token;
+import Syntax.AST.Expressions.Expr;
+import Syntax.AST.Statements.Stmt;
 
 class Parser;
 
@@ -8,109 +16,178 @@ terminal           INTNUM,REALNUM;
 
 
 /* Non-terminals stub#02 */
-non terminal       program,block,stmts,stmt,type,bool,join,equality,rel,expr,term,unary,factor;
-non terminal       declaration,assignment,single_if,if_else,single_while,do_while;
+non terminal       type;
+
+non terminal Stmt  program,block,stmts,stmt,declaration,assignment,single_if,if_else,single_while,do_while;
+non terminal Expr  bool,join,equality,rel,expr,term,unary,factor;
 
 precedence left    ELSE;
 
 /* The grammar */
-program ::= block;
+program ::= block:block
+            {:
+            ASTRoot.setRoot(block);
+            System.out.println("find root");
+            :};
 
-block   ::= SCOPE_START stmts SCOPE_END;
+block   ::= SCOPE_START stmts:stmts SCOPE_END
+            {:RESULT = new Scope(stmts);:}
+            ;
 
-stmts   ::= stmts stmt
+stmts   ::= stmts:stmts stmt:stmt
+            {:RESULT = new Stmts(stmts,new Stmts(stmt,null));:}
         |
-            stmt
+            stmt:stmt
+            {:RESULT = stmt;:}
         ;
 stmt    ::=
-            declaration
+            declaration:declare
+            {:RESULT = declare;:}
         |
-            assignment
+            assignment :assign
+            {:RESULT = assign;:}
         |
-            single_if
+            single_if:_if
+            {:RESULT = _if;:}
         |
-            if_else
+            if_else:if_else
+            {:RESULT = if_else;:}
         |
-            single_while
+            single_while:_while
+            {:RESULT = _while;:}
         |
-            do_while
+            do_while:do_while
+            {:RESULT = do_while;:}
         ;
 
-/* user define stub#03 */
+/*single_while*/
+{:RESULT = new While(expr,stmt,false);:};
+
+/*assignment*/
+{:
+    Token token = (Token)mid;
+    Id id = new Id(token, null, token.toString());
+    RESULT = new Assign(id,expr);
+:};
+
+/*declaration*/
+{:
+    Token token = (Token)mid;
+    Id id = new Id(token, Type.Int, token.toString());
+    RESULT = new Declare(id);
+:};
+
+/*single_if*/
+{:RESULT = new If(exp,stmt,null,false);:};
+
+/*if_else*/
+{:RESULT = new If(exp,s1,s2,false);:};
+
+/*do_while*/
+{://throw new NotImplementedException();:};
 
 stmt    ::=
-            block
+            block:block
+            {:RESULT = block;:}
         |
             error DELIMITER
         ;
-type   ::= INT
+type   ::=  INT
         |
             REAL
         ;
-bool   ::= join
+bool   ::= join:jn
+            {:RESULT = jn;:}
         |
-            bool OR join
+            bool:bl OR:tk join:jn
+            {:RESULT = new Or((Token)tk,bl,jn);:}
+
         ;
-join   ::= equality
+join   ::= equality:eq
+            {:RESULT = eq;:}
         |
-            join AND equality
+            join:jn AND:tk equality:eq
+            {:RESULT = new And((Token)tk,jn,eq);:}
         ;
-equality::= rel
+equality::= rel:rl
+            {:RESULT = rl;:}
         |
-            equality EQ rel
+            equality:eq EQ:tk rel:rl
+            {:RESULT = new Equal((Token)tk,eq,rl);:}
+
         |
-            equality NEQ rel
+            equality:eq NEQ:tk rel:rl
+            {:RESULT = new UnEqual((Token)tk,eq,rl);:}
         ;
-rel    ::= expr LESS_THAN expr
+rel    ::= expr:exp1 LESS_THAN:tk expr:exp2
+           {: RESULT = new Less((Token)tk,exp1,exp2);:}
         |
-            expr GREATER_THAN expr
+            expr:exp1 GREATER_THAN:tk expr:exp2
+            {: RESULT = new Greater((Token)tk,exp1,exp2);:}
         |
-            expr LESS_EQUAL expr
+            expr:exp1 LESS_EQUAL:tk expr:exp2
+            {: RESULT = new LessEqual((Token)tk,exp1,exp2);:}
         |
-            expr GREATER_EQUAL expr
+            expr:exp1 GREATER_EQUAL:tk expr:exp2
+            {: RESULT = new GreaterEqual((Token)tk,exp1,exp2);:}
         |
-            expr
+            expr:exp
+            {:RESULT = exp;:}
         ;
-expr   ::= term
+expr   ::= term:trm
+            {:RESULT = trm;:}
         |
-            expr MINUS term
+            expr:expr MINUS:tk term:trm
+            {:RESULT = new Minus((Token)tk,null,expr,trm);:}
         |
-            expr ADD term
+            expr:expr ADD:tk term:trm
+            {:RESULT = new Add((Token)tk,null,expr,trm);:}
         ;
 
-term   ::= unary
+term   ::= unary:ary
+        {: RESULT = ary; :}
         |
-            term TIMES unary
+            term:trm TIMES:tk unary:ary
+            {: RESULT = new Times((Token)tk,null,trm,ary); :}
         |
-            term DIVIDE unary
+            term:trm DIVIDE:tk unary:ary
+            {: RESULT = new Divide((Token)tk,null,trm,ary); :}
         |
-            term MOD unary
-        ;
-unary  ::= NOT unary
-        |
-            MINUS unary
-        |
-            factor
-        ;
-
-factor ::= BRACKET_LEFT bool BRACKET_RIGHT
-        |
-            ID
-        |
-            INTNUM:dint
+            term:trm MOD:tk unary:ary
             {:
-                Token token = (Token)dint;
-                RESULT=new Int(token,Type.Int,1);
-                System.out.println("int");
+                //throw new NotImplementedException();
+                //RESULT = new Mod(null,null,trm,ary);
+            :}
+        ;
+unary  ::= NOT:tk unary : ary
+            {: RESULT = new Not((Token)tk,ary);:}
+        |
+            MINUS:tk unary : ary
+            {: RESULT = new UnaryMinus((Token)tk,ary); :}
+        |
+            factor:fctr
+            {: RESULT = fctr; :}
+        ;
+
+factor ::= BRACKET_LEFT bool:bl BRACKET_RIGHT
+            {: RESULT = bl;:}
+        |
+            ID : id
+            {:
+                Token token = (Token)id;
+                RESULT = new Id(token,null,token.toString());
             :}
         |
-            REALNUM:real
+            INTNUM : mint
+            {:
+                Token token = (Token)mint;
+                RESULT = new Int(token,1);
+
+            :}
+        |
+            REALNUM : real
             {:
                 Token token = (Token)real;
-                RESULT=new Real(real,Type.Real,0.2);
-                System.out.println("real");
+                RESULT =  new Real(token,2.0);
             :}
         ;
-
-
-

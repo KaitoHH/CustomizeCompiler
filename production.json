@@ -2,15 +2,15 @@
   "declaration": [
     [
       "type",
-      "ID",
+      "ID:mid",
       "DELIMITER"
     ]
   ],
   "assignment": [
     [
-      "ID",
+      "ID:mid",
       "ASSIGN",
-      "bool",
+      "bool:expr",
       "DELIMITER"
     ]
   ],
@@ -18,29 +18,29 @@
     [
       "IF",
       "BRACKET_LEFT",
-      "bool",
+      "bool:exp",
       "BRACKET_RIGHT",
-      "stmt",
+      "stmt:s1",
       "ELSE",
-      "stmt"
+      "stmt:s2"
     ]
   ],
   "single_if": [
     [
       "IF",
       "BRACKET_LEFT",
-      "bool",
+      "bool:exp",
       "BRACKET_RIGHT",
-      "stmt"
+      "stmt:stmt"
     ]
   ],
   "single_while": [
     [
       "WHILE",
       "BRACKET_LEFT",
-      "bool",
+      "bool:expr",
       "BRACKET_RIGHT",
-      "stmt"
+      "stmt:stmt"
     ]
   ],
   "do_while": [

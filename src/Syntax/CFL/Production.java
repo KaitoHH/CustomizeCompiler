@@ -67,7 +67,7 @@ public class Production {
 		for (Symbol symbol : rule) {
 			out += "\t" + symbol;
 		}
-		out += ";\n";
+		out += "\n";
 		return out;
 	}
 }

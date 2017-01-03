@@ -8,45 +8,46 @@ package Syntax;
 /** CUP generated class containing symbol constants. */
 public class ParserSym {
   /* terminals */
-  public static final int DIVIDE = 32;
-  public static final int DELIMITER = 8;
-  public static final int SCOPE_END = 10;
-  public static final int CONTINUE = 15;
-  public static final int INT = 7;
+  public static final int DIVIDE = 11;
+  public static final int DELIMITER = 9;
+  public static final int SCOPE_END = 15;
+  public static final int CONTINUE = 27;
+  public static final int INT = 8;
   public static final int INTNUM = 34;
-  public static final int FOR = 13;
-  public static final int MINUS = 33;
-  public static final int BRACKET_RIGHT = 3;
-  public static final int GREATER_THAN = 30;
-  public static final int BRACKET_LEFT = 2;
-  public static final int NOT = 22;
-  public static final int AND = 17;
-  public static final int OR = 26;
-  public static final int LESS_EQUAL = 28;
-  public static final int ASSIGN = 6;
-  public static final int IF = 12;
-  public static final int ID = 29;
-  public static final int DIM = 14;
+  public static final int FOR = 23;
+  public static final int MINUS = 10;
+  public static final int BRACKET_RIGHT = 4;
+  public static final int GREATER_THAN = 14;
+  public static final int BRACKET_LEFT = 3;
+  public static final int NOT = 28;
+  public static final int AND = 30;
+  public static final int OR = 21;
+  public static final int LESS_EQUAL = 18;
+  public static final int ASSIGN = 7;
+  public static final int IF = 19;
+  public static final int ID = 17;
+  public static final int DIM = 24;
   public static final int EOF = 0;
-  public static final int GREATER_EQUAL = 31;
+  public static final int GREATER_EQUAL = 12;
   public static final int error = 1;
-  public static final int ADD = 20;
-  public static final int MOD = 27;
-  public static final int NEQ = 21;
-  public static final int BREAK = 9;
+  public static final int ADD = 2;
+  public static final int MOD = 20;
+  public static final int NEQ = 33;
+  public static final int BREAK = 13;
   public static final int REALNUM = 35;
-  public static final int EQ = 23;
-  public static final int REAL = 18;
-  public static final int TIMES = 25;
-  public static final int ELSE = 11;
-  public static final int WHILE = 19;
-  public static final int SCOPE_START = 4;
-  public static final int AS = 16;
-  public static final int LESS_THAN = 24;
-  public static final int DO = 5;
+  public static final int EQ = 26;
+  public static final int REAL = 31;
+  public static final int TIMES = 22;
+  public static final int ELSE = 16;
+  public static final int WHILE = 32;
+  public static final int SCOPE_START = 5;
+  public static final int AS = 29;
+  public static final int LESS_THAN = 25;
+  public static final int DO = 6;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
+  "ADD",
   "BRACKET_LEFT",
   "BRACKET_RIGHT",
   "SCOPE_START",
@@ -54,31 +55,30 @@ public class ParserSym {
   "ASSIGN",
   "INT",
   "DELIMITER",
+  "MINUS",
+  "DIVIDE",
+  "GREATER_EQUAL",
   "BREAK",
+  "GREATER_THAN",
   "SCOPE_END",
   "ELSE",
+  "ID",
+  "LESS_EQUAL",
   "IF",
+  "MOD",
+  "OR",
+  "TIMES",
   "FOR",
   "DIM",
+  "LESS_THAN",
+  "EQ",
   "CONTINUE",
+  "NOT",
   "AS",
   "AND",
   "REAL",
   "WHILE",
-  "ADD",
   "NEQ",
-  "NOT",
-  "EQ",
-  "LESS_THAN",
-  "TIMES",
-  "OR",
-  "MOD",
-  "LESS_EQUAL",
-  "ID",
-  "GREATER_THAN",
-  "GREATER_EQUAL",
-  "DIVIDE",
-  "MINUS",
   "INTNUM",
   "REALNUM"
   };

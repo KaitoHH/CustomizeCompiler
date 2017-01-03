@@ -17,10 +17,22 @@ import java.io.IOException;
  * @version 1.0
  */
 public class GrammarFactory {
+	private final static String[] rule = new String[]
+			{
+					"single_while",
+					"assignment",
+					"declaration",
+					"single_if",
+					"if_else",
+					"do_while"
+			};
+
 	public static void createProduction(CFL cfl) throws IOException {
 		String fileString = FileUtils.getFileString("spec/const.cup");
 		fileString = fileString.replace("/* Terminals stub#01 */", Tag.getTerminalString());
-		fileString = fileString.replace("/* user define stub#03 */", cfl.toString());
+		for (int i = 0; i < rule.length; i++) {
+			fileString = fileString.replace("/*" + rule[i] + "*/", cfl.getProductionList(rule[i]).get(0).toString());
+		}
 		FileUtils.createFile("production.cup", fileString);
 	}
 
@@ -49,7 +61,7 @@ public class GrammarFactory {
 	}
 
 	public static void main(String[] args) throws IOException {
-		//updateCupFile();
+		updateCupFile();
 		compileCUP();
 	}
 }
