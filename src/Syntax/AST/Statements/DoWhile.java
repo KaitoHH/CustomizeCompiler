@@ -34,9 +34,9 @@ public class DoWhile extends Stmt{
     }
 
     @Override
-    public String toJava(String indent) {
-        return indent + "do\n" +
-                stmt.toJava(indent) +
+    public String toJava() {
+        return "do\n" +
+                stmt.toJava() +
                 "while(" + expr.toJava() + ");\n";
     }
 }

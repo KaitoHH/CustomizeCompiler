@@ -19,9 +19,9 @@ public class Scope extends Stmt {
     }
 
     @Override
-    public String toJava(String indent) {
-        return indent + "{\n" +
-                stmt.toJava(indent + "    ") +
-                indent + "}\n";
+    public String toJava() {
+        return "{\n" +
+                stmt.toJava() +
+                "}\n";
     }
 }

@@ -36,8 +36,8 @@ public class While extends Stmt{
     }
 
     @Override
-    public String toJava(String indent) {
-        return indent + "while(" + expr.toJava() + ")\n" +
-                (newScope? new Scope(stmt).toJava(indent): stmt.toJava(indent + "    "));
+    public String toJava() {
+        return "while(" + expr.toJava() + ")\n" +
+                (newScope? new Scope(stmt).toJava(): stmt.toJava());
     }
 }

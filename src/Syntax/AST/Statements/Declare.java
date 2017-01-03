@@ -24,7 +24,7 @@ public class Declare extends Stmt{
     }
 
     @Override
-    public String toJava(String indent) {
-        return indent + Type.toJavaType(id.type) + " " + id.name + ";\n";
+    public String toJava() {
+        return Type.toJavaType(id.type) + " " + id.name + ";\n";
     }
 }

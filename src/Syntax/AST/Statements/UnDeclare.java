@@ -1,6 +1,5 @@
 package Syntax.AST.Statements;
 
-import Syntax.AST.Basic.Basic;
 import Syntax.AST.Basic.Id;
 import Syntax.AST.Env;
 
@@ -21,7 +20,7 @@ public class UnDeclare extends Stmt {
     }
 
     @Override
-    public String toJava(String indent) {
-        return indent + "\\\\ unDeclare not supported in java \n";
+    public String toJava() {
+        return "\\\\ unDeclare not supported in java \n";
     }
 }

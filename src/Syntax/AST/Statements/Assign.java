@@ -32,7 +32,7 @@ public class Assign extends Stmt {
     }
 
     @Override
-    public String toJava(String indent) {
-        return indent + id.name + " = " + expr.toJava() + ";\n";
+    public String toJava() {
+        return id.name + " = " + expr.toJava() + ";\n";
     }
 }

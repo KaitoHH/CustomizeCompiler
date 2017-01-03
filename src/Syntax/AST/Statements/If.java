@@ -40,10 +40,10 @@ public class If extends Stmt{
     }
 
     @Override
-    public String toJava(String indent) {
-        return indent +  "if(" + expr.toJava() + ")\n" +
-                (newScope? new Scope(stmt1).toJava(indent): stmt1.toJava(indent + "    ")) +
-                (stmt2 == null? "" : indent + "else" +
-                        (stmt2 instanceof If ? " "  + stmt2.toJava(indent): "\n" + stmt2.toJava(indent)));
+    public String toJava() {
+        return "if(" + expr.toJava() + ")\n" +
+                (newScope? new Scope(stmt1).toJava(): stmt1.toJava()) +
+                (stmt2 == null? "" : "else" +
+                        (stmt2 instanceof If ? " "  + stmt2.toJava(): "\n" + stmt2.toJava()));
     }
 }

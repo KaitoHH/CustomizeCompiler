@@ -5,6 +5,7 @@ import Lexer.Lexer;
 import Lexer.Token.Tag;
 import Lexer.Token.Token;
 import Syntax.AST.ASTRoot;
+import Syntax.AST.Env;
 import Syntax.AST.Statements.Stmt;
 import Utils.FileUtils;
 import java_cup.runtime.ComplexSymbolFactory;
@@ -72,6 +73,7 @@ public class SyntaxScanner implements Scanner {
 			e.printStackTrace();
 		}
 		Stmt root = ASTRoot.getRoot();
+		root.execute(new Env());
 		System.out.println(JavaGenerator.generate(root));
 	}
 }

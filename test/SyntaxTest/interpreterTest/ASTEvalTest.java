@@ -458,7 +458,7 @@ public class ASTEvalTest {
         dw.execute(env);
         assertEquals(1, id.eval(env).val(), 0);
         assertEquals(Type.Int, id.eval(env).type);
-        System.out.println(dw.toJava(""));
+        System.out.println(dw.toJava());
 
         // use do while to accelerate i to 10
         UnEqual neq_i_10 = new UnEqual(null, id, new Int(null, 10));

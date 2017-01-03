@@ -23,7 +23,7 @@ public class Stmts extends Stmt {
     }
 
     @Override
-    public String toJava(String indent) {
-        return indent + first.toJava(indent) + (rest != null ? rest.toJava(indent): "");
+    public String toJava() {
+        return first.toJava() + (rest != null ? rest.toJava(): "");
     }
 }

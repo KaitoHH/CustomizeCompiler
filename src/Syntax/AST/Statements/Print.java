@@ -22,7 +22,7 @@ public class Print extends Stmt {
     }
 
     @Override
-    public String toJava(String indent) {
-        return indent + " System.out.print(" + expr.toJava() + ")";
+    public String toJava() {
+        return " System.out.print(" + expr.toJava() + ")";
     }
 }
