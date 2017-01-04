@@ -79,11 +79,11 @@ public class Compiler {
 				else
 					root = new Stmts(root, new Stmts(inputStmt, null));
 			} catch (IOException e) {
-				System.out.println("Missing config file:");
-				System.out.println(e.getMessage());
+				System.err.println("Missing config file:");
+				System.err.println(e.getMessage());
 			} catch (RuntimeException e) {
-				System.out.println("Error occurs during execution:");
-				System.out.println(e.getMessage());
+				System.err.println("Error occurs during execution:");
+				System.err.println(e.getMessage());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
