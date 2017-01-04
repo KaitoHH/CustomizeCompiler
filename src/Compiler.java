@@ -1,3 +1,4 @@
+import CodeGenerator.JSONGenerator;
 import CodeGenerator.JavaGenerator;
 import Lexer.Lexer;
 import Syntax.AST.ASTRoot;
@@ -39,6 +40,7 @@ public class Compiler {
 		//execute or generate
 		root.execute(new Env());
 		System.out.println(JavaGenerator.generate(root));
+		System.out.println(JSONGenerator.generate(root).toString());
 		startREPL();
 	}
 

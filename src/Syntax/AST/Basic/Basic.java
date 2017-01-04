@@ -3,6 +3,7 @@ package Syntax.AST.Basic;
 import Lexer.Token.Token;
 import Syntax.AST.Expressions.Expr;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -47,4 +48,11 @@ public abstract class Basic extends Expr {
 
     @Override
     public abstract String toString();
+
+    public JSONObject toBasicJSON() {
+        JSONObject object = new JSONObject();
+        object.put("token", token.toJSON());
+        object.put("type", type == null ? "":type.name);
+        return object;
+    }
 }

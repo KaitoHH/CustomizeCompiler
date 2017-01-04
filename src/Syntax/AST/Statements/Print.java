@@ -3,6 +3,7 @@ package Syntax.AST.Statements;
 import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -24,5 +25,13 @@ public class Print extends Stmt {
     @Override
     public String toJava() {
         return "System.out.print(" + expr.toJava() + ");\n";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("expr1", expr.toJSON());
+        object.put("stmtType", "Print");
+        return object;
     }
 }

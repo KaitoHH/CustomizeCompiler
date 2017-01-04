@@ -3,6 +3,7 @@ package Syntax.AST.Basic;
 import Lexer.Token.Token;
 import Syntax.AST.Env;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -34,6 +35,14 @@ public class Bool extends Basic{
     @Override
     public String toJava() {
         return toString();
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = toBasicJSON();
+        object.put("val", val);
+        object.put("exprType", "Bool");
+        return object;
     }
 
     public static final Basic Uninitialized = new Bool(null, false);

@@ -4,6 +4,7 @@ import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -45,5 +46,15 @@ public class If extends Stmt{
                 (newScope? new Scope(stmt1).toJava(): stmt1.toJava()) +
                 (stmt2 == null? "" : "else" +
                         (stmt2 instanceof If ? " "  + stmt2.toJava(): "\n" + stmt2.toJava()));
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("expr", expr.toJSON());
+        object.put("stmt1", stmt1.toJSON());
+        object.put("stmt2", stmt2.toJSON());
+        object.put("stmtType", "If");
+        return object;
     }
 }

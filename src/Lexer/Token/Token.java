@@ -1,6 +1,7 @@
 package Lexer.Token;
 
 import javafx.util.Pair;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -34,5 +35,11 @@ public abstract class Token {
 		return lineOffset;
 	}
 
-
+	public JSONObject toJSON() {
+		JSONObject object = new JSONObject();
+		object.put("tag", tag);
+		object.put("lineNum", lineNum);
+		object.put("lineOffset", lineOffset);
+		return object;
+	}
 }

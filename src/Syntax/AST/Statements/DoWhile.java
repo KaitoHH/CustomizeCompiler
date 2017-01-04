@@ -4,6 +4,7 @@ import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -38,5 +39,14 @@ public class DoWhile extends Stmt{
         return "do\n" +
                 stmt.toJava() +
                 "while(" + expr.toJava() + ");\n";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("expr", expr.toJSON());
+        object.put("stmt", stmt.toJSON());
+        object.put("stmtType", "DoWhile");
+        return object;
     }
 }

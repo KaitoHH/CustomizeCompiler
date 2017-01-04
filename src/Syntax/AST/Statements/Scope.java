@@ -1,6 +1,7 @@
 package Syntax.AST.Statements;
 
 import Syntax.AST.Env;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -23,5 +24,13 @@ public class Scope extends Stmt {
         return "{\n" +
                 stmt.toJava() +
                 "}\n";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("stmt", stmt.toJSON());
+        object.put("stmtType", "Print");
+        return object;
     }
 }

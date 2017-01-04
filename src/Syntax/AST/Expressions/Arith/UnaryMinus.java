@@ -5,6 +5,7 @@ import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -30,5 +31,15 @@ public class UnaryMinus extends Expr {
     @Override
     public String toJava() {
         return "(-" + expr.toJava() + ")";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("token", token.toJSON());
+        object.put("type", type == null ? "":type.name);
+        object.put("expr1", expr.toJSON());
+        object.put("exprType","UnaryMinus");
+        return object;
     }
 }

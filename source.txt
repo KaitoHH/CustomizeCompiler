@@ -3,5 +3,4 @@
     real b;
     b=2.0;
     a='c';
-    a=(8>0);
     print(a);
