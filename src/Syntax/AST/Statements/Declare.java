@@ -3,6 +3,7 @@ package Syntax.AST.Statements;
 import Syntax.AST.Basic.*;
 import Syntax.AST.Env;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -26,5 +27,13 @@ public class Declare extends Stmt{
     @Override
     public String toJava() {
         return Type.toJavaType(id.type) + " " + id.name + ";\n";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("id", id.toJSON());
+        object.put("stmtType", "Declare");
+        return object;
     }
 }

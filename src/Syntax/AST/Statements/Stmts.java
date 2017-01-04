@@ -1,6 +1,7 @@
 package Syntax.AST.Statements;
 
 import Syntax.AST.Env;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -25,5 +26,16 @@ public class Stmts extends Stmt {
     @Override
     public String toJava() {
         return first.toJava() + (rest != null ? rest.toJava(): "");
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("first", first.toJSON());
+        object.put("stmtType", "Stmts");
+
+        if (rest != null)
+            object.put("rest", rest.toJSON());
+        return object;
     }
 }

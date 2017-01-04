@@ -473,7 +473,7 @@ public class ASTEvalTest {
     public void If() {
         Env env = new Env();
         String name = "i";
-        Id id = new Id(null, Type.Int, name);
+        Id id = new Id(token, Type.Int, name);
 
         Declare declare = new Declare(id);
         declare.execute(env);

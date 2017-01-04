@@ -7,6 +7,7 @@ import Syntax.AST.Basic.Int;
 import Syntax.AST.Basic.Real;
 import Syntax.AST.Env;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -44,5 +45,15 @@ public class Cast extends Expr{
     @Override
     public String toJava() {
         return "((" + Type.toJavaType(type) + ")" + expr.toJava() +")";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("token", token.toJSON());
+        object.put("type", type == null ? "":type.name);
+        object.put("expr1", expr.toJSON());
+        object.put("exprType", "Cast");
+        return object;
     }
 }

@@ -2,6 +2,7 @@ package Syntax.AST.Statements;
 
 import Syntax.AST.Basic.Id;
 import Syntax.AST.Env;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -22,5 +23,13 @@ public class UnDeclare extends Stmt {
     @Override
     public String toJava() {
         return "\\\\ unDeclare not supported in java \n";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("id", id.toJSON());
+        object.put("stmtType", "UnDeclare");
+        return object;
     }
 }

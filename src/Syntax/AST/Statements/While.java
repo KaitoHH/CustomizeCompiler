@@ -4,6 +4,7 @@ import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -39,5 +40,14 @@ public class While extends Stmt{
     public String toJava() {
         return "while(" + expr.toJava() + ")\n" +
                 (newScope? new Scope(stmt).toJava(): stmt.toJava());
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("expr", expr.toJSON());
+        object.put("stmt", stmt.toJSON());
+        object.put("stmtType", "While");
+        return object;
     }
 }

@@ -4,6 +4,7 @@ import Lexer.Token.Token;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -33,5 +34,14 @@ public class Id extends Expr {
     @Override
     public String toJava() {
         return toString();
+    }
+
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("token", token.toJSON());
+        object.put("type", type == null ? "":type.name);
+        object.put("name", name);
+        object.put("exprType", "Id");
+        return object;
     }
 }

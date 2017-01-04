@@ -5,6 +5,7 @@ import Syntax.AST.Basic.Id;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -34,5 +35,14 @@ public class Assign extends Stmt {
     @Override
     public String toJava() {
         return id.name + " = " + expr.toJava() + ";\n";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        object.put("id", id.toJSON());
+        object.put("expr", expr.toJSON());
+        object.put("stmtType", "Assign");
+        return object;
     }
 }

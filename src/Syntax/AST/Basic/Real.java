@@ -4,6 +4,7 @@ import Lexer.Token.Token;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -34,6 +35,14 @@ public class Real extends Basic {
     @Override
     public String toJava() {
         return toString();
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = toBasicJSON();
+        object.put("val", val);
+        object.put("exprType", "Real");
+        return object;
     }
 
     public static final Basic Uninitialized = new Real(null, Double.MIN_VALUE);

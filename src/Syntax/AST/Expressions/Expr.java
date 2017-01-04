@@ -4,6 +4,7 @@ import Lexer.Token.Token;
 import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -25,4 +26,5 @@ public abstract class Expr{
 
     public abstract Basic eval(Env env) throws RuntimeException;
     public abstract String toJava();
+    public abstract JSONObject toJSON();
 }

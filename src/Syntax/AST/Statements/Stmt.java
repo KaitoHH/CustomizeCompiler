@@ -1,6 +1,7 @@
 package Syntax.AST.Statements;
 
 import Syntax.AST.Env;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -12,4 +13,5 @@ import Syntax.AST.Env;
 public abstract class Stmt {
     public abstract void execute(Env env);
     public abstract String toJava();
+    public abstract JSONObject toJSON();
 }

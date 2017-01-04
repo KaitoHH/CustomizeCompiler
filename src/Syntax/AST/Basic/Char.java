@@ -3,6 +3,7 @@ package Syntax.AST.Basic;
 import Lexer.Token.Token;
 import Syntax.AST.Env;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -37,6 +38,14 @@ public class Char extends Basic {
 	@Override
 	public String toJava() {
 		return '\'' + toString() + '\'';
+	}
+
+	@Override
+	public JSONObject toJSON() {
+		JSONObject object = toBasicJSON();
+		object.put("c", c);
+		object.put("exprType", "Int");
+		return object;
 	}
 
 	public static final Basic Uninitialized = new Char(null, '\0');

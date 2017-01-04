@@ -5,6 +5,7 @@ import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
 import Syntax.AST.Type;
+import org.json.JSONObject;
 
 /**
  * Project: CustomizeCompiler
@@ -30,5 +31,12 @@ public class Times extends Arith {
     @Override
     public String toJava() {
         return "(" + expr1.toJava() + " * " + expr2.toJava() + ")";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject object = toArithJSON();
+        object.put("exprType","Times");
+        return null;
     }
 }
