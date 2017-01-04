@@ -1,7 +1,10 @@
-
-    int a;
-    real b;
-    b=2.0;
-    a='c';
-    a=(8>0);
-    print(a);
+int a;
+real b;
+b = 2.0;
+print(b);
+print(' ');
+a = 'c';
+print(a);
+print(' ');
+a = (int)8.0 + 5;
+print(a);

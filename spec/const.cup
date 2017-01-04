@@ -13,7 +13,7 @@ import Syntax.AST.Statements.Stmt;
 class Parser;
 
 /* Terminals stub#01 */
-terminal           INTNUM,REALNUM,CHARNUM;
+terminal           INTNUM,REALNUM,CHARNUM,CASTRIGHT;
 
 
 /* Non-terminals stub#02 */
@@ -23,6 +23,9 @@ non terminal Stmt  program,block,stmts,stmt,declaration,assignment,single_if,if_
 non terminal Expr  bool,join,equality,rel,expr,term,unary,factor;
 
 precedence left    ELSE;
+precedence left    CASTRIGHT;
+
+
 
 /* The grammar */
 program ::= stmts:stmt
@@ -108,9 +111,6 @@ bool   ::= join:jn
         |
             bool:bl OR:tk join:jn
             {:RESULT = new Or((Token)tk,bl,jn);:}
-        |
-            BRACKET_LEFT type:type BRACKET_RIGHT:tk BRACKET_LEFT bool:expr BRACKET_RIGHT
-            {:RESULT = new Cast((Token)tk,type,expr);:}
         ;
 join   ::= equality:eq
             {:RESULT = eq;:}
@@ -204,4 +204,8 @@ factor ::= BRACKET_LEFT bool:bl BRACKET_RIGHT
                 Lexer.Token.Char token = (Lexer.Token.Char)ch;
                 RESULT = new Char(token,token.value);
             :}
+        |
+            BRACKET_LEFT type:type BRACKET_RIGHT:tk  factor:expr
+            {:RESULT = new Cast((Token)tk,type,expr);
+            :}%prec CASTRIGHT
         ;

@@ -12,6 +12,7 @@ public class ParserSym {
   public static final int DELIMITER = 11;
   public static final int SCOPE_END = 17;
   public static final int CHAR = 6;
+  public static final int CASTRIGHT = 39;
   public static final int CONTINUE = 29;
   public static final int INT = 10;
   public static final int INTNUM = 36;
@@ -86,7 +87,8 @@ public class ParserSym {
   "NEQ",
   "INTNUM",
   "REALNUM",
-  "CHARNUM"
+  "CHARNUM",
+  "CASTRIGHT"
   };
 }
 
