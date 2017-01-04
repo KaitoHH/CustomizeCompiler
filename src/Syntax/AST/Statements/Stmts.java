@@ -31,11 +31,11 @@ public class Stmts extends Stmt {
     @Override
     public JSONObject toJSON() {
         JSONObject object = new JSONObject();
-        object.put("first", first.toJSON());
+        object.put("left", first.toJSON());
         object.put("stmtType", "Stmts");
 
         if (rest != null)
-            object.put("rest", rest.toJSON());
+            object.put("right", rest.toJSON());
         return object;
     }
 }

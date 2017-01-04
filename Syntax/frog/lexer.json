@@ -1,0 +1,42 @@
+{
+  "language_info": {
+    "name": "name",
+    "file_extensions": [
+      "frog"
+    ]
+  },
+  "language_definition": {
+    "INT": "因特",
+    "REAL": "里尔",
+    "CHAR": "掐",
+    "IF": "如果",
+    "ELSE": "否则",
+    "WHILE": "当",
+    "DO": "做一次",
+    "FOR": "for",
+    "BREAK": "break",
+    "CONTINUE": "continue",
+    "ADD": "加",
+    "MINUS": "减",
+    "TIMES": "乘",
+    "DIVIDE": "除",
+    "MOD": "膜",
+    "LESS_THAN": "小于",
+    "GREATER_THAN": "大于",
+    "LESS_EQUAL": "小于等于",
+    "GREATER_EQUAL": "大于等于",
+    "AND": "而且",
+    "OR": "或者",
+    "NOT": "不是",
+    "EQ": "等于",
+    "SCOPE_START": "开始",
+    "SCOPE_END": "结束",
+    "ASSIGN": "的值为",
+    "BRACKET_LEFT": "~(",
+    "BRACKET_RIGHT": "~)",
+    "DELIMITER": ";",
+    "NEQ": "不等于",
+    "PRINT": "打印",
+    "ID": "$(_|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|0|1|2|3|4|5|6|7|8|9)*"
+  }
+}
