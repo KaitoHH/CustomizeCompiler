@@ -3,6 +3,8 @@ package CodeGenerator;
 import Syntax.AST.Statements.Stmt;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 /**
  * Project: CustomizeCompiler
  * Author: CtheSky
@@ -11,7 +13,11 @@ import org.json.JSONObject;
  * All rights reserved.
  */
 public class JSONGenerator {
-    public static JSONObject generate(Stmt root){
-        return root.toJSON();
-    }
+	public static JSONObject generate(Stmt root) {
+		return root.toJSON();
+	}
+
+	public static void main(String[] args) throws IOException {
+		System.out.println(JSONGenerator.generate(CCompiler.getRoot()).toString());
+	}
 }

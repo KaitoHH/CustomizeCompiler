@@ -1,5 +1,5 @@
-import CodeGenerator.JSONGenerator;
-import CodeGenerator.JavaGenerator;
+package CodeGenerator;
+
 import Lexer.Lexer;
 import Syntax.AST.ASTRoot;
 import Syntax.AST.Env;
@@ -18,12 +18,9 @@ import java.io.IOException;
  * Description:
  * All rights reserved.
  */
-public class Compiler {
-	public static String inputPrompt = ">>>";
-	public static Stmt root;
-	public static Env env = new Env();
+public class CCompiler {
 
-	public static void main(String args[]) throws IOException {
+	public static Stmt getRoot() throws IOException {
 		Lexer lexer = new Lexer(FileUtils.getFileString("source.txt"));
 		SyntaxScanner scanner = new SyntaxScanner(lexer.getTokenList());
 		Parser p = new SyntaxParser(scanner, scanner.getFactory());
@@ -32,16 +29,16 @@ public class Compiler {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Compile terminated due to Syntax Error");
-			return;
+			return null;
 		}
 		//AST
-		Stmt root = ASTRoot.getRoot();
+		Stmt _root = ASTRoot.getRoot();
+		return _root;
+	}
 
-		//execute or generate
+	public static void main(String args[]) throws IOException {
+		Stmt root = getRoot();
 		root.execute(new Env());
-		System.out.println("\n");
-		System.out.println(JavaGenerator.generate(root));
-		System.out.println(JSONGenerator.generate(root).toString());
 	}
 
 }

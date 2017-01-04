@@ -1,4 +1,5 @@
-import CodeGenerator.JavaGenerator;
+package CodeGenerator;
+
 import Lexer.Lexer;
 import Syntax.AST.ASTRoot;
 import Syntax.AST.Env;

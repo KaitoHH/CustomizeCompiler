@@ -8,6 +8,9 @@ i = 0,
 n = 30,
 b = 0,
 a = 1,
+print('v').
+print('b').
+print((Char)(10)).
 While i < n
 BEGIN
     c = a + b.
