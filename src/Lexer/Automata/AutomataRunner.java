@@ -68,8 +68,11 @@ public class AutomataRunner {
 					Token matched = matchSingleAutomata(automata, input, start);
 					if (matched != null)
 						synchronized ("multi automata match lock") {
-							if (longest == null || matched.getLength() > longest.getLength())
-								longest = matched;
+							if (longest == null
+									|| matched.getLength() > longest.getLength()
+									|| matched.getLength() == longest.getLength() && matched.tag < longest.tag) {
+									longest = matched;
+							}
 						}
 				}
 			};
