@@ -1,0 +1,60 @@
+{
+  "declaration": [
+    [
+      "DIM",
+      "ID:mid",
+      "AS",
+      "type:t",
+      "DELIMITER"
+    ]
+  ],
+  "assignment": [
+    [
+      "ID:mid",
+      "ASSIGN",
+      "bool:expr",
+      "DELIMITER"
+    ]
+  ],
+  "if_else": [
+    [
+      "IF",
+      "bool:exp",
+      "THEN",
+      "DELIMITER",
+      "stmt:s1",
+      "ELSE",
+      "stmt:s2",
+      "ENDIF"
+    ]
+  ],
+  "single_if": [
+    [
+      "IF",
+      "bool:exp",
+      "THEN",
+      "DELIMITER",
+      "stmt:stmt",
+      "ENDIF"
+    ]
+  ],
+  "single_while": [
+    [
+      "WHILE",
+      "bool:expr",
+      "stmt:stmt",
+      "ENDWHILE"
+    ]
+  ],
+  "do_while": [
+    [
+      "DO",
+      "DELIMITER",
+      "stmt:stmt",
+      "LOOP",
+      "WHILE",
+      "bool:expr",
+      "DELIMITER"
+    ]
+  ]
+}

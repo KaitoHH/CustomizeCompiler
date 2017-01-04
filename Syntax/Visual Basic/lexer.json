@@ -1,0 +1,48 @@
+{
+  "language_info": {
+    "name": "name",
+    "file_extensions": [
+      "nvb"
+    ]
+  },
+  "language_definition": {
+    "INT": "Integer",
+    "REAL": "Double",
+    "CHAR": "Char",
+    "IF": "If",
+    "ELSE": "Else",
+    "WHILE": "While",
+    "DO": "do",
+    "FOR": "for",
+    "BREAK": "break",
+    "CONTINUE": "continue",
+    "ADD": "+",
+    "MINUS": "-",
+    "TIMES": "~*",
+    "DIVIDE": "/",
+    "MOD": "MOD",
+    "LESS_THAN": "<",
+    "GREATER_THAN": ">",
+    "LESS_EQUAL": "<=",
+    "GREATER_EQUAL": ">=",
+    "AND": "AND",
+    "OR": "OR",
+    "NOT": "NOT",
+    "EQ": "EQ",
+    "SCOPE_START": "BEGIN",
+    "SCOPE_END": "END",
+    "ASSIGN": "=",
+    "BRACKET_LEFT": "~(",
+    "BRACKET_RIGHT": "~)",
+    "DELIMITER": ".|,",
+    "NEQ": "NEQ",
+    "PRINT": "print",
+    "DIM": "dim",
+    "AS": "as",
+    "THEN": "Then",
+    "ENDIF": "EndIf",
+    "ENDWHILE": "Wend",
+    "LOOP": "loop",
+    "ID": "(_|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z)(_|a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|0|1|2|3|4|5|6|7|8|9)*"
+  }
+}

@@ -2,7 +2,6 @@ package Lexer.Automata;
 
 import Lexer.IllegalLexemeException;
 import Lexer.Token.Token;
-import Lexer.Token.Word;
 import Preprocessor.Preprocessor;
 import javafx.util.Pair;
 
@@ -70,8 +69,8 @@ public class AutomataRunner {
 						synchronized ("multi automata match lock") {
 							if (longest == null
 									|| matched.getLength() > longest.getLength()
-									|| matched.getLength() == longest.getLength() && matched.tag < longest.tag) {
-									longest = matched;
+									|| matched.getLength() == longest.getLength() && matched.tag != 32) {
+								longest = matched;
 							}
 						}
 				}

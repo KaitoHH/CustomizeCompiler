@@ -24,10 +24,10 @@ public class ParserSym {
   public static final int NOT = 29;
   public static final int AND = 30;
   public static final int OR = 23;
-  public static final int LESS_EQUAL = 20;
+  public static final int LESS_EQUAL = 19;
   public static final int ASSIGN = 9;
   public static final int IF = 21;
-  public static final int ID = 19;
+  public static final int ID = 20;
   public static final int EOF = 0;
   public static final int GREATER_EQUAL = 14;
   public static final int error = 1;
@@ -66,8 +66,8 @@ public class ParserSym {
   "GREATER_THAN",
   "SCOPE_END",
   "ELSE",
-  "ID",
   "LESS_EQUAL",
+  "ID",
   "IF",
   "MOD",
   "OR",

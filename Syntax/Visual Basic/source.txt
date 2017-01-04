@@ -1,0 +1,20 @@
+dim a as Integer.
+dim b as Integer.
+dim c as Integer.
+dim n as Integer.
+dim i as Integer.
+dim f as Double.
+i = 0,
+n = 30,
+b = 0,
+a = 1,
+While i < n
+BEGIN
+    c = a + b.
+    print(c).
+    print(' ').
+    a = b.
+    b = c.
+    i = i + 1,
+END
+Wend

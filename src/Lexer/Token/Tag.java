@@ -30,6 +30,8 @@ public class Tag {
 			"mod",
 			"less_than",
 			"greater_than",
+			"less_equal",
+			"greater_equal",
 			"and",
 			"or",
 			"not",
