@@ -53,6 +53,7 @@ public class If extends Stmt{
         JSONObject object = new JSONObject();
         object.put("expr", expr.toJSON());
         object.put("stmt1", stmt1.toJSON());
+        if (stmt2 != null)
         object.put("stmt2", stmt2.toJSON());
         object.put("stmtType", "If");
         return object;
