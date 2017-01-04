@@ -35,9 +35,9 @@ public class Type {
             return false;
         else if (t1 == Real)
             return true;
-        else if (t1 == Int || t2 != Real)
+        else if (t1 == Int && t2 != Real)
             return true;
-        else if (t1 == Char || t2 == Char)
+        else if (t1 == Char && t2 == Char)
             return true;
         else
             return false;
