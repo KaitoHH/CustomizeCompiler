@@ -25,7 +25,7 @@ public abstract class Logic extends Expr {
         object.put("token", token.toJSON());
         object.put("type", type == null ? "":type.name);
         object.put("expr1", expr1.toJSON());
-        object.put("expr1", expr2.toJSON());
+        object.put("expr2", expr2.toJSON());
         return object;
     }
 }
