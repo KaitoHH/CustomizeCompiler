@@ -21,6 +21,8 @@ public class Id extends Expr {
     @Override
     public Basic eval(Env env) {
         Basic val = env.get(this);
+        if (val == null)
+            error("try to use undeclared identifier");
         if (val != null && Basic.getUninitialized(val.type) == val)
             error("try to use uninitialized identifier");
         return env.get(this);
