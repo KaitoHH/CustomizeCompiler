@@ -1,5 +1,6 @@
 package Syntax.AST.Statements;
 
+import CodeGenerator.CoverageInfo;
 import Syntax.AST.Env;
 import org.json.JSONObject;
 
@@ -32,5 +33,10 @@ public class Scope extends Stmt {
         object.put("stmt", stmt.toJSON());
         object.put("stmtType", "Print");
         return object;
+    }
+
+    @Override
+    public void getCoverage(CoverageInfo info) {
+        stmt.getCoverage(info);
     }
 }

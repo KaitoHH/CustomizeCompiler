@@ -1,5 +1,6 @@
 package Syntax.AST.Statements;
 
+import CodeGenerator.CoverageInfo;
 import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
@@ -54,5 +55,11 @@ public class DoWhile extends Stmt{
         object.put("stmt", stmt.toJSON());
         object.put("stmtType", "DoWhile");
         return object;
+    }
+
+    @Override
+    public void getCoverage(CoverageInfo info) {
+        stmt.getCoverage(info);
+        info.set(getLineNum(),getCalledNum());
     }
 }

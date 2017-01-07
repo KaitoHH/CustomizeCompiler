@@ -1,5 +1,6 @@
 package Syntax.AST.Statements;
 
+import CodeGenerator.CoverageInfo;
 import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
@@ -59,5 +60,12 @@ public class If extends Stmt{
         object.put("stmt2", stmt2.toJSON());
         object.put("stmtType", "If");
         return object;
+    }
+
+    @Override
+    public void getCoverage(CoverageInfo info) {
+        info.set(getLineNum(),getCalledNum());
+        stmt1.getCoverage(info);
+        stmt2.getCoverage(info);
     }
 }

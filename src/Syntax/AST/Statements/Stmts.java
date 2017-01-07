@@ -1,5 +1,6 @@
 package Syntax.AST.Statements;
 
+import CodeGenerator.CoverageInfo;
 import Syntax.AST.Env;
 import org.json.JSONObject;
 
@@ -39,4 +40,11 @@ public class Stmts extends Stmt {
             object.put("right", rest.toJSON());
         return object;
     }
+
+    @Override
+    public void getCoverage(CoverageInfo info) {
+        first.getCoverage(info);
+		if (rest != null)
+			rest.getCoverage(info);
+	}
 }

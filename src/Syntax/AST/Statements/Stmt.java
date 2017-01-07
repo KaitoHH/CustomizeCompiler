@@ -1,5 +1,6 @@
 package Syntax.AST.Statements;
 
+import CodeGenerator.CoverageInfo;
 import Syntax.AST.Env;
 import org.json.JSONObject;
 
@@ -22,4 +23,7 @@ public abstract class Stmt {
     public abstract void execute(Env env);
     public abstract String toJava();
     public abstract JSONObject toJSON();
+    public void getCoverage(CoverageInfo info){
+        info.set(lineNum,calledNum);
+    }
 }

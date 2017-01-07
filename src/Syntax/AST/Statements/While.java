@@ -1,5 +1,6 @@
 package Syntax.AST.Statements;
 
+import CodeGenerator.CoverageInfo;
 import Syntax.AST.Basic.Basic;
 import Syntax.AST.Env;
 import Syntax.AST.Expressions.Expr;
@@ -55,5 +56,11 @@ public class While extends Stmt{
         object.put("stmt", stmt.toJSON());
         object.put("stmtType", "While");
         return object;
+    }
+
+    @Override
+    public void getCoverage(CoverageInfo info) {
+        info.set(getLineNum(),getCalledNum());
+        stmt.getCoverage(info);
     }
 }
