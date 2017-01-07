@@ -16,10 +16,15 @@ import org.json.JSONObject;
 public class DoWhile extends Stmt{
     public final Expr expr;
     public final Stmt stmt;
-    public DoWhile(Expr expr, Stmt stmt) { this.expr = expr; this.stmt = stmt; }
+    public DoWhile(Expr expr, Stmt stmt) {
+        this.expr = expr;
+        this.stmt = stmt;
+        setLineNum(expr.token.getLineNum());
+    }
 
     @Override
     public void execute(Env env) {
+        setCalledNum(getCalledNum() + 1);
         stmt.execute(env);
 
         while(true) {
@@ -30,6 +35,7 @@ public class DoWhile extends Stmt{
             if (Basic.isFalse(condition))
                 break;
 
+            setCalledNum(getCalledNum() + 1);
             stmt.execute(env);
         }
     }

@@ -17,7 +17,12 @@ public class While extends Stmt{
     public final Expr expr;
     public final Stmt stmt;
     public final boolean newScope;
-    public While(Expr expr, Stmt stmt, boolean newScope) { this.expr = expr; this.stmt = stmt; this.newScope = newScope; }
+    public While(Expr expr, Stmt stmt, boolean newScope) {
+        this.expr = expr;
+        this.stmt = stmt;
+        this.newScope = newScope;
+        setLineNum(expr.token.getLineNum());
+    }
 
     @Override
     public void execute(Env env) {
@@ -29,6 +34,7 @@ public class While extends Stmt{
             if (Basic.isFalse(condition))
                 break;
 
+            setCalledNum(getCalledNum() + 1);
             if (newScope)
                 new Scope(stmt).execute(env);
             else

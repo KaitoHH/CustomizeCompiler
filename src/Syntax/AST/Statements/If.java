@@ -23,10 +23,12 @@ public class If extends Stmt{
         this.stmt1 = stmt1;
         this.stmt2 = stmt2;
         this.newScope = newScope;
+        setLineNum(expr.token.getLineNum());
     }
 
     @Override
     public void execute(Env env) {
+        setCalledNum(getCalledNum() + 1);
         Basic condition = expr.eval(env);
         if (Type.numeric(condition.type))
             expr.error("expect bool but get numeric");

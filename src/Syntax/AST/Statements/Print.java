@@ -14,10 +14,11 @@ import org.json.JSONObject;
  */
 public class Print extends Stmt {
     public final Expr expr;
-    public Print(Expr expr) { this.expr = expr; }
+    public Print(Expr expr) { this.expr = expr; setLineNum(expr.token.getLineNum());}
 
     @Override
     public void execute(Env env) {
+        setCalledNum(getCalledNum() + 1);
         Basic val = expr.eval(env);
         System.out.print(val.toString());
     }

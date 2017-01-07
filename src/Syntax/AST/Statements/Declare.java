@@ -14,10 +14,11 @@ import org.json.JSONObject;
  */
 public class Declare extends Stmt{
     public final Id id;
-    public Declare(Id id) { this.id = id; }
+    public Declare(Id id) { this.id = id; setLineNum(id.token.getLineNum());}
 
     @Override
     public void execute(Env env) {
+        setCalledNum(getCalledNum() + 1);
         if (env.getWithinCurEnv(id) != null)
             id.error("duplicate declare");
 

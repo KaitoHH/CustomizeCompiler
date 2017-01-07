@@ -17,10 +17,11 @@ import org.json.JSONObject;
 public class Assign extends Stmt {
     public final Id id;
     public final Expr expr;
-    public Assign(Id id, Expr expr) { this.id = id; this.expr = expr; }
+    public Assign(Id id, Expr expr) { this.id = id; this.expr = expr; setLineNum(id.token.getLineNum()); }
 
     @Override
     public void execute(Env env) {
+        setCalledNum(getCalledNum() + 1);
         if (env.get(id) == null)
             id.error("assign to undeclared identifier");
 

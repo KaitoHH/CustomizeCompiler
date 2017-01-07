@@ -13,10 +13,11 @@ import org.json.JSONObject;
  */
 public class UnDeclare extends Stmt {
     public final Id id;
-    public UnDeclare(Id id) { this.id = id; }
+    public UnDeclare(Id id) { this.id = id; setLineNum(id.token.getLineNum()); }
 
     @Override
     public void execute(Env env) {
+        setCalledNum(getCalledNum() + 1);
         env.undeclare(id);
     }
 
