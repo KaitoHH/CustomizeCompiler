@@ -11,6 +11,14 @@ import org.json.JSONObject;
  * All rights reserved.
  */
 public abstract class Stmt {
+    private int lineNum;
+    private int calledNum;
+
+    public int getLineNum() { return lineNum; }
+    public void setLineNum(int lineNum) { this.lineNum = lineNum; }
+    public int getCalledNum() { return calledNum; }
+    public void setCalledNum(int calledNum) { this.calledNum = calledNum; }
+
     public abstract void execute(Env env);
     public abstract String toJava();
     public abstract JSONObject toJSON();

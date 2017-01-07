@@ -13,13 +13,9 @@ import org.json.JSONObject;
 public class Stmts extends Stmt {
     public final Stmt first;
     public final Stmts rest;
-    private int lineNum;
-    private int calledNum;
 
     public Stmts(Stmt first, Stmts rest) { this.first = first; this.rest = rest; }
 
-    public int getLineNum() { return lineNum; }
-    public int getCalledNum() {return calledNum; }
 
     @Override
     public void execute(Env env) {
