@@ -13,6 +13,7 @@ import org.json.JSONObject;
  * All rights reserved.
  */
 public class Print extends Stmt {
+    private static boolean disabled;
     public final Expr expr;
     public Print(Expr expr) { this.expr = expr; setLineNum(expr.token.getLineNum());}
 
@@ -20,7 +21,8 @@ public class Print extends Stmt {
     public void execute(Env env) {
         setCalledNum(getCalledNum() + 1);
         Basic val = expr.eval(env);
-        System.out.print(val.toString());
+        if (!disabled)
+            System.out.print(val.toString());
     }
 
     @Override
@@ -35,4 +37,7 @@ public class Print extends Stmt {
         object.put("stmtType", "Print");
         return object;
     }
+
+    public static void disable() { disabled = true; }
+    public static void enable() { disabled = false; }
 }
