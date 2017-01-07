@@ -60,4 +60,14 @@ public class Type implements Serializable{
 			t = "char";
 		return t;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Type)) return false;
+
+		Type type = (Type) o;
+
+		return name.equals(type.name);
+	}
 }
