@@ -3,6 +3,8 @@ package Lexer.Token;
 import javafx.util.Pair;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Project: CustomizeCompiler
  * Author: KaitoHH
@@ -10,7 +12,7 @@ import org.json.JSONObject;
  * Description:
  * All rights reserved.
  */
-public abstract class Token {
+public abstract class Token implements Serializable{
 	public final int tag;
 	public int lineNum;
 	public int lineOffset;

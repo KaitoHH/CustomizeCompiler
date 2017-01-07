@@ -1,5 +1,7 @@
 package Syntax.AST;
 
+import java.io.Serializable;
+
 /**
  * Project: CustomizeCompiler
  * Author: CtheSky
@@ -7,7 +9,7 @@ package Syntax.AST;
  * Description:
  * All rights reserved.
  */
-public class Type {
+public class Type implements Serializable{
 	public final String name;
 
 	private Type(String name) {

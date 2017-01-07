@@ -36,9 +36,14 @@ public class CCompiler {
 		return _root;
 	}
 
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[]) throws IOException, ClassNotFoundException {
 		Stmt root = getRoot();
-		root.execute(new Env());
+		FileUtils.serialAST(root,"fib.ast");
+		Stmt stmt = FileUtils.deserialAST("fib.ast");
+		System.out.println(JavaGenerator.generate(stmt));
+		System.out.println(JSONGenerator.generate(stmt));
+		stmt.execute(new Env());
+		//root.execute(new Env());
 	}
 
 }

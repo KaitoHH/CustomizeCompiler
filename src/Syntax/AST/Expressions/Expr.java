@@ -6,6 +6,8 @@ import Syntax.AST.Env;
 import Syntax.AST.Type;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Project: CustomizeCompiler
  * Author: CtheSky
@@ -13,7 +15,7 @@ import org.json.JSONObject;
  * Description:
  * All rights reserved.
  */
-public abstract class Expr{
+public abstract class Expr implements Serializable{
     public Type type;
     public Token token;
     public Expr(Token token, Type type) { this.token = token; this.type = type;  }

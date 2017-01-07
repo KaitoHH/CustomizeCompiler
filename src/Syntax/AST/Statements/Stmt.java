@@ -4,6 +4,8 @@ import CodeGenerator.CoverageInfo;
 import Syntax.AST.Env;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Project: CustomizeCompiler
  * Author: CtheSky
@@ -11,7 +13,7 @@ import org.json.JSONObject;
  * Description:
  * All rights reserved.
  */
-public abstract class Stmt {
+public abstract class Stmt implements Serializable{
     private int lineNum;
     private int calledNum;
 

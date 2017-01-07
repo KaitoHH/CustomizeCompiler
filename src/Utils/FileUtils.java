@@ -1,5 +1,7 @@
 package Utils;
 
+import Syntax.AST.Statements.Stmt;
+
 import java.io.*;
 
 /**
@@ -29,5 +31,20 @@ public class FileUtils {
 		PrintStream p = new PrintStream(fs);
 		p.println(content);
 		p.close();
+	}
+
+	public static void serialAST(Stmt root, String filename) throws IOException {
+		File file = new File(filename);
+		ObjectOutputStream oout = new ObjectOutputStream(new FileOutputStream(file));
+		oout.writeObject(root);
+		oout.close();
+	}
+
+	public static Stmt deserialAST(String filename) throws IOException, ClassNotFoundException {
+		File file = new File(filename);
+		ObjectInputStream oin = new ObjectInputStream(new FileInputStream(file));
+		Stmt root = (Stmt) oin.readObject();
+		oin.close();
+		return root;
 	}
 }
