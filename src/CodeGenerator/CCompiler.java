@@ -32,8 +32,7 @@ public class CCompiler {
 			return null;
 		}
 		//AST
-		Stmt _root = ASTRoot.getRoot();
-		return _root;
+		return ASTRoot.getRoot();
 	}
 
 	public static void main(String args[]) throws IOException, ClassNotFoundException {

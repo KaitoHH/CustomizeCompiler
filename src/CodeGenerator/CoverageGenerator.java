@@ -1,8 +1,8 @@
 package CodeGenerator;
 
 import Syntax.AST.Env;
+import Syntax.AST.Statements.Print;
 import Syntax.AST.Statements.Stmt;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -18,10 +18,10 @@ import java.io.IOException;
 public class CoverageGenerator {
 	public static void generate(Stmt root) {
 		CoverageInfo info = new CoverageInfo();
+		Print.disable();
 		root.execute(new Env());
 		root.getCoverage(info);
-		JSONObject jsonObject = new JSONObject(info.getLine());
-		System.out.println(jsonObject);
+		System.out.println(info.toJSON());
 	}
 
 	public static void main(String[] args) throws IOException {

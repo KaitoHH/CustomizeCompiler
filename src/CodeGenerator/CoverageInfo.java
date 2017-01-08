@@ -1,6 +1,10 @@
 package CodeGenerator;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,5 +36,26 @@ public class CoverageInfo {
 
 	public Map<Integer, Integer> getLine() {
 		return line;
+	}
+
+	public JSONObject toJSON() {
+		JSONObject jsonObject = new JSONObject();
+		List<Map<String, Integer>> array = new ArrayList<>();
+		int lineCnt = 0;
+		int covCnt = 0;
+		for (Map.Entry<Integer, Integer> entry : line.entrySet()) {
+			Map<String, Integer> map = new HashMap<>();
+			map.put("line", entry.getKey());
+			map.put("call", entry.getValue());
+			if (entry.getValue() != 0) {
+				covCnt++;
+			}
+			array.add(map);
+			lineCnt++;
+		}
+		jsonObject.put("line", array);
+		jsonObject.put("lines", lineCnt);
+		jsonObject.put("coverage", 100.0 * covCnt / lineCnt);
+		return jsonObject;
 	}
 }
