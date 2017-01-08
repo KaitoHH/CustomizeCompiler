@@ -23,14 +23,14 @@ public class Type implements Serializable{
 			Bool = new Type("Bool");
 
 	public static boolean numeric(Type t) {
-		return t == Int || t == Real || t == Char;
+		return t.equals(Int) || t.equals(Real) || t.equals(Char);
 	}
 
 	public static Type max(Type t1, Type t2) {
 		if (numeric(t1) != numeric(t2)) return null;
 		else if (!numeric(t1) && !numeric(t2)) return Bool;
-		else if (t1 == Real || t2 == Real) return Real;
-		else if (t1 == t2) return t1;
+		else if (t1.equals(Real) || t2.equals(Real)) return Real;
+		else if (t1.equals(t2)) return t1;
 		else return Int;
 	}
 
@@ -38,11 +38,11 @@ public class Type implements Serializable{
 		Type maxType = max(t1, t2);
 		if (maxType == null)
 			return false;
-		else if (t1 == Real)
+		else if (t1.equals(Real))
 			return true;
-		else if (t1 == Int && t2 != Real)
+		else if (t1.equals(Int) && !t2.equals(Real))
 			return true;
-		else if (t1 == Char && t2 == Char)
+		else if (t1.equals(Char) && t2.equals(Char))
 			return true;
 		else
 			return false;
@@ -50,11 +50,11 @@ public class Type implements Serializable{
 
 	public static String toJavaType(Type type) {
 		String t;
-		if (type == Type.Bool)
+		if (type.equals(Type.Bool))
 			t = "boolean";
-		else if (type == Type.Int)
+		else if (type.equals(Type.Int))
 			t = "int";
-		else if (type == Type.Real)
+		else if (type.equals(Type.Real))
 			t = "double";
 		else
 			t = "char";

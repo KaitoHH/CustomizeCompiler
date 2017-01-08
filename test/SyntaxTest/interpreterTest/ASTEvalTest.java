@@ -424,10 +424,12 @@ public class ASTEvalTest {
         String name = "i";
         Id id = new Id(token, Type.Int, name);
 
+        Print.disable();
+        Print.enable();
         // initialize i with 0 and use while to accelerate i to 10
         Declare declare = new Declare(id);
         Assign assign_i0 = new Assign(id, new Int(token, 0));
-        Stmts stmts = new Stmts(declare, new Stmts(assign_i0, null));
+        Stmts stmts = new Stmts(declare, new Stmts(assign_i0, new Stmts(new Print(new Int(token, 4)), null)));
         stmts.execute(env);
 
         UnEqual neq_i_10 = new UnEqual(token, id, new Int(null, 10));

@@ -24,21 +24,21 @@ public class Cast extends Expr {
 	@Override
 	public Basic eval(Env env) throws RuntimeException {
 		Basic right = expr.eval(env);
-		if (type == right.type)
+		if (type.equals(right.type))
 			return right;
-		else if (type == Type.Bool)
+		else if (type.equals(Type.Bool))
 			return new Bool(null, right.val() != 0);
-		else if (right.type == Type.Bool) {
+		else if (right.type.equals(Type.Bool)) {
 			// bool - > numeric
-			if (type == Type.Int)
+			if (type.equals(Type.Int))
 				return new Int(null, Basic.isTrue(right) ? 1 : 0);
 			else
 				return new Real(null, Basic.isTrue(right) ? 1 : 0);
-		} else if (type == Type.Char && Type.numeric(right.type)) {
+		} else if (type.equals(Type.Char) && Type.numeric(right.type)) {
 			return new Char(null, (char) right.val());
 		} else {
 			// numeric -> numeric
-			if (type == Type.Int)
+			if (type.equals(Type.Int))
 				return new Int(null, (int) right.val());
 			else
 				return new Real(null, right.val());
