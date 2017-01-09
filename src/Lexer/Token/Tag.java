@@ -44,7 +44,8 @@ public class Tag {
 			"delimiter",
 			"neq",
 			"print",
-			"id"
+			"id",
+			"get_char"
 	};
 	private static int cnt;
 
