@@ -1,7 +1,8 @@
 package Syntax.AST.Expressions;
 
 import Lexer.Token.Token;
-import Syntax.AST.Basic.*;
+import Syntax.AST.Basic.Basic;
+import Syntax.AST.Basic.Char;
 import Syntax.AST.Env;
 import Syntax.AST.Type;
 import org.json.JSONObject;
@@ -21,7 +22,6 @@ public class GetChar extends Expr{
     @Override
     public Basic eval(Env env) throws RuntimeException {
         try{
-            System.out.println("GetChar:");
             int input = System.in.read();
             return new Char(token, (char)input);
         } catch (IOException e) {

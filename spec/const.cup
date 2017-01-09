@@ -208,4 +208,8 @@ factor ::= BRACKET_LEFT bool:bl BRACKET_RIGHT
             BRACKET_LEFT type:type BRACKET_RIGHT:tk  factor:expr
             {:RESULT = new Cast((Token)tk,type,expr);
             :}%prec CASTRIGHT
+        |
+            GET_CHAR:tk BRACKET_LEFT  BRACKET_RIGHT
+            {:RESULT = new GetChar((Token)tk);
+            :}
         ;

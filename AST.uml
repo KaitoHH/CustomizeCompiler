@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Syntax.AST</OriginalElement>
+  <nodes>
+    <node x="337.5" y="89.0">Syntax.AST.Expressions.Cast</node>
+    <node x="244.0" y="341.0">Syntax.AST.Statements.Declare</node>
+    <node x="81.0" y="168.0">Syntax.AST.Basic.Bool</node>
+    <node x="200.5" y="89.0">Syntax.AST.Expressions.Arith</node>
+    <node x="131.0" y="415.0">Syntax.AST.Type</node>
+    <node x="60.0" y="341.0">Syntax.AST.Statements.Assign</node>
+    <node x="456.0" y="341.0">Syntax.AST.Statements.Print</node>
+    <node x="0.0" y="415.0">Syntax.AST.ASTRoot</node>
+    <node x="726.0" y="341.0">Syntax.AST.Statements.Stmts</node>
+    <node x="238.0" y="415.0">Syntax.AST.Env</node>
+    <node x="341.0" y="341.0">Syntax.AST.Statements.UnDeclare</node>
+    <node x="0.0" y="168.0">Syntax.AST.Basic.Char</node>
+    <node x="623.0" y="341.0">Syntax.AST.Statements.DoWhile</node>
+    <node x="480.5" y="89.0">Syntax.AST.Expressions.GetChar</node>
+    <node x="161.0" y="168.0">Syntax.AST.Basic.Int</node>
+    <node x="154.0" y="341.0">Syntax.AST.Statements.Scope</node>
+    <node x="537.0" y="341.0">Syntax.AST.Statements.While</node>
+    <node x="115.5" y="89.0">Syntax.AST.Basic.Basic</node>
+    <node x="373.25" y="0.0">Syntax.AST.Expressions.Expr</node>
+    <node x="358.0" y="242.0">Syntax.AST.Statements.Stmt</node>
+    <node x="229.0" y="168.0">Syntax.AST.Basic.Real</node>
+    <node x="583.5" y="89.0">Syntax.AST.Expressions.Logic</node>
+    <node x="417.5" y="89.0">Syntax.AST.Basic.Id</node>
+    <node x="0.0" y="341.0">Syntax.AST.Statements.If</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Syntax.AST.Basic.Bool" target="Syntax.AST.Basic.Basic">
+      <point x="0.0" y="-14.5" />
+      <point x="111.0" y="148.0" />
+      <point x="139.875" y="148.0" />
+      <point x="-8.125" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Statements.Scope" target="Syntax.AST.Statements.Stmt">
+      <point x="0.0" y="-14.5" />
+      <point x="189.0" y="311.0" />
+      <point x="374.94444444444446" y="311.0" />
+      <point x="-13.555555555555543" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Basic.Real" target="Syntax.AST.Basic.Basic">
+      <point x="0.0" y="-14.5" />
+      <point x="257.5" y="138.0" />
+      <point x="172.375" y="138.0" />
+      <point x="24.375" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Basic.Id" target="Syntax.AST.Expressions.Expr">
+      <point x="0.0" y="-14.5" />
+      <point x="439.0" y="69.0" />
+      <point x="408.25" y="69.0" />
+      <point x="5.0" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Basic.Basic" target="Syntax.AST.Expressions.Expr">
+      <point x="0.0" y="-14.5" />
+      <point x="148.0" y="49.0" />
+      <point x="378.25" y="49.0" />
+      <point x="-25.0" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Expressions.GetChar" target="Syntax.AST.Expressions.Expr">
+      <point x="0.0" y="-14.5" />
+      <point x="522.0" y="59.0" />
+      <point x="418.25" y="59.0" />
+      <point x="15.0" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Statements.UnDeclare" target="Syntax.AST.Statements.Stmt">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Statements.Stmts" target="Syntax.AST.Statements.Stmt">
+      <point x="0.0" y="-14.5" />
+      <point x="760.0" y="291.0" />
+      <point x="415.61111111111114" y="291.0" />
+      <point x="27.111111111111143" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Expressions.Logic" target="Syntax.AST.Expressions.Expr">
+      <point x="0.0" y="-14.5" />
+      <point x="643.5" y="49.0" />
+      <point x="428.25" y="49.0" />
+      <point x="25.0" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Statements.Print" target="Syntax.AST.Statements.Stmt">
+      <point x="0.0" y="-14.5" />
+      <point x="486.5" y="321.0" />
+      <point x="395.27777777777777" y="321.0" />
+      <point x="6.7777777777777715" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Expressions.Arith" target="Syntax.AST.Expressions.Expr">
+      <point x="0.0" y="-14.5" />
+      <point x="259.0" y="59.0" />
+      <point x="388.25" y="59.0" />
+      <point x="-15.0" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Statements.Assign" target="Syntax.AST.Statements.Stmt">
+      <point x="0.0" y="-14.5" />
+      <point x="97.0" y="301.0" />
+      <point x="368.1666666666667" y="301.0" />
+      <point x="-20.333333333333314" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Statements.Declare" target="Syntax.AST.Statements.Stmt">
+      <point x="0.0" y="-14.5" />
+      <point x="282.5" y="321.0" />
+      <point x="381.72222222222223" y="321.0" />
+      <point x="-6.7777777777777715" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Statements.If" target="Syntax.AST.Statements.Stmt">
+      <point x="0.0" y="-14.5" />
+      <point x="20.0" y="291.0" />
+      <point x="361.3888888888889" y="291.0" />
+      <point x="-27.111111111111086" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Basic.Int" target="Syntax.AST.Basic.Basic">
+      <point x="0.0" y="-14.5" />
+      <point x="185.0" y="148.0" />
+      <point x="156.125" y="148.0" />
+      <point x="8.125" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Statements.While" target="Syntax.AST.Statements.Stmt">
+      <point x="0.0" y="-14.5" />
+      <point x="570.0" y="311.0" />
+      <point x="402.05555555555554" y="311.0" />
+      <point x="13.555555555555543" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Basic.Char" target="Syntax.AST.Basic.Basic">
+      <point x="0.0" y="-14.5" />
+      <point x="30.5" y="138.0" />
+      <point x="123.625" y="138.0" />
+      <point x="-24.375" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Expressions.Cast" target="Syntax.AST.Expressions.Expr">
+      <point x="0.0" y="-14.5" />
+      <point x="367.5" y="69.0" />
+      <point x="398.25" y="69.0" />
+      <point x="-5.0" y="14.5" />
+    </edge>
+    <edge source="Syntax.AST.Statements.DoWhile" target="Syntax.AST.Statements.Stmt">
+      <point x="0.0" y="-14.5" />
+      <point x="664.5" y="301.0" />
+      <point x="408.83333333333337" y="301.0" />
+      <point x="20.33333333333337" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.2745953722227306" x="398.1719246873747" y="266.02581692559045" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

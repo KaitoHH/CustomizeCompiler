@@ -1,2 +1,23 @@
-print('h');
-print('e');
+char ch;
+ch = getchar();
+if(ch>='a'&&ch<='z'){
+    print('l');
+    print('o');
+    print('w');
+    print('e');
+    print('r');
+}else if(ch>='A'&&ch<='Z'){
+    print('u');
+    print('p');
+    print('p');
+    print('e');
+    print('r');
+}else{
+    print('n');
+    print('e');
+    print('i');
+    print('t');
+    print('h');
+    print('e');
+    print('r');
+}

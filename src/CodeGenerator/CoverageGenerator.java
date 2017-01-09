@@ -1,7 +1,5 @@
 package CodeGenerator;
 
-import Syntax.AST.Env;
-import Syntax.AST.Statements.Print;
 import Syntax.AST.Statements.Stmt;
 import Utils.FileUtils;
 
@@ -19,8 +17,6 @@ import java.io.IOException;
 public class CoverageGenerator implements Generator {
 	public static String generate(Stmt root) {
 		CoverageInfo info = new CoverageInfo();
-		Print.disable();
-		root.execute(new Env());
 		root.getCoverage(info);
 		return info.toJSON().toString();
 	}
