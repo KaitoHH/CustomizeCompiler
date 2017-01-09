@@ -19,7 +19,7 @@ import java.util.Scanner;
  * Description:
  * All rights reserved.
  */
-public class REPL {
+public class REPL implements Generator{
 	public static String inputPrompt = ">>>";
 	public static Stmt root;
 	public static Env env = new Env();
@@ -75,5 +75,20 @@ public class REPL {
 
 	public static void main(String[]args) {
 		startREPL();
+	}
+
+	@Override
+	public void execute(String[] args) throws IOException {
+		startREPL();
+	}
+
+	@Override
+	public String getOption() {
+		return "-repl";
+	}
+
+	@Override
+	public int getArgsCnt() {
+		return 0;
 	}
 }

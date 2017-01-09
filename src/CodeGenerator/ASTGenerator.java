@@ -2,7 +2,6 @@ package CodeGenerator;
 
 import Lexer.Lexer;
 import Syntax.AST.ASTRoot;
-import Syntax.AST.Env;
 import Syntax.AST.Statements.Stmt;
 import Syntax.Parser;
 import Syntax.SyntaxParser;
@@ -14,14 +13,30 @@ import java.io.IOException;
 /**
  * Project: CustomizeCompiler
  * Author: KaitoHH
- * Create Date: 2017/1/3
+ * Create Date: 2017/1/9
  * Description:
  * All rights reserved.
  */
-public class CCompiler {
+public class ASTGenerator implements Generator {
+	@Override
+	public void execute(String[] args) throws IOException {
+		String filename = args[0];
+		Stmt root = getRoot(filename);
+		FileUtils.serialAST(root, FileUtils.replaceExtName(filename, "ast"));
+	}
 
-	public static Stmt getRoot() throws IOException {
-		Lexer lexer = new Lexer(FileUtils.getFileString("source.txt"));
+	@Override
+	public String getOption() {
+		return null;
+	}
+
+	@Override
+	public int getArgsCnt() {
+		return 0;
+	}
+
+	public static Stmt getRoot(String filename) throws IOException {
+		Lexer lexer = new Lexer(FileUtils.getFileString(filename));
 		SyntaxScanner scanner = new SyntaxScanner(lexer.getTokenList());
 		Parser p = new SyntaxParser(scanner, scanner.getFactory());
 		try {
@@ -34,15 +49,4 @@ public class CCompiler {
 		//AST
 		return ASTRoot.getRoot();
 	}
-
-	public static void main(String args[]) throws IOException, ClassNotFoundException {
-		Stmt root = getRoot();
-		FileUtils.serialAST(root,"fib.ast");
-		Stmt stmt = FileUtils.deserialAST("fib.ast");
-		System.out.println(JavaGenerator.generate(stmt));
-		System.out.println(JSONGenerator.generate(stmt));
-		stmt.execute(new Env());
-		//root.execute(new Env());
-	}
-
 }

@@ -47,4 +47,9 @@ public class FileUtils {
 		oin.close();
 		return root;
 	}
+
+	public static String replaceExtName(String filename, String ext) {
+		String name = filename.substring(0, filename.lastIndexOf('.'));
+		return name + "." + ext;
+	}
 }

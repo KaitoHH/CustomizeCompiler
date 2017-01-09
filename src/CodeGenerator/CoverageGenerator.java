@@ -3,6 +3,7 @@ package CodeGenerator;
 import Syntax.AST.Env;
 import Syntax.AST.Statements.Print;
 import Syntax.AST.Statements.Stmt;
+import Utils.FileUtils;
 
 import java.io.IOException;
 
@@ -15,16 +16,34 @@ import java.io.IOException;
  * @author huang
  * @version 1.0
  */
-public class CoverageGenerator {
-	public static void generate(Stmt root) {
+public class CoverageGenerator implements Generator {
+	public static String generate(Stmt root) {
 		CoverageInfo info = new CoverageInfo();
 		Print.disable();
 		root.execute(new Env());
 		root.getCoverage(info);
-		System.out.println(info.toJSON());
+		return info.toJSON().toString();
 	}
 
-	public static void main(String[] args) throws IOException {
-		CoverageGenerator.generate(CCompiler.getRoot());
+	@Override
+	public void execute(String[] args) throws IOException {
+		String filename = args[0];
+		try {
+			Stmt root = FileUtils.deserialAST(FileUtils.replaceExtName(filename,"ast"));
+			String string = generate(root);
+			FileUtils.createFile(filename + ".json", string);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String getOption() {
+		return "-showcoverage";
+	}
+
+	@Override
+	public int getArgsCnt() {
+		return 0;
 	}
 }

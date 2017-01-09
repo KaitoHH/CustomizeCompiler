@@ -1,6 +1,7 @@
 package CodeGenerator;
 
 import Syntax.AST.Statements.Stmt;
+import Utils.FileUtils;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
  * Description:
  * All rights reserved.
  */
-public class JavaGenerator {
+public class JavaGenerator implements Generator{
 	public static String generate(Stmt root) {
 		return "public class Main  {\n" +
 				"    public static void main(String arg[]){ \n" +
@@ -47,7 +48,25 @@ public class JavaGenerator {
 		return sb.toString();
 	}
 
-	public static void main(String[] args) throws IOException {
-		System.out.println(JavaGenerator.generate(CCompiler.getRoot()));
+	@Override
+	public void execute(String[] args) throws IOException {
+		String filename = args[1];
+		try {
+			Stmt root = FileUtils.deserialAST(filename);
+			String string = generate(root);
+			FileUtils.createFile(args[0], string);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String getOption() {
+		return "-tojava";
+	}
+
+	@Override
+	public int getArgsCnt() {
+		return 1;
 	}
 }
