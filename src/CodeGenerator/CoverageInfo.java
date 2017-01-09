@@ -31,7 +31,11 @@ public class CoverageInfo {
 	}
 
 	public void set(Integer key, Integer value) {
-		line.put(key, value);
+		Integer cnt = line.get(key);
+		if (cnt != null) {
+			line.put(key, Math.max(cnt, value));
+		} else
+			line.put(key, value);
 	}
 
 	public Map<Integer, Integer> getLine() {

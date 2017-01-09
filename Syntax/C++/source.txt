@@ -7,10 +7,10 @@ i = 0;
 n = 30;
 b = 0;
 a = 1;
-print('c').
-print('p').
-print('p').
-print((Char)(10)).
+print('c');
+print('p');
+print('p');
+print((char)(10));
 while(i < n) {
     c = a + b;
     print(c);
