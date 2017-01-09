@@ -32,12 +32,16 @@ public class GetChar extends Expr{
 
     @Override
     public JSONObject toJSON() {
-        return null;
+        JSONObject object = new JSONObject();
+        object.put("token", token.toJSON());
+        object.put("type", type == null ? "":type.name);
+        object.put("exprType", "GetChar");
+        return object;
     }
 
     @Override
     public String toJava() {
-        return "(char)System.in.read()";
+        return "((char)System.in.read())";
     }
 
 }
