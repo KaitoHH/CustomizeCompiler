@@ -13,3 +13,4 @@ CustomizeCompiler.iml
 out
 /production.cup
 *.pdf
+!documentation_*.pdf
