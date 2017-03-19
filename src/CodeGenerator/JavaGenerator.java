@@ -15,7 +15,8 @@ import java.util.regex.Pattern;
  */
 public class JavaGenerator implements Generator{
 	public static String generate(Stmt root) {
-		return "public class Main  {\n" +
+		return  "import java.io.IOException;" +
+				"public class Main  {\n" +
 				"    public static void main(String arg[]) throws IOException{ \n" +
 				addIndent(root.toJava()) +
 				"    }\n}";
