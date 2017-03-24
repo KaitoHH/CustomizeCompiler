@@ -1,9 +1,44 @@
-#Customize Compiler
+# Customize Compiler
+Customize Compiler implements a statically strong typed language which compiles to Java. Its semantics is a subset of C but allows user-defined lexical and grammatical form by simply changing `lexer.json` and `production.json`.
 
-##项目介绍
-本项目实现一个支持自定义词法和自定义部分文法的编译器。项目最终实现了一个支持命令行交互的编译器。用户可以通过指定不同的编译参数使得编译器进行不同的行为。首先，编译生成语法树是整个编译器的核心工作。编译器对源代码文件进行预处理、词法分析、语法分析、语义动作定义，最后生成一棵语法树。在生成语法树的基础上，编译器还支持：执行语法树、将语法树以json格式呈现、从语法树生成java代码、显示代码覆盖情况等操作。
+#### some minor features
+* an optional interpreter as an back-end
+* jsonify/serialize abstract syntax tree
+* print generated automata using Latex 
+* generate Sublime syntax highlight configuration for user-defined lexical form
+* interpret source code and show code coverage
 
-在实现编译器的过程中，为了达到自定义文法的目的，项目编写了一个语法工厂，当用户改变文法之后，通过运行一次语法工厂即可生成对应的文法解析器。此外，本项目还实现了一些副产品，如：为自定义词法生成sublime语法高亮文件、可视化词法正则表达式的自动机。
+# Customize lexical and grammatical form
+There are two steps:
+1. edit `lexer.json` to define lexical form (regular expression is supported)
+2. edit `production.json` to define grammatical form (with a little limitation)
+3. run `Grammar Factory` main method
+  
+There are three examples in [Syntax folder](https://github.com/KaitoHH/CustomizeCompiler/tree/master/Syntax) to show how to do this:
+1. C++
+2. Visual Basic
+3. Frog :frog: (this is chinese programming language, mod is represented as '膜')
 
-##documentation
-see `documentation.pdf` for more information.
+# Usage
+Different arguments could be used to trigger different functionality:
+```shell
+>java Compiler -help
+Usage: compiler [option]
+Default:
+FILE_NAME                      : compile FILE_NAME to AST
+Option:
+-exec AST_NAME                 : execute AST_NAME
+-json JSON_FILE_NAME AST_NAME  : generate JSON format AST to JSON_FILE_NAME from AST_NAME
+-showcoverage SOURCE_NAME      : show SOURCE_NAME code coverage
+-tojava JAVA_NAME AST_NAME     : show java code to JAVA_NAME from AST_NAME
+-repl                          : running REPL
+-help                          : show this
+...
+```
+
+## documentation
+see [documentation.pdf](https://github.com/KaitoHH/CustomizeCompiler/blob/master/documentation_zhcn.pdf) for more information.
+
+# Stack
+* [JUnit](https://github.com/junit-team/junit4)
+* [Cup](http://www2.cs.tum.edu/projects/cup/) - a LALR parser generator
