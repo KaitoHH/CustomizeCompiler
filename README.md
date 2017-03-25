@@ -9,10 +9,10 @@ Customize Compiler implements a statically strong typed language which compiles 
 * interpret source code and show code coverage
 
 # Customize lexical and grammatical form
-There are two steps:
+There are three steps:
 1. edit `lexer.json` to define lexical form (regular expression is supported)
 2. edit `production.json` to define grammatical form (with a little limitation)
-3. run `Grammar Factory` main method
+3. run `Grammar Factory` main method and it will dynamically generate the parser
   
 There are three examples in [Syntax folder](https://github.com/KaitoHH/CustomizeCompiler/tree/master/Syntax) to show how to do this:
 1. C++
